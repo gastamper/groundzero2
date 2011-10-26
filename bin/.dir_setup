@@ -1,8 +1,8 @@
-#!/bin/sh
+#!/bin/bash
 # Directory setup.
 # satori (10 Sep 2001)
 
-BASEDIR="$(dirname $0)/.."
+BASEDIR="$( cd "$( dirname "$0" )/.." && pwd )"
 
 LOGDIR="$BASEDIR/log"
 SRCDIR="$BASEDIR/src"
