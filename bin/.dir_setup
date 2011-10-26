@@ -2,7 +2,7 @@
 # Directory setup.
 # satori (10 Sep 2001)
 
-BASEDIR="/home/gz2/current"
+BASEDIR="$(dirname $0)/.."
 
 LOGDIR="$BASEDIR/log"
 SRCDIR="$BASEDIR/src"
