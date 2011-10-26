@@ -37,7 +37,7 @@ static ares_channel x_aresChannel;
 static struct dns_query_data *x_recycleQuery = NULL;
 static struct dns_query_data *x_headQuery = NULL;
 
-static void x_DnsCallback(void *, int, struct hostent *);
+static void x_DnsCallback(void *, int status, int timeouts, struct hostent *);
 static struct dns_query_data *x_MakeQueryData(struct descriptor_data *);
 static void x_DestroyQueryData(struct dns_query_data *);
 
@@ -53,8 +53,9 @@ ResolvInitialize (void)
 
     if ( (status = ares_init(&x_aresChannel)) != ARES_SUCCESS )
     {
-        logmesg("ares_init: %s\n", ares_strerror(status, &errstr));
-        ares_free_errmem(errstr);
+		errstr = ares_strerror(status);
+        logmesg("ares_init: %s\n", errstr);
+        ares_free_string((void *) errstr);
         return -1;
     }
 
@@ -128,7 +129,7 @@ ResolvTerminate (void)
 /** HELPER FUNCTIONS AND CALLBACKS *******************************************/
 
 static void
-x_DnsCallback (void *arg, int status, struct hostent *he)
+x_DnsCallback (void *arg, int status, int timeouts, struct hostent *he)
 {
     struct dns_query_data *dqd = arg;
 

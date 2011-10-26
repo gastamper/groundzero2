@@ -2,7 +2,7 @@ CC      = gcc
 PROF    =
 NOCRYPT =
 C_FLAGS = -O -g -Wall -std=gnu99 $(PROF) $(NOCRYPT)
-L_FLAGS = -lcrypt -lz -lm -lares
+L_FLAGS = -lcrypt -lz -lm -lcares
 
 OBJDIR  = .obj
 
