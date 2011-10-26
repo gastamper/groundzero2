@@ -22,11 +22,7 @@
 
 /* This version contains minor modifications to support ROM 2.4b4. */
 
-#if defined(macintosh)
-#include <types.h>
-#else
 #include <sys/types.h>
-#endif
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -65,8 +61,12 @@ load_social_table ()
         logmesg("Could not open " SOCIAL_FILE " for reading.");
         exit(1);
     }
-
-    fscanf(fp, "%d\n", &maxSocial);
+    
+    // read the number at the top of the social file, and set maxSocial
+    if(fscanf(fp, "%d\n", &maxSocial) == EOF) {
+        logmesg("Error reading " SOCIAL_FILE ". Expecting the file to start with a number.");
+        exit(1);
+    }
 
     /* IMPORTANT to use malloc so we can realloc later on */
 

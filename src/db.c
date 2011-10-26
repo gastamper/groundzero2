@@ -1929,10 +1929,10 @@ load_outfit (FILE * fp)
 
     for ( idx = 0; !feof(fp); )
     {
-        fgets(line, 256, fp);
+        ptr = fgets(line, 256, fp);
         *(line + strlen(line) - 1) = '\0';
 
-        ptr = one_argument(line, buf);
+        ptr = one_argument(ptr, buf);
 
         if ( !*buf || *buf == '*' )
             continue;

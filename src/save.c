@@ -17,22 +17,15 @@
  *  around, comes around.                                                  *
  ***************************************************************************/
 
-#if defined(macintosh)
-#include <types.h>
-#else
 #include <sys/types.h>
-#endif
 #include <ctype.h>
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
 #include "ground0.h"
 
-#if !defined(macintosh)
+
 extern int _filbuf args((FILE *));
-#endif
-
-
 extern int default_palette[MAX_PALETTE_ENTS];
 
 /*
@@ -324,7 +317,9 @@ load_char_obj (DESCRIPTOR_DATA * d, char *name)
     {
         fclose(fp);
         sprintf(buf, "gzip -dfq %s", strsave);
-        system(buf);
+        if (system(buf) == -1) {
+            logmesg("Load_char_obj: gzip decompress failed!");
+        }
     }
 
     sprintf(strsave, "%sPS%s", PLAYER_DIR, capitalize(name));

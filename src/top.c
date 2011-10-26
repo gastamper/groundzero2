@@ -131,10 +131,16 @@ read_top (const char *fname, TOP_DATA * topv, size_t sz)
     if ( (fh = fopen(fname, "rb")) == NULL )
     {
         logmesg("Error opening top file %s for reading", fname);
+        fclose(fh);
         return;
     }
 
-    fread((char *) topv, sizeof(TOP_DATA), sz, fh);
+    if (!fread((char *) topv, sizeof(TOP_DATA), sz, fh)) {
+        logmesg ("Error: Could not load top data!");
+        fclose(fh);
+        return;
+    }
+    
     fclose(fh);
 }
 

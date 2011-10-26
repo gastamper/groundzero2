@@ -158,10 +158,21 @@ read_connections (void)
         return (-1);
     }
 
-    fread((char *) &rhd, sizeof(rhd), 1, fp);
+    if (!fread((char *) &rhd, sizeof(rhd), 1, fp)) {
+        logmesg ("Error: Could not load header data of reboot file!");
+        fclose(fp);
+        return (-1);
+    };
+    
     reconnects = (fbytes / sizeof(struct reconnect_data));
-    rds = calloc(reconnects, sizeof(struct reconnect_data));
-    fread((char *) rds, sizeof(struct reconnect_data), reconnects, fp);
+    rds = calloc(reconnects, sizeof(struct reconnect_data));    
+    
+    if (!fread((char *) rds, sizeof(struct reconnect_data), reconnects, fp)) {
+        logmesg ("Error: Could not load reconnect data from reboot file!");
+        fclose(fp);
+        return (-1);
+    };
+    
     fclose(fp);
 
     unlink(RECONNECT_FILE);
@@ -278,7 +289,9 @@ handle_log_redir (const char *dir)
 
     if ( num > 9999 )
     {
-        system("../automaint -l");
+        if (system("../automaint -l") == -1) {
+            logmesg("handle_log_redir: Failed to run automaint script!");
+        }
         sprintf(fname, "%s/%04d.log", dir, (num = 0));
     }
 
