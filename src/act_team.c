@@ -4,10 +4,6 @@
  * Copyright 2000, GZ2 Coding Team
  */
 
-#include <stdio.h>
-#include <string.h>
-#include <sys/types.h>
-#include <sys/time.h>
 #include "ground0.h"
 
 

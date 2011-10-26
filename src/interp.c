@@ -18,17 +18,6 @@
  *  around, comes around.                                                  *
  ***************************************************************************/
 
-#if defined(macintosh)
-#include <types.h>
-#else
-#include <sys/types.h>
-#endif
-#include <ctype.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/time.h>
-
 #include "ground0.h"
 #include "interp.h"
 #include "mccp.h"

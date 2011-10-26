@@ -17,11 +17,6 @@
  *  around, comes around.                                                  *
  ***************************************************************************/
 
-#include <sys/types.h>
-#include <ctype.h>
-#include <stdio.h>
-#include <string.h>
-#include <sys/time.h>
 #include "ground0.h"
 
 
