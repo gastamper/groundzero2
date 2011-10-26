@@ -1,0 +1,12 @@
+the_city.boot
+teams.boot
+consts.boot
+obj_header.boot
+weapons_obj.boot
+ammo_obj.boot
+armor_obj.boot
+explosive_obj.boot
+general_obj.boot
+newobj.boot
+mobs.boot
+outfit.boot
