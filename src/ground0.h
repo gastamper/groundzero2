@@ -1674,7 +1674,7 @@ void save_social_table();
 
 /* vehicle.c */
 const char *vehicleTypeName(OBJ_DATA *);
-extern inline bool isVehicle(OBJ_DATA *);
+// extern inline bool isVehicle(OBJ_DATA *);
 void scan_direction(CHAR_DATA *, ROOM_DATA *, int, int, bool);
 void vehicle_hud(OBJ_DATA *, CHAR_DATA *);
 
