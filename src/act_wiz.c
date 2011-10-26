@@ -4106,7 +4106,7 @@ do_setscenario (CHAR_DATA * ch, char *argument)
             return;
         }
 
-        if ( (k = readlink(curscen_link, curscen, MAX_STRING_LENGTH)) == -1 )
+        if ( (k = readlink(curscen_link, curscen, sizeof(curscen))) == -1 )
         {
             send_to_char("Could not read current scenario link.\r\n", ch);
             logerr(curscen_link);
