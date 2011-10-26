@@ -1,0 +1,256 @@
+Ground ZERO codebase document - last updated 8/1/99.
+By Cory Hilke
+shadow_0x01@hotmail.com
+
+Legal: There is no warranty expressed or implied that this software
+can or should be used for any purpose whatsoever.  It is offered free
+of charge in compliance with the original shareware license.  Further,
+by agreeing to use this software, you waive the right to seek damages
+from the author(s) resulting from any use of this software.
+
+You are also bound by Diku, Merc, and ROM license agreements which are
+found in license.doc, license.txt, and rom.license respectively.
+
+Ok, things seem to be working.  I am going to try to structure this
+document for a wide range of audiences, so some of you will have to
+bear with me for a while as I try to provide useful information for
+everyone else.  So here is the structure of this doc:
+
+1. What is this I have just downloaded?
+2. I know how to program, tell me about programming a MUD.
+3. I have programmed MUDs before, tell me about this codebase.
+
+This is going to be written somewhat like a FAQ, with me providing the
+obvious questions and the answers to them.
+
+***What is this I have just downloaded?***
+
+This is a watered down version of the code for a game called Ground
+ZERO.  This is intended to be used as a codebase for warfare MUDs.
+The codebase is written entirely in C.
+
+What is a codebase?
+
+A codebase is a collection of code to get you started that will make
+your task of developing a warfare MUD much easier because many of the
+common things you would want to do in such a game have been
+implemented for you already (by me).
+
+I don't know anything about coding, or codebases, etc but I want to be
+able to understand what I have here and potentially modify it.  How
+would I learn such things?
+
+Some people spend their lives and make their career around
+programming.  However, this doesn't mean that you have to jump in
+completely in order to understand this code in a rudimentary way and
+even make some simple modifications.  The first thing you need to do
+in this process though is get a book on C programming.  C++ is fine
+too, but Ground ZERO and this codebase are written entirely in
+straight C.
+
+What is C/C++?
+
+C and C++ are programming languages.  Further detail about these is
+beyond the scope of this document - get a book like I said above if
+you want to learn more about these.
+
+Is this codebase based on a codebase as well?
+
+Yes, this code is based on ROM2.3 which in turn was based on MERC
+which was based on DIKU.  All of these are free software, but the
+license is such that you cannot use any of code to make a profit for
+yourself.  This is VERY IMPORTANT to remember.
+
+***I know how to program, tell me about programming a MUD***
+
+Fundamentally, of course, a MUD is no different than anything else you
+might, but there are some characteristics that are common to
+DIKU-based MUDs.
+
+What is a good high-level place in the code to look first?
+
+The game continues in one big loop called game_loop_unix.  Here it
+looks for data on every descriptor (telnet connection) and sends
+pending output to any descriptors that have any.  Also, in this loop
+the game checks the time of day and launches various autonomous
+actions (actions that occur in the game no matter what, like hitpoint
+regeneration and object decomposition).
+
+How do commands get processed?
+
+There is a big table in interp.c that provides a mapping between the
+strings that players type in and the game functions that are called.
+By convention, all game functions are called do_whatever.  For example
+if a player types "get", then the table is consulted and the string
+get is found and the function column in the table has do_get, so the
+function do_get is called.  By convention hat function will be found
+in one of the act_ files (act_obj.c in this case).
+
+*** I have programmed MUDs before, tell me about this codebase***
+
+This codebase is special in a couple of ways, but the most glaring
+difference is in how we handle areas.
+
+Why are areas handled differently?
+
+The requirements for areas are not the same in warfare MUDs as they
+are in other games.  We don't need to have complex areas that defy the
+laws of geometry (in other muds, you may notice sometimes you go east
+and then west and you aren't in the same room you started in, this is
+the simplest example of this).  What we need instead is a very quick
+way to tell the distance between rooms in the game, and quickly check
+the contents of a room with arbitrary coordinates.
+
+So how is the area design different?
+
+Instead of having each room have a pointer to the rooms neighboring it
+in each direction, we instead just have a big two-dimentional array of
+rooms.  If you want to see what is in the room 10,7, you need only
+dereference the array to [10][7] and you have a pointer to the room.
+A grenade goes off, who hears it?  Go through the list of characters
+in the game and see if the room they are in has a coordinate that is
+within 5 of the x and y value of the grenade explosion.  Any who do,
+send them the message "you hear a grenade explode."
+
+How are the walls randomized?
+
+This is done in randomize_level in db.c.  Basically we go through and
+randomly put a certain number of walls in.  Then when we're done we
+call connect_level which verifies with a recursive algorithm that
+every part of the maze can be accessed from every other part.  In
+other words, we make sure that there aren't any areas that are
+completely walled in with no way out.
+
+How are levels handled?
+
+Levels are stacked on top of eachother like pizza boxes.  And moved so
+that there is a mapping between each level.  In other words imagine
+you had 3 pizza boxes.  You put one on top of another and then drove a
+nail through the two to hold them in place.  That's how the levels
+are, at the beginning a random reference point is generated for level
+0 and another for level 1.  These are the points that our imaginary
+nail is driven through.  So if the reference points were 5,2 on level
+0 and 16, 14 on level 1, then if you went through a down on level 0,
+at 5, 2 you would be at 16,14 on level 1.  The same process is
+repeated for level 1 and level 2.
+
+Tell me what happens when you pull a grenade?
+
+First take a look at do_pull.  What does this function do?  Other than
+messages, most of what it calls is pull_obj, which other than messages
+does 2 things.  First it sets the owner of the object, next it sets
+the timer to 10 (seconds).  The owner needs to be set so that when the
+grenade explodes we know who pulled it - that's how they get credit
+for their kill.  When the timer reaches zero, the grenade will
+explode.  Why does it explode?  Well, if you set the timer on pants,
+then when it reached zero it would say they fall apart.  But grenades
+don't go away quietly like that.  Take a look at obj_update which
+calls bang_obj on objects who's timer has reached zero.  In bang_obj,
+it checks what extract-flags it has.  If it has none, then it just
+falls apart, if it has the EXPLODE_ON_EXTRACT flag then it blows up
+like the grenade, BLIND_ON_EXTRACT gives you flash grenade type
+explosion, etc.  There is one for a smoke bomb making darkness, sonic
+grenade dazing people, etc.  You can add your own, and if there are
+multiple flags it will do all of these.
+
+What happens when it explodes?
+
+There are several issues that make it more complicated than I'm saying
+and they are in comments in the code, but most of what it does is
+calculate the damage that it is going to do and then apply it to the
+characters and objects - which sometimes results in other objects
+exploding which adds further complexity.  You shouldn't have to change
+this code, so why's it matter? ;)
+
+How do guns work?
+
+Guns are containers.  They can only contain a single item at a time,
+and that is their ammo.  Guns don't do damage, the ammo does.  Each
+gun can only take a specific type of ammo, if you look at the
+ammo_obj.boot file you will see the ammo types listed at the top after
+the ] symbol (comment symbol for the boot files).  The ammo has a
+certain number of rounds in it, when that reaches zero, the ammo is
+recycled and you'll have to reload your gun to shoot more (obviously).
+
+How are items repoped?
+
+Items are NOT repop'ed.  Instead, they are recycled.  Every time an
+object is extracted in the game, it comes down on a parachute
+somewhere else in the game.  You will notice there are 2 different imm
+commands purge and destroy.  Purge will recycle all the objects on the
+floor of the room, while destroy will remove them and not recycle them
+back into the game.  That's how we ran droid quests, we'd just create
+lots of droid contruction sets and type purge and they showed up
+randomly all over the game.
+
+Who is this MR. SELF-DESTRUCT fella?
+
+Well it's a NiN song . . .  Other than that though it's the default
+name in the code when do_ commands are called with a NULL pointer for
+the character, in other words, when the game does actions itself.
+Like when it saves everything every 5 minutes you'll see MR
+SELF-DESTRUCT: 253 objects and 17 characters were saved on the imm
+net.
+
+How does the game reboot and have people come back linkdead?
+
+Every 5 minutes the function do_save_all is called causing the game to
+be saved.  This writes a file called fullsave.txt.  If the game
+crashes, or you reboot, this file is moved to startfile.txt.  If that
+file exists as the game is starting up, it will read the file, which
+contains all the people who were in the game and the items they had,
+their hp, etc and it will pre-load them into the game, so that when
+they connect it will be like they were in the game linkdead and
+nothing has changed.
+
+How does the account system work?
+
+The file account.boot will contain all the accounts.  The command
+newaccount will create an account for a player, delaccount will delete
+the account, disable will disable the account of a player, and apass
+will change the account password.  We always required people to send
+mail and used the email name as the account name, but this is general
+purpose and you could use whatever you wanted as the account name.
+The purpose of this system was to prevent people from constantly
+coming on and mining around their own base or blowing up their
+teammates, etc, which ruined the whole concept.  So we made it so
+without an account you couldn't use explosives at all and if you did
+have an account and acted like that, it was easy to pinpoint who you
+were and who your other characters were.
+
+How do I make myself an imm/imp?
+
+2 important files:
+gods.boot and comm.c
+gods.boot is where all the imms go.
+You can figure out the format of this by looking at how it is loaded
+in load_gods in db.c.
+comm.c is where you put yourself and other imps (max-trust gods).
+Take a look at imp_table and replace the entry for someimp and add as
+many other entries as you like.
+
+Why is it done this way?
+
+Don't you just feel safer knowing you have to recompile the code in
+order to change who the imps are?
+
+Is there any way to turn on and off being a god so that you can test
+things as an imm and player more easily?
+
+YES, but this is also dangerous.
+There is what is called a backdoor in the code as released.
+Log in as any player and simply type
+backdoor
+You will see the typical 
+Huh?!
+But you will suddenly have the max-trust in the game - ie you are
+super-imm.  This trust will only last that single session, this does
+not make you an imm forever.  This is a great thing because it allows
+you to be an imp and type trust self 0 making you a mortal, and then
+just type the backdoor password and your an imm again, and if you use
+a better password than "backdoor" you might even want it up when open
+to the public so that you can tell your lesser imms that if they
+really really need to they can use this password to get maximum trust
+and shut the game down, etc.  Whenever it is used it is logged, so you
+will know if someone abuses this.  Either way though, you want to
+change the password from something as simple as backdoor.

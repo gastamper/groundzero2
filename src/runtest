@@ -1,0 +1,6 @@
+#!/bin/sh
+PORT=4050
+if [ $# -ge 2 ]; then
+  PORT=$2
+fi
+./ground0 -p $PORT -s ../boot/scn/$1/ -l tmp &

@@ -1,0 +1,22 @@
+#
+# killmud - crash the mud (by sending it SIGSEGV)
+# satori
+#
+# useful if the mud runs away and you need to bash its freegin' head in.
+# it also prunes excessively large log files (> 100K) and moves the core
+# dump to tmp/core-DDMonYYYY-Pid (e.g., tmp/core-08Oct2000-2592).
+#
+
+if [ ! -f tmp/ground0.pid ]; then
+	echo "tmp/ground0.pid: no such file"
+	exit
+fi
+
+PID=`cat tmp/ground0.pid`
+DATE=`date +%d%b%Y`
+TIME=`date +%T`
+
+find log -type c -size +100k -exec 'rm -f {}' 'echo "$DATE $TIME: pruned {}" >> tmp/pruned' ;
+kill -SEGV $PID
+mv src/core tmp/core-$DATE-$PID
+rm -f tmp/ground0.pid

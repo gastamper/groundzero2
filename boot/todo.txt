@@ -1,0 +1,29 @@
+Sender  Satori~
+Date    Mon Feb 19 03:11:03 2001~
+Stamp   982581063
+To      self~
+Subject TODO~
+Text
+&X[&cGame Features&X]&n
+&Y*&n Finish mech code up.  (Mainly testing.)
+&Y*&n Test tank code more thoroughly.
+&Y*&n Barbed wire?
+&Y*&n New items/mobs/scen-types?
+
+&X[&cStructural Changes&X]
+&Y*&n Add back in container support.
+&Y*&n Change how mobile behaviors work.
+&Y*&n Rewrite db code.
+&Y*&n Port the color codes from -/working/src/.
+&Y*&n Cuth's PREPARE command idea from long ago.
+&Y*&n Better verb-handling for ammoless weapons.
+&Y*&n Sticky bombs for anti-tanking.
+
+&X[&cNon-enjoyable Stuff&X]
+&Y*&n New tank help files.
+&Y*&n Flagg's weapon descriptions (if he has any?)
+&Y*&n Update the rest of the helps.
+&Y*&n New help file format, probably.
+&Y*&n Make it possible to generate HTML versions of the help files fast.
+&Y*&n help URLs in GZ's mini-httpd, so people can fetch the current help files from http://groundzero.wox.org:6667/helps/WHATEVER
+~

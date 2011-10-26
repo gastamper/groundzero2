@@ -1,0 +1,36 @@
+CC      = gcc
+PROF    =
+NOCRYPT =
+C_FLAGS = -O -g -Wall -std=gnu99 $(PROF) $(NOCRYPT)
+L_FLAGS = -lcrypt -lz -lm -lares
+
+OBJDIR  = .obj
+
+SRC     = act_comm.c act_obj.c db.c interp.c social-edit.c \
+	  act_info.c act_team.c act_wiz.c fight.c memory.c \
+	  update.c act_move.c comm.c handler.c save.c string.c \
+	  mccp.c net.c utils.c poll.c rank.c mob_vehicle.c \
+	  act_use.c act_combat.c reboot.c telnet.c inline.c dns.c \
+	  top.c behave.c ban.c act_profile.c graph.c pfile.c
+O_FILES = $(foreach f,$(SRC:.c=.o),$(OBJDIR)/$(f))
+D_FILES = $(foreach f,$(SRC:.c=.d),$(OBJDIR)/$(f))
+
+default: ground0
+-include $(D_FILES)
+
+ground0: $(O_FILES)
+	@echo Creating executable $@ ...
+	@$(CC) -o ground0 $(O_FILES) $(L_FLAGS)
+	@chmod g=rwx ground0
+	@chmod -R g=rw $(OBJDIR) *.[ch]
+	@echo "DONE."
+clean:
+	rm -f ground0
+	rm -f $(OBJDIR)/*
+	rm -f *~
+
+$(OBJDIR)/%.d: %.c
+	@$(CC) -MM -MT '$$(OBJDIR)/$(*F).o' $< > $@
+$(OBJDIR)/%.o: %.c
+	@echo Compiling $< ...
+	@$(CC) -c $(C_FLAGS) $< -o $@

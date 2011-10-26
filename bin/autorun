@@ -1,0 +1,47 @@
+#!/bin/sh
+
+source .dir_setup
+
+PORT=6666
+ARUNLOG="$BASEDIR/autorun.log"
+
+if [ "$1" != "" ]; then
+	PORT=$1
+fi
+
+if [ "$2" != "" ]; then
+	BASEDIR="$2"
+fi
+
+
+# allow core dumps, stack size, etc
+ulimit -c unlimited
+ulimit -s unlimited
+
+# Remove the old shutdown file.
+if [ -f $SHUTDOWN_FILE ]; then
+	rm -f $SHUTDOWN_FILE
+fi
+
+# Sandbox
+cd $BASEDIR/src
+
+echo "`date`: autorun: Starting up autorun script." >> $ARUNLOG
+
+while :; do
+	./ground0 -p $PORT -l $LOGDIR
+
+	if [ -e core ]; then
+		chmod g+rw core
+	fi
+
+	if [ -e $SHUTDOWN_FILE ]; then
+		echo "XXXX `date`: autorun: Shutting down autorun script." >> $ARUNLOG
+		rm -f $SHUTDOWN_FILE
+		exit 1
+	fi
+
+	echo "`date`: autorun: Hard reboot or crash detected -- restarting GZ." >> $ARUNLOG
+	rm -f *.resolve
+	sleep 10
+done

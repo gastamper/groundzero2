@@ -1,0 +1,17 @@
+#!/bin/sh
+# Directory setup.
+# satori (10 Sep 2001)
+
+BASEDIR="/home/gz2/current"
+
+LOGDIR="$BASEDIR/log"
+SRCDIR="$BASEDIR/src"
+BOOTDIR="$BASEDIR/boot"
+DOCDIR="$BASEDIR/doc"
+TMPDIR="$BASEDIR/tmp"
+PLRDIR="$BASEDIR/player"
+
+LOGARCH_DIR="$LOGDIR/archives"
+PLRARCH_DIR="$PLRDIR/archives"
+
+SHUTDOWN_FILE="$BOOTDIR/shutdown.txt"

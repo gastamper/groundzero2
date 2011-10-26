@@ -1,0 +1,18 @@
+#! /usr/bin/env python
+
+# Unarchives a player
+#  - Tireg (with help from "dash") 07/18/01
+
+import sys,string
+
+if len(sys.argv) > 1:		# there's an argument
+	player = sys.argv[1]
+else:
+	player = raw_input('Unarchive who? ')
+
+player = string.capitalize(player)
+pfile = 'PS' + player
+file = open('/home/gz2/satori/date-purged-24Jun2001/%s' %pfile, 'r')
+newfile = open('/home/gz2/current/player/%s' %pfile, 'w')
+newfile.write(file.read())
+

@@ -1,0 +1,123 @@
+#CMDHELP
+
+activate~   activate <explosive> - Activates explosive, also hyposprays~
+attach~     attach <what> <to-what> - Attaches one item to another~
+beeps~      Toggles beeps on/off (from paging, etc.)~
+boot~       Team leaders only, removes player from the team~
+bury~       bury <mine> - Buries a mine on the ground~
+censor~     Filters vulgar language (or, tries, anyway)~
+changes~    Displays changes to the MUD and immortal emails~
+clear~      Clear the screen (ANSI/VT [ISO6429] required)~
+cls~        Synonym for CLEAR~
+colorset~   Configure your color scheme.~
+commands~   Displays list of commands~
+commbadge~  commbadge <message> - communicates message to all players~
+compact~    Eliminate some unnecessary newlines.~
+compare~    compare <what> <to-what> - Compares armor absorb~
+compress~   Toggles MCCP (need a client supporting zlib compression)~
+count~      Displays current players and max players current boot~
+credits~    Displays the game's credits~
+deactive~   deactive <explosive> - Stops the timer on explosives~
+delete~     Start deletion process (read what it tells you!)~
+demosocial~ See how a social would look to you and everyone else~
+depress~    Depress button, starts or stops countdown~
+detach~     detach <object> <weapon> - detaches scope from weapon~
+donate~     donate <object> - Donate an item (to team HQ)~
+down~       Moves you one direction down~
+drop~       drop <object> - Drops item from inventory to ground~
+east~       Moves you one room east~
+emote~      emote <message> - Act out something~
+enter~      enter <object> - Enter an object (if it can be entered)~
+equipment~  Display what you're wearing~
+examine~    examine <object/target> - Synonym for LOOK~
+exits~      Displays exits and the area they are in~
+follow~     Toggles followable; follow <target> - Follow a teammate~
+gamestats~  Displays awards given to players for current game~
+gear~       Displays equipment worn~
+get~        get <object> - Get an object from the room~
+give~       give <object> <target> - Give an object to someone~
+gocial~     gocial <social> - Global social~
+help~       help <topic> - Displays help file for a given topic~
+history~    Display your command history~
+hold~       hold <object> - Hold an object~
+idea~       idea <idea> - Submits idea to the admins~
+induct~     Team leaders only, induct volunteer into team~
+inventory~  Displays all objects in inventory~
+kill~       kill <target> - Synonym for SHOOT~
+kmsg~       Display current kill message; kmsg <message> - set kmsg~
+ld~         Break link (linkdead characters count as being online!)~
+leave~      Leaves saferoom, hq, or vehicle, teleports~
+light~      light <explosive> - Synonym for PULL~
+lines~      Sets terminal screen length~
+load~       Loads wielded weapon(s).  See HELP LOAD for more.~
+look~       Look at the surroundings; look out - Look outside HQ/vehicle.~
+man~        Mans a position in a vehicle~
+motd~       Displays message of the day, set by the admin~
+north~      Moves you one room north~
+note~       Access the note system; see HELP NOTE~
+page~       For paging someone (type PAGE for more information)~
+password~   password <old password> <new password> - Change password~
+poll~       Access the polling system; see POLL HELP~
+primary~    primary <weapon> - Wields the weapon in the primary hand~
+pull~       pull <explosive> - Activates an explosive~
+push~       push <target> <direction> - Push someone/something in a direction~
+quiet~      Turns off COMMBADGE, TEAM, and GOCIAL channels~
+rank~       [HUNTER+] hides ratio information from lower ranks~
+remove~     remove <object> - Remove equipped armor or weapon~
+repin~      repin <explosive> - Stops explosive timer, if possible~
+reply~      reply <message> - Reply to last tell received, see TELL~
+repop~      Toggles repop/teleport at hq or randomly in battlefield L0~
+report~     Reports hp to players in room~
+resign~     Team leaders only, resign as leader of team~
+rest~       Rests/sits, better regen, cannot move while resting~
+roll~       roll <object> <direction> - Rolls a barrel or keg until wall~
+rules~      Displays the rules~
+say~        say <message> - Communicates message to players in room~
+scan~       Displays targets in all directions~
+score~      Displays hours, armor absorb, status, stats~
+second~     second <weapon> - Wields the weapon in the secondary hand~
+shoot~      shoot <target> - Target one person (and one person, alone)~
+sit~        Sits/rests, increased regen, cannot move while sitting~
+sleep~      Go to sleep, increased regen, but completely defenseless~
+smsg~       Displays current suicide message; smsg <message> - sets smsg~
+socials~    Displays list of socials~
+sockets~    Displays site addresses and hours for players connected~
+south~      Moves you one room south~
+stand~      Stand/wake up~
+start~      Starts up vehicle~
+stop~       Turns off an active vehicle~
+take~       take <object> - synonym for GET~
+team~       team <message> - Communicates message to teammates~
+teamtalk~   teamtalk <message> - Communicates message to teammates~
+teleport~   Teleport to random location or outside base, see REPOP~
+tell~       tell <target> <message> - Communicates message to a target~
+throw~      throw <object> <direction> <distance> - throw an object~
+time~       Displays scenario, round time, system time, max players boot~
+title~      Sets title~
+toss~       toss <object> <direction> <distance> - throw an object~
+track~      track <target> - Tells you in what direction a target is~
+ttype~      Set terminal type (for color and other special features).~
+typo~       typo <typo> - Reports typo to admin~
+unload~     Unload a loaded weapon (primary/secondary or both)~
+unpull~     unpull <explosive> - synonym for REPIN/DEACTIVATE~
+up~         Moves you one room up~
+use~        use <object> - Uses an item from inventory~
+volunteer~  volunteer <team> - Volunteer for another team~
+wake~       Wakes/stands up; wake <target> - Wakes target from sleep~
+wear~       wear <object> - Wears a piece of equipment from inventory~
+west~       Moves you one room west~
+where~      Displays where potential targets are~
+who~        Displays visible players connected and their titles~
+whois~      whois <player> - Displays WHO listing for player~
+wield~      wield <weapon> - Wields weapon from inventory~
+wizlist~    Displays list of admin and emails~
+wprofile~   wprofile <weapon> - Displays stats for a weapon~
+;~          ; <message> - Abbreviation for REPLY~
+/~          / <message> - Abbreviation for TEAMTALK~
+,~          , <message> - Abbreviation for EMOTE~
+'~          ' <message> - Abbreviation for SAY~
+!~          Repeat from command history, see HELP !~
+^~          Substitution repeat from command history, see HELP !~
+$~
+
+#$

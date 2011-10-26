@@ -1,0 +1,35 @@
+#!/bin/sh
+## Automagic Maintainence Tool ###############################################
+#
+# This is used to perform some of the common maintainence things that we need
+# to do every now and then, like date-purging old player files, cleaning up
+# old logs, etc.
+#
+# It should be ran automatically every so often by crond.
+#
+
+source .dir_setup
+DATE=`date +%d%b%Y`
+PLR_ARCH="$PLRARCH_DIR/purged-$DATE.tar.gz"
+LOG_ARCH="$LOGARCH_DIR/logs-$DATE.tar.gz"
+AMLOG="$BASEDIR/automaint.log"
+
+if [ $1 = "-X" ]; then
+	# Date purge player files (actually, archive).
+	find $PLRDIR -mtime +30 -print > .to_purge
+	tar cz -T .to_purge -f $PLR_ARCH &> /dev/null
+
+	for f in $(< .to_purge); do
+		echo "$DATE: Date purged/archived: $f" >> $AMLOG
+		rm -rf $f
+	done
+
+	rm .to_purge
+fi
+
+if [ $1 = "-l" ]; then
+	# Clean up logs.
+	tar czf $LOG_ARCH $LOGDIR/*.log $LOGDIR/players &> /dev/null
+	rm -f $LOGDIR/*.log $LOGDIR/players/*
+	echo "$DATE: Archived and cleaned up $LOGDIR." >> $AMLOG
+fi

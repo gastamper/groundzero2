@@ -1,0 +1,33 @@
+#!/bin/sh
+
+cd /home/gz2/current/log
+
+EXDATE=`date -d '1 day ago' +%m%d%Y`
+mkdir $EXDATE
+
+find -mtime -1 -name '[1-9][0-9][0-9][0-9].log' -exec cp {} $EXDATE \;
+tar -czf logs-$EXDATE.tar.gz $EXDATE players/
+
+/usr/local/bin/mutt -x -a logs-$EXDATE.tar.gz -H .log-maint-to <<EOF
+
+The following is a MIME attachment of an archived file containing
+the logs for the previous day up to 6:10am on this day.  There will
+be, at the least, a directory named MMDDYYYY, where MM is the month,
+DD is the day, and YYYY is the year (e.g., 02172001 for 17 Feb 2001).
+You may also find a players/ directory, which are the complete logs
+for individual players.  You should let players/*.log files be
+overwritten, since it always sends the complete file again and you
+will only be storing duplicate information by doing it any other
+way.
+
+The game log files are usually named XXXX.log, where XXXX is some
+number starting at 1000 and going up to 9999.  Each XXXX.log file
+corresponds to a single boot.  Since I don't do log maintainence
+every day, you'll often see that the number of the log file picks
+up on one day where the last day left off.  This is because I have
+not yet checked, archived, and removed the logs from the previous
+day.
+EOF
+
+rm -rf $EXDATE
+rm -f logs-$EXDATE.tar.gz
