@@ -1153,75 +1153,75 @@ load_obj_item_type (FILE * fp, OBJ_INDEX_DATA * current_obj)
 
             if ( !str_cmp(buf, "capacity") )
             {
-                OBJ_CAPACITY(current_obj) = fread_number(fp);
+                current_obj->vehicle->capacity = fread_number(fp);
                 buf = fread_word(fp);
             }
             else
-                OBJ_CAPACITY(current_obj) = 0;
+                current_obj->vehicle->capacity = 0;
 
             if ( !str_cmp(buf, "interior") )
             {
-                OBJ_INTERIOR_DESC(current_obj) = fread_string(fp);
+                current_obj->vehicle->interior_desc = fread_string(fp);
                 buf = fread_word(fp);
             }
             else
-                OBJ_INTERIOR_DESC(current_obj) =
+                current_obj->vehicle->interior_desc =
                     str_dup("Inside a vehicle.");
 
             if ( !str_cmp(buf, "startActor") )
             {
-                OBJ_START_MESSAGE_DP(current_obj) = fread_string(fp);
+                current_obj->vehicle->start_message_dp = fread_string(fp);
                 buf = fread_word(fp);
             }
 
             if ( !str_cmp(buf, "startInterior") )
             {
-                OBJ_START_MESSAGE_DO(current_obj) = fread_string(fp);
+                current_obj->vehicle->start_message_do = fread_string(fp);
                 buf = fread_word(fp);
             }
 
             if ( !str_cmp(buf, "startExterior") )
             {
-                OBJ_START_MESSAGE_IO(current_obj) = fread_string(fp);
+                current_obj->vehicle->start_message_io = fread_string(fp);
                 buf = fread_word(fp);
             }
 
             if ( !str_cmp(buf, "stopActor") )
             {
-                OBJ_STOP_MESSAGE_DP(current_obj) = fread_string(fp);
+                current_obj->vehicle->stop_message_dp = fread_string(fp);
                 buf = fread_word(fp);
             }
 
             if ( !str_cmp(buf, "stopInterior") )
             {
-                OBJ_STOP_MESSAGE_DO(current_obj) = fread_string(fp);
+                current_obj->vehicle->stop_message_do = fread_string(fp);
                 buf = fread_word(fp);
             }
 
             if ( !str_cmp(buf, "stopExterior") )
             {
-                OBJ_STOP_MESSAGE_IO(current_obj) = fread_string(fp);
+                current_obj->vehicle->stop_message_io = fread_string(fp);
                 buf = fread_word(fp);
             }
 
-            OBJ_R_POSITIONS(current_obj) =
-            OBJ_POSITIONS(current_obj) = fread_flag(fp);
+            current_obj->vehicle->r_positions =
+            current_obj->vehicle->positions = fread_flag(fp);
             buf = fread_word(fp);
 
             if ( !str_cmp(buf, "reqPositions") )
             {
-                OBJ_R_POSITIONS(current_obj) = fread_flag(fp);
+                current_obj->vehicle->r_positions = fread_flag(fp);
                 buf = fread_word(fp);
             }
 
             if ( !str_cmp(buf, "turretDistance") )
             {
-                OBJ_TURRET_LOW(current_obj) = fread_number(fp);
-                OBJ_TURRET_HIGH(current_obj) = fread_number(fp);
+                current_obj->vehicle->turret_low = fread_number(fp);
+                current_obj->vehicle->turret_high = fread_number(fp);
                 buf = fread_word(fp);
             }
 
-            OBJ_TOMOB(current_obj) = fread_string(fp);
+            current_obj->vehicle->tomob = fread_string(fp);
             break;
         case ITEM_TEAM_ENTRANCE:
         case ITEM_MISC:
@@ -2228,19 +2228,20 @@ create_object (OBJ_INDEX_DATA * pObjIndex, int level)
     if ( obj->item_type == ITEM_TEAM_VEHICLE )
     {
         obj->vehicle = alloc_mem(sizeof(struct obj_vehicle_data));
-        OBJ_TOMOB(obj) = OBJ_TOMOB(pObjIndex);
-        OBJ_POSITIONS(obj) = OBJ_POSITIONS(pObjIndex);
-        OBJ_R_POSITIONS(obj) = OBJ_R_POSITIONS(pObjIndex);
-        OBJ_START_MESSAGE_DP(obj) = OBJ_START_MESSAGE_DP(pObjIndex);
-        OBJ_START_MESSAGE_DO(obj) = OBJ_START_MESSAGE_DO(pObjIndex);
-        OBJ_START_MESSAGE_IO(obj) = OBJ_START_MESSAGE_IO(pObjIndex);
-        OBJ_STOP_MESSAGE_DP(obj) = OBJ_STOP_MESSAGE_DP(pObjIndex);
-        OBJ_STOP_MESSAGE_DO(obj) = OBJ_STOP_MESSAGE_DO(pObjIndex);
-        OBJ_STOP_MESSAGE_IO(obj) = OBJ_STOP_MESSAGE_IO(pObjIndex);
-        OBJ_INTERIOR_DESC(obj) = OBJ_INTERIOR_DESC(pObjIndex);
-        OBJ_CAPACITY(obj) = OBJ_CAPACITY(pObjIndex);
-        OBJ_TURRET_HIGH(obj) = OBJ_TURRET_HIGH(pObjIndex);
-        OBJ_TURRET_LOW(obj) = OBJ_TURRET_LOW(pObjIndex);
+                
+        obj->vehicle->tomob = pObjIndex->vehicle->tomob;
+        obj->vehicle->positions = pObjIndex->vehicle->positions;
+        obj->vehicle->r_positions = pObjIndex->vehicle->r_positions;
+        obj->vehicle->start_message_dp = pObjIndex->vehicle->start_message_dp;
+        obj->vehicle->start_message_do = pObjIndex->vehicle->start_message_do;
+        obj->vehicle->start_message_io = pObjIndex->vehicle->start_message_io;
+        obj->vehicle->stop_message_dp = pObjIndex->vehicle->stop_message_dp;
+        obj->vehicle->stop_message_do = pObjIndex->vehicle->stop_message_do;
+        obj->vehicle->stop_message_io = pObjIndex->vehicle->stop_message_io;
+        obj->vehicle->interior_desc = pObjIndex->vehicle->interior_desc;
+        obj->vehicle->capacity = pObjIndex->vehicle->capacity;
+        obj->vehicle->turret_high = pObjIndex->vehicle->turret_high;
+        obj->vehicle->turret_low = pObjIndex->vehicle->turret_low;
     }
 
     obj->next = object_list;
@@ -2351,40 +2352,40 @@ clone_object (OBJ_DATA * parent, OBJ_DATA * clone)
     if ( clone->item_type == ITEM_TEAM_VEHICLE )
     {
         clone->vehicle = alloc_perm(sizeof(struct obj_vehicle_data));
-        OBJ_TOMOB(clone) = str_dup(OBJ_TOMOB(parent));
-        OBJ_POSITIONS(clone) = OBJ_POSITIONS(parent);
-        OBJ_R_POSITIONS(clone) = OBJ_R_POSITIONS(parent);
+        clone->vehicle->tomob = str_dup(parent->vehicle->tomob);
+        clone->vehicle->positions = parent->vehicle->positions;
+        clone->vehicle->r_positions = parent->vehicle->r_positions;
 
-        if ( OBJ_START_MESSAGE_DP(parent) )
+        if ( parent->vehicle->start_message_dp )
         {
-            OBJ_START_MESSAGE_DP(clone) =
-                str_dup(OBJ_START_MESSAGE_DP(parent));
-            OBJ_START_MESSAGE_DO(clone) =
-                str_dup(OBJ_START_MESSAGE_DO(parent));
-            OBJ_START_MESSAGE_IO(clone) =
-                str_dup(OBJ_START_MESSAGE_IO(parent));
+            clone->vehicle->start_message_dp =
+                str_dup(parent->vehicle->start_message_dp);
+            clone->vehicle->start_message_do =
+                str_dup(parent->vehicle->start_message_do);
+            clone->vehicle->start_message_io =
+                str_dup(parent->vehicle->start_message_io);
         }
         else
-            OBJ_START_MESSAGE_DP(clone) = OBJ_START_MESSAGE_DO(clone) =
-                OBJ_START_MESSAGE_IO(clone) = NULL;
+            clone->vehicle->start_message_dp = clone->vehicle->start_message_do =
+                clone->vehicle->start_message_io = NULL;
 
-        if ( OBJ_STOP_MESSAGE_DP(parent) )
+        if ( parent->vehicle->stop_message_dp )
         {
-            OBJ_STOP_MESSAGE_DP(clone) =
-                str_dup(OBJ_STOP_MESSAGE_DP(parent));
-            OBJ_STOP_MESSAGE_DO(clone) =
-                str_dup(OBJ_STOP_MESSAGE_DO(parent));
-            OBJ_STOP_MESSAGE_IO(clone) =
-                str_dup(OBJ_STOP_MESSAGE_IO(parent));
+            clone->vehicle->stop_message_dp =
+                str_dup(parent->vehicle->stop_message_dp);
+            clone->vehicle->stop_message_do =
+                str_dup(parent->vehicle->stop_message_do);
+            clone->vehicle->stop_message_io =
+                str_dup(parent->vehicle->stop_message_io);
         }
         else
-            OBJ_STOP_MESSAGE_DP(clone) = OBJ_STOP_MESSAGE_DO(clone) =
-                OBJ_STOP_MESSAGE_IO(clone) = NULL;
+            clone->vehicle->stop_message_dp = clone->vehicle->stop_message_do =
+                clone->vehicle->stop_message_io = NULL;
 
-        OBJ_INTERIOR_DESC(clone) = str_dup(OBJ_INTERIOR_DESC(parent));
-        OBJ_CAPACITY(clone) = OBJ_CAPACITY(parent);
-        OBJ_TURRET_HIGH(clone) = OBJ_TURRET_HIGH(parent);
-        OBJ_TURRET_LOW(clone) = OBJ_TURRET_LOW(parent);
+        clone->vehicle->interior_desc = str_dup(parent->vehicle->interior_desc);
+        clone->vehicle->capacity = parent->vehicle->capacity;
+        clone->vehicle->turret_high = parent->vehicle->turret_high;
+        clone->vehicle->turret_low = parent->vehicle->turret_low;
     }
 
     for ( count = 0; count < 3; count++ )
