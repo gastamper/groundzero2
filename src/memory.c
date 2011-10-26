@@ -22,14 +22,9 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <time.h>
-#if defined(macintosh)
-#include <types.h>
-#else
 #include <sys/types.h>
 #include <sys/time.h>
 #include <sys/resource.h>
-#endif
-
 #include "ground0.h"
 #include "db.h"
 #include "memory.h"
@@ -444,8 +439,8 @@ do_dump (CHAR_DATA * ch, char *argument)
         count++;
 
     fprintf(fp, "Pcdata  %4d (%8d bytes), %2d free (%d bytes)\n",
-            num_pcs, num_pcs * (sizeof(*pc)), count,
-            count * (sizeof(*pc)));
+            num_pcs, num_pcs * ((int)sizeof(*pc)), count,
+            count * ((int)sizeof(*pc)));
 
     /* descriptors */
     count = 0;
@@ -456,7 +451,7 @@ do_dump (CHAR_DATA * ch, char *argument)
         count2++;
 
     fprintf(fp, "Descs  %4d (%8d bytes), %2d free (%d bytes)\n",
-            count, count * (sizeof(*d)), count2, count2 * (sizeof(*d)));
+            count, count * ((int)sizeof(*d)), count2, count2 * ((int)sizeof(*d)));
 
     /* object prototypes */
     for ( vnum = 0; vnum < top_obj_index; vnum++ )
@@ -466,7 +461,7 @@ do_dump (CHAR_DATA * ch, char *argument)
         }
 
     fprintf(fp, "ObjProt %4d (%8d bytes)\n", top_obj_index,
-            top_obj_index * (sizeof(*pObjIndex)));
+            top_obj_index * ((int)sizeof(*pObjIndex)));
 
 
     /* objects */
@@ -480,8 +475,8 @@ do_dump (CHAR_DATA * ch, char *argument)
         count2++;
 
     fprintf(fp, "Objs    %4d (%8d bytes), %2d free (%d bytes)\n",
-            count, count * (sizeof(*obj)), count2,
-            count2 * (sizeof(*obj)));
+            count, count * ((int)sizeof(*obj)), count2,
+            count2 * ((int)sizeof(*obj)));
     fprintf(fp, "\n\n\nAll strings:\n\n");
     for ( printer = string_space; printer < top_string; printer++ )
         fprintf(fp, "%c", printer[0]);

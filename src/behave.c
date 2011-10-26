@@ -27,6 +27,7 @@ int is_aggro(struct char_data *, struct char_data *);
 bool medic_should_heal(struct char_data *, struct char_data *);
 
 DECLARE_DO_FUN (do_use);
+DECLARE_DO_FUN (do_pull);
 
 char *npc_parse(const char *, struct char_data *, struct char_data *,
                 struct obj_data *, const char *);

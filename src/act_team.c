@@ -113,7 +113,7 @@ do_teamwho (struct char_data *ch, char *argument)
             k += sprintf(buf + k,
                          "  %s%-15s &n%*s &Y%-5d &Y%d\r\n",
                          team_table[team].namecolor, memb->names,
-                         -(30 + (strlen(p) - str_len(p))), p,
+                         -(30 + ((int)strlen(p) - str_len(p))), p,
                          memb->pcdata->gs_teamed_kills, memb->teamkill);
 
             count++;

@@ -53,7 +53,7 @@ ResolvInitialize (void)
 
     if ( (status = ares_init(&x_aresChannel)) != ARES_SUCCESS )
     {
-		errstr = ares_strerror(status);
+		errstr = (char *) ares_strerror(status);
         logmesg("ares_init: %s\n", errstr);
         ares_free_string((void *) errstr);
         return -1;

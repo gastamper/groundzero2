@@ -196,7 +196,7 @@ display_poll (struct char_data *ch, struct poll_data *poll, bool show)
         for ( x = 0; x < poll->numOptions; x++ )
             k += sprintf(buf + k, "&W%s%*c&n%3d%% &X(&n%d votes&X)&n\r\n",
                          poll->options[x].text,
-                         longest - strlen(poll->options[x].text), ' ',
+                         longest - (int)strlen(poll->options[x].text), ' ',
                          (poll->options[x].tally * 100) / poll->voters,
                          poll->options[x].tally);
     }
