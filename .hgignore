@@ -3,7 +3,8 @@ syntax: glob
 *.pyc
 .DS_Store
 src/ground0
-.obj
+.obj/*.o
+.obj/*.d
 log/*.log
 player/PS*
 tmp/*.pid
