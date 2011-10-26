@@ -63,7 +63,6 @@ const int codeTrustLevel[256] = {
         *(buf++) = (_);                                                 \
         szbuf--;                                                        \
     }                                                                   \
-    (_);                                                                \
 })
 
 
