@@ -915,7 +915,8 @@ do_goto (CHAR_DATA * ch, char *argument)
 
     if ( argument[0] == '\0' )
     {
-        send_to_char("Goto where?\r\n", ch);
+        send_to_char("Syntax: goto <room>\r\n", ch);
+	send_to_char("Destination can be either coordinates (X Y Z) or one of the predefined rooms (safe, god, etc.).\r\n");
         return;
     }
 
