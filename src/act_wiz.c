@@ -1529,7 +1529,7 @@ do_clone (CHAR_DATA * ch, char *argument)
         obj = get_obj_here(ch, id);
         if ( obj == NULL )
         {
-            send_to_char("You don't see that here.\r\n", ch);
+            send_to_char("Clone only works on objects in the current room.\r\n", ch);
             return;
         }
 
@@ -1565,12 +1565,12 @@ do_clone (CHAR_DATA * ch, char *argument)
         mob = get_char_room(ch, id);
         if ( mob == NULL )
         {
-            send_to_char("You don't see that here.\r\n", ch);
+            send_to_char("Clone only works on mobiles in the current room.\r\n", ch);
             return;
         }
         else if ( !IS_NPC(mob) )
         {
-            send_to_char("It must be a mob.\r\n", ch);
+            send_to_char("'clone mobile' only works on mobiles.\r\n", ch);
             return;
         }
 
