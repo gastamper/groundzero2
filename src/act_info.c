@@ -127,7 +127,7 @@ scan_direction (struct char_data *ch, struct room_data *rm, int dist,
         for ( ich = rm->people; ich; ich = ich->next_in_room )
             if ( can_see(ch, ich) )
             {
-                sprintf(buf, "%s: %s%s%s&n is %d %s.\r\n",
+                sprintf(buf, "%5s: %s%s%s&n is %d %s.\r\n",
 			capitalize(dir_name[dir]),
                         (autoscan ? "- " : ""),
                         team_table[ich->team].namecolor, PERS(ich, ch),
@@ -140,7 +140,7 @@ scan_direction (struct char_data *ch, struct room_data *rm, int dist,
             if (iobj->item_type == ITEM_TEAM_VEHICLE ||
                 iobj->item_type == ITEM_TEAM_ENTRANCE)
             {
-                sprintf(buf, "%s: %s&uO%s&n is %d %s.\r\n",
+                sprintf(buf, "%5s: %s&uO%s&n is %d %s.\r\n",
 			capitalize(dir_name[dir]),
                         (autoscan ? "&X- " : ""),
                         iobj->short_descr, i,
