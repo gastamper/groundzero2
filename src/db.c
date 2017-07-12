@@ -350,22 +350,22 @@ boot_db (void)
                    ammo_repop[1]->y, ammo_repop[2]->x, ammo_repop[2]->y);
     }
 
-    logmesg("Distributing objects . . .");
+    logmesg("Distributing objects...");
     scatter_objects();
 
-    logmesg("Setting bases . . .");
+    logmesg("Setting bases...");
     set_bases();
 
-    logmesg("Distributing mobs . . .");
+    logmesg("Distributing mobs...");
     distribute_mobs();
 
-    logmesg("Reading notes . . .");
+    logmesg("Reading notes...");
     load_notes();
 
-    logmesg("Loading socials . . .");
+    logmesg("Loading socials...");
     load_social_table();
 
-    logmesg("Loading polls . . .");
+    logmesg("Loading polls...");
     load_polls();
 
     /* Declare booting over. */
