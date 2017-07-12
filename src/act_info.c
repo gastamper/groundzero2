@@ -115,6 +115,7 @@ scan_direction (struct char_data *ch, struct room_data *rm, int dist,
     int i;                      /* Iterator distance.         */
     struct char_data *ich;      /* Iterator character.        */
     struct obj_data *iobj;      /* Iterator object.           */
+    int count = 0;		/* Count of seen things	      */
 
     for ( i = 1; i <= dist; i++ )
     {
@@ -126,24 +127,33 @@ scan_direction (struct char_data *ch, struct room_data *rm, int dist,
         for ( ich = rm->people; ich; ich = ich->next_in_room )
             if ( can_see(ch, ich) )
             {
-                sprintf(buf, "%s%s%s&n is %d %s.\r\n",
+                sprintf(buf, "%s: %s%s%s&n is %d %s.\r\n",
+			capitalize(dir_name[dir]),
                         (autoscan ? "- " : ""),
                         team_table[ich->team].namecolor, PERS(ich, ch),
                         i, dir_name[dir]);
                 send_to_char(buf, ch);
+		count+=1;
             }
 
         for ( iobj = rm->contents; iobj; iobj = iobj->next_content )
             if (iobj->item_type == ITEM_TEAM_VEHICLE ||
                 iobj->item_type == ITEM_TEAM_ENTRANCE)
             {
-                sprintf(buf, "%s&uO%s&n is %d %s.\r\n",
+                sprintf(buf, "%s: %s&uO%s&n is %d %s.\r\n",
+			capitalize(dir_name[dir]),
                         (autoscan ? "&X- " : ""),
                         iobj->short_descr, i,
                         dir_name[dir]);
                 send_to_char(buf, ch);
+		count+=1;
             }
     }
+    if (count == 0) 
+	    { 
+	     	sprintf(buf, "%5s: Nothing.\r\n", capitalize(dir_name[dir]));
+		send_to_char(buf, ch);
+	    }
 }
 
 
@@ -156,11 +166,13 @@ do_scan (CHAR_DATA * ch, char *argument)
         return;
     }
 
-    send_to_char("You scan your surroundings and see...\r\n\r\n", ch);
+    send_to_char("You scan your surroundings and see...\r\n", ch);
     scan_direction(ch, ch->in_room, max_sight(ch), DIR_NORTH, false);
     scan_direction(ch, ch->in_room, max_sight(ch), DIR_EAST, false);
     scan_direction(ch, ch->in_room, max_sight(ch), DIR_SOUTH, false);
     scan_direction(ch, ch->in_room, max_sight(ch), DIR_WEST, false);
+    scan_direction(ch, ch->in_room, max_sight(ch), DIR_UP, false);
+    scan_direction(ch, ch->in_room, max_sight(ch), DIR_DOWN, false);
 }
 
 
