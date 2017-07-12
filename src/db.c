@@ -392,10 +392,10 @@ set_bases ()
         obj = create_object(get_obj_index(VNUM_HQ), 0);
         team_table[count].hq = obj;
         obj->name = str_dup("An HQ.");
-        sprintf(stat_buf, "The %s&n headquarters entrance",
+        sprintf(stat_buf, "&nThe %s&n headquarters entrance",
                 team_table[count].who_name);
         obj->short_descr = str_dup(stat_buf);
-        sprintf(stat_buf, "The %s&n headquarters entrance is here.",
+        sprintf(stat_buf, "&nThe %s&n headquarters entrance is here.",
                 team_table[count].who_name);
         obj->description = str_dup(stat_buf);
         obj->interior->name = str_dup("The inside of HQ.");
