@@ -156,7 +156,7 @@ do_scan (CHAR_DATA * ch, char *argument)
         return;
     }
 
-    send_to_char("You scan your surroundings and see. . .\r\n\r\n", ch);
+    send_to_char("You scan your surroundings and see...\r\n\r\n", ch);
     scan_direction(ch, ch->in_room, max_sight(ch), DIR_NORTH, false);
     scan_direction(ch, ch->in_room, max_sight(ch), DIR_EAST, false);
     scan_direction(ch, ch->in_room, max_sight(ch), DIR_SOUTH, false);
