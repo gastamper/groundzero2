@@ -159,6 +159,12 @@ log_base_string (const char *mesg)
 void
 logmesg (const char *fmt, ...)
 {
+#ifdef LOG_STDOUT
+    time_t t = time(0);
+    char timestr[1000];
+    struct tm * lt = localtime(&t);
+#endif
+
     char buf[MAX_STRING_LENGTH];
     va_list ap;
 
@@ -169,6 +175,9 @@ logmesg (const char *fmt, ...)
     log_base_string(buf);
 
 #ifdef LOG_STDOUT
+    strftime(timestr, 1000, "%a %b %d %Y, %T", lt);
+    fprintf(stdout, timestr);
+    fprintf(stdout, ": ");
     fprintf(stdout, buf);
     fprintf(stdout, "\r\n");
 #endif
