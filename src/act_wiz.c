@@ -1627,7 +1627,7 @@ do_oload (CHAR_DATA * ch, char *argument)
 
     if ( arg1[0] == '\0' || !is_number(arg1) )
     {
-        send_to_char("Syntax: create obj <vnum>.\r\n", ch);
+        send_to_char("Syntax: create <vnum>.\r\n", ch);
         return;
     }
 
