@@ -3,3 +3,5 @@
 *.log
 *.pid
 ground0
+player/PS*
+*.top
