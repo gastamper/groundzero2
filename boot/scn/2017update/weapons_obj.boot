@@ -27,7 +27,7 @@ EXTRACT 0
 USE 0
 gun rifle pulse~
 a &{&Wpulse&} rifle~
-a &{&XMK II &Wpulse&} rifle looks harmless just lying here~
+a &{&XMK II &Wpulse&} rifle looks harmless just lying here.~
 REPOP 80 1-1
 CHSH 7000 7000
 
