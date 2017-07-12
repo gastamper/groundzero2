@@ -10,7 +10,7 @@
 
 
 #include    "ground0.h"
-
+#include    "localconfig.h"
 
 int
 get_line (FILE * fp, char *buf, size_t nbuf)
@@ -167,6 +167,11 @@ logmesg (const char *fmt, ...)
     va_end(ap);
 
     log_base_string(buf);
+
+#ifdef LOG_STDOUT
+    fprintf(stdout, buf);
+    fprintf(stdout, "\r\n");
+#endif
 }
 
 
