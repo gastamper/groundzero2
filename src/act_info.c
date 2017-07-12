@@ -1693,7 +1693,7 @@ do_who (CHAR_DATA * ch, char *argument)
     bool justRank = 0;
     CHAR_DATA *vch;
     int nMatch;
-    int ldcount;
+    int ldcount = 0;
 
     /*
      * Set default arguments.
