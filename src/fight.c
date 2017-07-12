@@ -604,7 +604,7 @@ autothrow_exp (CHAR_DATA * ch, CHAR_DATA * victim, OBJ_DATA * weapon,
     else
     {
         act("You &uathrow&n $p at $N.", ch, weapon, victim, TO_CHAR);
-        act("$n &uathrows&n $p at You.", ch, weapon, victim, TO_VICT);
+        act("$n &uathrows&n $p at you.", ch, weapon, victim, TO_VICT);
         act("$n &uathrows&n $p at $N.", ch, weapon, victim, TO_NOTVICT);
         send_object(weapon, victim->in_room, (dx ? dx : dy));
     }
