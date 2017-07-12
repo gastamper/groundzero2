@@ -24,4 +24,4 @@ to pick it up and make it work.
 2. Build and install libcares
 3. Make the necessary source changes according to the instructions in groundzeromud/src
 4. Build the server by going into groundzeromud/src and hitting __make__
-5. Hit __./groundz0__ and pray
+5. Hit __./ground0__ and pray
