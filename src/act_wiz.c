@@ -1600,8 +1600,7 @@ do_create (CHAR_DATA * ch, char *argument)
 {
     if ( argument[0] == '\0' )
     {
-        send_to_char("Syntax:\r\n", ch);
-        send_to_char("  create obj <vnum>\r\n", ch);
+        send_to_char("Syntax: create <vnum>\r\n", ch);
         return;
     }
     else
