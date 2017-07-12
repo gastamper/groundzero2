@@ -536,7 +536,7 @@ a hypospray charge~
 DAM_CH 0 0 0
 DAM_ST 0 0 0
 USE A
-DAM_CH -2000 -1000 0
+DAM_CH 2000 1000 0
 DAM_ST 0 0 0
 hypro hypospray charge heal~
 a &Rhypospray charge&n~
