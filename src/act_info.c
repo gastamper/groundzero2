@@ -1693,6 +1693,7 @@ do_who (CHAR_DATA * ch, char *argument)
     bool justRank = 0;
     CHAR_DATA *vch;
     int nMatch;
+    int ldcount;
 
     /*
      * Set default arguments.
@@ -1731,6 +1732,10 @@ do_who (CHAR_DATA * ch, char *argument)
 
     for ( vch = char_list; vch; vch = vch->next )
     {
+        /* Check if linkdead, if so add 1 to ldcount */
+        if ( !vch->desc && !IS_NPC(vch) )
+            ldcount += 1;
+
         /*
          * Check for match against restrictions.
          * Don't use trust as that exposes trusted mortals.
@@ -1762,10 +1767,11 @@ do_who (CHAR_DATA * ch, char *argument)
 
     if ( (arg[0] == 'l') || (arg[0] == 'L') )
     {
-        page_to_char
-            ("\r\n&X- -- --&n- ----&W=&Y/ &RFREE KILLS &Y/&W=&n---- -&X-- -- -&n\r\n",
-             ch);
-        do_who(ch, "d");
+        if (ldcount > 0) {
+             page_to_char
+                 ("\r\n&X- -- --&n- ----&W=&Y/ &RFREE KILLS &Y/&W=&n---- -&X-- -- -&n\r\n",
+                 ch);
+             do_who(ch, "d"); }
     }
 }
 
