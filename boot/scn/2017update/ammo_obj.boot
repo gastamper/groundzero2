@@ -258,7 +258,7 @@ EXTRACT 0
 USE 0
 rounds ammo drum 50 calibre~
 a drum of .50 calibre machinegun rounds~
-An ammo drum has been dropped here.~
+A drum of .50 calibre machinegun rounds has been dropped here.~
 REPOP 95 2-4
 CHSH 2000 2000
 
