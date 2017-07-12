@@ -532,15 +532,15 @@ DAM_CH -2000 -1000 0
 DAM_ST 0 0 0
 GEN 0
 EXTRACT A
-a hypospray charge~
+a hypospray healing charge~
 DAM_CH 0 0 0
 DAM_ST 0 0 0
 USE A
 DAM_CH 2000 1000 0
 DAM_ST 0 0 0
-hypro hypospray charge heal~
-a &Rhypospray charge&n~
-A small cylinder with a &Rred x&n lies here.~
+hypo hypospray charge healing~
+a &Rhypospray healing charge&n~
+A &Rhypospray healing charge&n lies here.~
 REPOP 100 5-10
 CHSH 10 10
 
