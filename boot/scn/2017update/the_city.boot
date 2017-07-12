@@ -1,0 +1,10 @@
+#AREA
+SCENARIO GZ2 Default Scenario~
+TIME 90
+L 3
+XY 21 21
+XY 16 16
+XY 5 5
+$
+
+#$
