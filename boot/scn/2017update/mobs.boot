@@ -69,7 +69,7 @@ LOC "god-store"~
 ITEMS 32 2 0
 
 _medic_ medic~
-a Team $a Medic~
+a Team $a &WM&Re&Wd&Ri&Wc~
 HP 6000-8000
 SPEED_DELAY 0
 BEHAV 7
