@@ -6,3 +6,13 @@ which is an integer which defines maxSocial, itself used to allocate memory
 for the social table.  load_social_table() simply reads through 
 boot/social.txt line-by-line and loads socials in order; there is no error 
 checking.
+
+An individul social is defined as follows; all lines must end in '~':
+name~            (the name (command) of the social)
+char_no_arg~     (what the character executing the social sees if using
+others_no_arg~   no argument)
+char_found~      (if the target (argument) exists, what is seen)
+others_found~    (what others see if the target exists)
+vict_found~	 (what the victim sees)
+char_auto~       (what the character sees if victim not found)
+others_auto~     (what others see if victim not found)
