@@ -119,7 +119,7 @@ do_bury (CHAR_DATA * ch, char *argument)
 
     if ( ch->in_room->mine )
     {
-        send_to_char("Oops.  Someone beat you to it!  DOH!!!\n\r", ch);
+        send_to_char("Oops.  Someone beat you to it!\n\r", ch);
         extract_obj(obj, obj->extract_me);
         obj = ch->in_room->mine;
 
@@ -146,7 +146,7 @@ do_bury (CHAR_DATA * ch, char *argument)
     else if ( obj->carried_by )
         obj_from_char(obj);
     else
-        logmesg("do_bury: Where the hell am I?");
+        logmesg("do_bury: can't figure out where target object is.");
 
     obj->destination = ch->in_room;
     ch->in_room->mine = obj;
