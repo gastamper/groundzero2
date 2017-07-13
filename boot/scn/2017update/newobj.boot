@@ -176,7 +176,7 @@ EXTRACT 0
 USE 0
 gun pistol MANHUNTER 9mm~
 &na &BMANHUNTER(tm)&n heavy pistol~
-FUCK YEA! A &BMANHUNTER(tm)&n lies in the dust.~
+A &BMANHUNTER(tm)&n lies in the dust.~
 REPOP 80 1-2
 CHSH 6000 6000
 
