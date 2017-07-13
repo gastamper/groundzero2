@@ -1,0 +1,8 @@
+Social table format:
+The social table is defined in social-edit.c; the socials themselves are 
+loaded at boot time in db.c which calls load_social_table() in 
+social-edit.c.  This function reads boot/social.txt, the first line of 
+which is an integer which defines maxSocial, itself used to allocate memory 
+for the social table.  load_social_table() simply reads through 
+boot/social.txt line-by-line and loads socials in order; there is no error 
+checking.
