@@ -210,7 +210,7 @@ do_resign (CHAR_DATA * ch, char *argument)
 
     if ( team_table[ch->team].teamleader != ch )
     {
-        send_to_char("Yeah, right pal.\r\n", ch);
+        send_to_char("Only the team leader can resign from being team leader.\r\n", ch);
         return;
     }
 
@@ -228,7 +228,7 @@ do_resign (CHAR_DATA * ch, char *argument)
     }
     else if ( (targ = get_char_world(ch, arg)) == NULL )
     {
-        send_to_char("Who's that?\r\n", ch);
+        send_to_char("Can't find that person.\r\n", ch);
         return;
     }
     else if ( targ->team != ch->team )
@@ -240,18 +240,18 @@ do_resign (CHAR_DATA * ch, char *argument)
     }
     else if ( IS_NPC(targ) )
     {
-        send_to_char("Uhm, not a chance.\r\n", ch);
+        send_to_char("You can't make NPCs into team leaders.\r\n", ch);
         return;
     }
     else if ( RANK(targ) < RANK_MERC )
     {
-        send_to_char("They don't have the experience to lead.\r\n", ch);
+        send_to_char("Only Mercenaries and above can be team leaders.\r\n", ch);
         return;
     }
     else if ( IS_SET(targ->act, PLR_NOLEADER) )
     {
         send_to_char
-            ("Relinquish control to that asshole?  Think again!\r\n", ch);
+            ("That's not possible!\r\n", ch);
         return;
     }
 
@@ -282,7 +282,7 @@ boot (CHAR_DATA * victim)
     char buf[MAX_INPUT_LENGTH];
     int old_team = victim->team;
 
-    sprintf(buf, "%s%s&n has betrayed %s&n for the last time!",
+    sprintf(buf, "%s%s&n has been booted from the team by %s&n!",
             team_table[victim->team].namecolor, victim->names,
             team_table[victim->team].who_name);
     do_gecho(NULL, buf);
@@ -316,8 +316,7 @@ boot (CHAR_DATA * victim)
         act("A black helicopter swoops down and takes $n away.", victim,
             NULL, NULL, TO_ROOM);
         send_to_char
-            ("A large soldier comes up and grabs you.  'Get out of here, traitor,\r\n"
-             "before I decide to do something more drastic.'\r\n", victim);
+            ("You have been booted from your team, and teleported elsewhere on the map.\r\n", victim);
         do_goto(victim, "random 0");
     }
 }
