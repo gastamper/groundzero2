@@ -1,4 +1,4 @@
-472
+471
 gack~
 Gaaack!~
 $n gacks with dismay!~
@@ -4237,4 +4237,3 @@ $n screams at $N, '&RThere's the ruckus, bitch!&n'~
 $n screams at you, '&RThere's the ruckus, bitch!&n' ~
 You say, '&RThe ruckus is at MY table!&n'~
 $n says, '&RThe ruckus is at MY table!&n'  Fear.~
-
