@@ -2351,7 +2351,7 @@ clone_object (OBJ_DATA * parent, OBJ_DATA * clone)
 
     if ( clone->item_type == ITEM_TEAM_VEHICLE )
     {
-        clone->vehicle = alloc_perm(sizeof(struct obj_vehicle_data));
+        clone->vehicle = alloc_mem(sizeof(struct obj_vehicle_data));
         clone->vehicle->tomob = str_dup(parent->vehicle->tomob);
         clone->vehicle->positions = parent->vehicle->positions;
         clone->vehicle->r_positions = parent->vehicle->r_positions;
