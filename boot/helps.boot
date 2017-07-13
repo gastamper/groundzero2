@@ -1875,6 +1875,7 @@ Numerous typos, errors, etc. in ammunication objects were fixed.
 A number of typos throughout the sourcecode were fixed.
 Several commands had their syntax messages fixed.
 A number of backend fixes were made.
+Full list of command line switches is now documented.
 Fixed issue with hyposprays causing damage rather than healing it.
 
 ~
