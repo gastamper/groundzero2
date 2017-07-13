@@ -12,7 +12,7 @@ a &wf&Rl&wa&Rr&we&n~
 USE 0
 flares 2 pair ammo explosive~
 2 flares~
-a pair of &{&Wf&Rl&Wa&Rr&We&Rs&} lies here.~
+A pair of &{&Wf&Rl&Wa&Rr&We&Rs&} lies here.~
 REPOP 75 10-14
 CHSH 5000 5000
 
@@ -27,7 +27,7 @@ EXTRACT 0
 USE 0 
 ammo energy cell~
 an &{&Benergy&} cell~
-a &{&wglowing &Benergy&} cell illuminates a small patch of ground.~
+A &{&wglowing &Benergy&} cell illuminates a small patch of ground.~
 REPOP 80 3-5
 CHSH 3000 3000
 
@@ -56,8 +56,8 @@ GEN 0
 EXTRACT 0
 USE 0
 belt strap rounds 100 explosive ammo~
-a strap of 100 &{&Re&Wx&Rp&Wl&Ro&Ws&Ri&Wv&Re&} machinegun rounds~
-Someone left a strap of 100 &{&Re&Wx&Rp&Wl&Ro&Ws&Ri&Wv&Re&} machinegun rounds.~
+A strap of 100 &{&Re&Wx&Rp&Wl&Ro&Ws&Ri&Wv&Re&} machinegun rounds~
+A strap of 100 &{&Re&Wx&Rp&Wl&Ro&Ws&Ri&Wv&Re&} machinegun rounds lies here.~
 REPOP 0
 CHSH 2000 2000
 
@@ -72,7 +72,7 @@ EXTRACT 0
 USE 0
 belt strap rounds 50 explosive ammo~
 a strap of 50 &{&Re&Wx&Rp&Wl&Ro&Ws&Ri&Wv&Re&} machinegun rounds~
-Someone left a strap of 50 &{&Re&Wx&Rp&Wl&Ro&Ws&Ri&Wv&Re&} machinegun rounds.~
+A strap of 50 &{&Re&Wx&Rp&Wl&Ro&Ws&Ri&Wv&Re&} machinegun rounds lies here.~
 REPOP 90 1-3
 CHSH 2000 2000
 
@@ -87,7 +87,7 @@ EXTRACT 0
 USE 0
 belt 50 ammo~
 50 rounds of belted ammo~
-a 50 round ammo belt has been left here~
+A 50 round ammo belt has been left here.~
 REPOP 95 3-7
 CHSH 2000 2000
 
@@ -100,7 +100,7 @@ DAM_ST 0 0 0
 GEN 0
 EXTRACT 0
 USE 0
-ammo 9mm hollow clip~
+ammo 9mm hollow clip rounds~
 a clip of &chollow&n tipped 9mm rounds~
 A clip of &chollow&n tipped 9mm bullets lies here.~
 REPOP 95 10-15
@@ -117,7 +117,7 @@ EXTRACT 0
 USE 0
 ammo 9mm sharps uzi clip~
 a clip of 9mm &ms&ch&ma&cr&mp&cs&n fit for an uzi~
-an uzi clip of &ms&ch&ma&cr&mp&cs&n lies here.~   
+An uzi clip of 9mm &ms&ch&ma&cr&mp&cs&n lies here.~   
 REPOP 95 3-7
 CHSH 2000 2000
 
@@ -132,7 +132,7 @@ EXTRACT 0
 USE 0
 ammo assault rifle clip uranium~
 a clip of &{&BU&cr&Ba&cn&Bi&cu&Bm&} dipped assault rifle rounds~
-A clip for an assault rifle lies here.~
+A clip of &{&BU&cr&Ba&cn&Bi&cu&Bm&} dipped assault rifle rounds lies here.~
 REPOP 90 2-3
 CHSH 2000 2000
 
@@ -145,9 +145,9 @@ DAM_ST 1 0 0
 GEN 0
 EXTRACT 0
 USE 0
-ammo shotgun shell~
+ammo shotgun shell single~
 a shotgun shell~
-Someone dropped a shotgun shell here!~
+A single shotgun shell lies here.~
 REPOP 100 7-15
 CHSH 30 30
 
@@ -165,7 +165,7 @@ DAM_ST 3000 3000 0
 USE 0
 sonic grenade explosive~
 a &ysonic&n grenade~
-A very odd looking grenade is lying here.~
+a &ysonic&n grenade~ lies here.
 REPOP 95 8-10
 CHSH 500 500
 
@@ -193,9 +193,9 @@ DAM_ST 500 250 0
 GEN 0
 EXTRACT 0
 USE 0
-sniper rounds clip~
+sniper rounds clip ammo~
 a round of &{&Bs&Xn&Bi&Xp&Be&Xr&} ammo~
-a round of &{&Bs&Xn&Bi&Xp&Be&Xr&} ammo lies here on the ground.~
+A round of &{&Bs&Xn&Bi&Xp&Be&Xr&} ammo lies here on the ground.~
 REPOP 90 1-1
 CHSH 3000 3000
 
@@ -210,7 +210,7 @@ EXTRACT 0
 USE 0
 ammo plasma cell~
 a &{&Bp&Ml&Ba&Ms&Bm&Ma&} cell~
-a &wglowing &{&Bp&Ml&Ba&Ms&Bm&Ma&} cell illuminates a small patch of ground.~
+A &wglowing &{&Bp&Ml&Ba&Ms&Bm&Ma&} cell illuminates a small patch of ground.~
 REPOP 90 2-3
 CHSH 3000 3000
 
@@ -228,7 +228,7 @@ DAM_ST 500 250 0
 USE 0
 ammo stun cartridge pellets~
 a cartridge of stun pellets~
-A small cartridge of pellets lies here.~
+A small cartridge of stun pellets lies here.~
 REPOP 91 12-20
 CHSH 10 10
 
@@ -242,8 +242,8 @@ GEN 0
 EXTRACT 0
 USE 0
 ammo 2mm clip long thin gauss~
-a clip of 2mm ammo~
-A thin, long, black clip of 2mm ammo is here.~
+a clip of 2mm gauss ammo~
+A thin, long, black clip of 2mm gauss ammo is here.~
 REPOP 90 5-6
 CHSH 1000 1000
 
@@ -271,9 +271,9 @@ DAM_ST 0 0 0
 GEN 0
 EXTRACT 0
 USE 0
-ammo rusty metal box shotgun shells~
+ammo box shotgun shells~
 a metal box containing 20 shotgun shells~
-A rusty metal box sits here.~
+A box containing 20 shotgun shells sits here.~
 REPOP 95 5-9
 CHSH 2000 2000
 
@@ -286,9 +286,9 @@ DAM_ST 10 0 0
 GEN 0
 EXTRACT 0
 USE 0
-postal assault rounds ammo~
+postal service assault rounds ammo~
 a clip of &RUS &BPostal Service&n assault rifle rounds~
-a clip of &RUS &BPostal Service&n assault rifle rounds is here.~
+A clip of &RUS &BPostal Service&n assault rifle rounds is here.~
 REPOP 0
 CHSH 2000 2000
 
@@ -302,8 +302,8 @@ GEN 0
 EXTRACT 0
 USE 0
 ammo 5.56 ball ammo banana clip~
-A 30 round banana clip~
-Someone left a banana clip here.~
+a 30 round banana clip~
+A 30 round banana clip lies here.~
 REPOP 90 2-5
 CHSH 5000 5000
 
@@ -318,7 +318,7 @@ EXTRACT 0
 USE 0
 belt 100 ammo~
 100 rounds of belted ammo~
-a 100 round ammo belt has been left here~
+A 100 round ammo belt has been left here.~
 REPOP 95 3-4
 CHSH 1000 1000
 
@@ -332,8 +332,8 @@ GEN 0
 EXTRACT 0
 USE 0
 ammo button 9mm clip~
-button clan 9mm ammo~
-a clip of 9mm button ammo lies here.~
+a clip of 9mm button clan ammo~
+A clip of 9mm button clan ammo lies here.~
 REPOP 95 1-3
 CHSH 1000 1000
 
@@ -352,7 +352,7 @@ DAM_ST 450 0 0
 USE 0
 explosive ammo clip coupled mini-grenades~
 a clip of coupled &gmini-grenades&n~
-a clip of coupled &gmini-grenades&n for a &ggrenade&n launcher is here.~
+A clip of coupled &gmini-grenades&n for a &ggrenade&n launcher is here.~
 REPOP 0
 CHSH 1000 1000
 
@@ -367,7 +367,7 @@ EXTRACT 0
 USE 0
 electron pack energy ammo~
 an &Benergy pack&n for an electron cannon~
-an &Benergy pack&n for an electron cannon~
+An &Benergy pack&n for an electron cannon lies here.~
 REPOP 90 2-3
 CHSH 1500 1500
 
@@ -382,7 +382,7 @@ EXTRACT 0
 USE 0
 ammo 9mm uzi clip~
 a 9mm uzi clip~   
-a 9mm uzi clip lies here~
+A 9mm uzi clip lies here.~
 REPOP 95 10-16
 CHSH 1000 1000
 
@@ -395,9 +395,9 @@ DAM_ST 2500 1250 250
 GEN 0
 EXTRACT 0
 USE 0
-rocket ammo~
-a rocket~   
-a rocket for an &RRPG&n lies here.~
+rocket rpg ammo~
+a rocket for an &RRPG&n~   
+A rocket for an &RRPG&n lies here.~
 REPOP 75 3-5
 CHSH 3000 3000
 
@@ -410,9 +410,9 @@ DAM_ST 10 0 0
 GEN S
 EXTRACT 0
 USE 0
-pebble ammo~
-The &yPebble of David&n~
-a &ypebble &nlies here in the dust~
+pebble david ammo~
+the &yPebble of David&n~
+A &ypebble &nlies here.~
 REPOP 100 1-1
 CHSH 5000 5000
 
@@ -426,8 +426,8 @@ GEN 0
 EXTRACT 0
 USE 0
 pebble stone ammo~
-a &ypebble&n~
-a &ypebble &nlies here in the dust~
+a &ystone pebble&n~
+A &ypebble &nlies here.~
 REPOP 100 10-20
 CHSH 250 250
 
@@ -520,7 +520,7 @@ EXTRACT 0
 USE 0
 ammo dual e-30 30 battery pack~
 a dual E-30 battery pack~
-A small battery pack lies here.~
+A dual E-30 battery pack lies here.~
 REPOP 98 1-2
 CHSH 5000 5000
 
@@ -553,7 +553,7 @@ DAM_ST 0 0 0
 GEN 0
 EXTRACT 0
 USE 0
-ammo 44 clip~
+ammo 44 clip rounds~
 a clip of .44 rounds~
 A clip of .44 rounds lies here.~
 REPOP 100 1-3
