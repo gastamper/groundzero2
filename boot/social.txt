@@ -2717,15 +2717,6 @@ $n points at you and asks, "&RAre you prepared to DIE?&n"~
 ~
 ~
 
-backdoor~
-You are now &WADMIN!&n (secretly!)  &n  Now type  :immortalize    (with the colon) to gain trust.~
-$n types in the word "backdoor."  What an idiot.~
-You use $S "backdoor".~
-$n uses $N's "backdoor".~
-$n walks behind you to use your "backdoor".~
-~
-~
-
 damnright~
 You say, "Damn right!"~
 $n says, "Damn right!"~
