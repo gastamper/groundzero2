@@ -1865,6 +1865,21 @@ use TITLE to set your title to pretty much anything of yer choosing.
 ~
 
 -1 CHANGES CHANGELOG~
+&Y* &cHELP CHANGES_ARCHIVE_3&n for December 2001 to June 2017.
+
+2017-07-12:
+Who command no longer displays section for linkdead players unless linkdead players exist.
+Scan command now includes up and down exist.
+Scan command includes left-justified directions to make it a bit easier to read.
+Numerous typos, errors, etc. in ammunication objects were fixed.
+A number of typos throughout the sourcecode were fixed.
+Several commands had their syntax messages fixed.
+A number of backend fixes were made.
+Fixed issue with hyposprays causing damage rather than healing it.
+
+~
+
+-1 CHANGES_ARCHIVE_3~
 
 sat - Satori (satori@gz.malawar.net)
 tir - Tireg (tireg@gz.malawar.net)
