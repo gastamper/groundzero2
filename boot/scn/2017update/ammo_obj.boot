@@ -165,7 +165,7 @@ DAM_ST 3000 3000 0
 USE 0
 sonic grenade explosive~
 a &ysonic&n grenade~
-a &ysonic&n grenade~ lies here.
+a &ysonic&n grenade lies here.~
 REPOP 95 8-10
 CHSH 500 500
 
