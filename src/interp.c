@@ -135,74 +135,10 @@ const struct wiznet_type wiznet_table[] = {
 };
 
 
-#define MAX_ERRORS    58
+#define MAX_ERRORS    1
 
 const char *error_table[MAX_ERRORS] = {
-    "You bang your head on your keyboard in frustration.",
-    "Bad command or filename.",
-    "You type worse than my grandmother!",
-    "WHAT?!?!",
-    "I wanna bone Britney Spears.. oh sorry, what did you want?",
-    "You consult your Magic 8-ball... Outlook not so good.",
-    "no hablo ingles.",
-    "I can't fix typos for you.",
-    "Stop typing, start killing!",
-    "Hey sexy, wanna cyber?",
-    "MMAASSTTUURRBBAATTIIOONN CAAUSSES BLINNDDNEEESSS",
-    "No.",
-    "Why don'tcha make me..",
-    "Tireg's sister is HOT!!",
-    "Typo! Typo! Typo!",
-
-    "You &uapull &uOthe pin&n from &uOa small plastic container of c4 with a detonator&n.\r\n"
-        "Better get rid of that pal.  &YYou only got a few seconds!&n\r\n"
-        "&uOa small plastic container of c4 with a detonator&n ticks very quietly.",
-
-    "Now try playing with two hands on the keyboard.",
-    "Stop jacking off and make yourself clear.",
-    "I can't do that, Dave.",
-    "Return to sender.",
-    "Oooooh, okay.  Whatever.",
-    "jsoh wil kill u fir ur tpyos",
-    "Confucious once say: man who type badly suck worse.",
-    "Argle bargle glyph.",
-    "Now try that in English.",
-    "Your wish would be my command if I knew what the fuck you wished.",
-    "Stop trying to type with your face.",
-    "Hear that?  That's the sound of the cluetrain passing you by.",
-    "It's all Greek to me.",
-    "Hey, pal, this is Amer'ca, we speak English, here.",
-    "Of course I'm French!  Why do you think I have this outrageous accent?!",
-    "Woe is I.",
-    "Oh, geez, I can't read hieroglyphics, man.  Use English.",
-    "What, Lassie?  Timmy's stuck in the well!  Oh no!",
-    "gorge w bsuh wil kill u fir ur tpyos",
-    "Tireg's sister is TEPID!!",
-    "I can't do that, Dave.",
-    "brain: Not found.",
-    "You ever get that not-so-fresh feeling?",
-    "&WYou've found the backdoor!&n  You're now an admin!",
-    "Computer: $1000.\r\nKeyboard: $20.\r\nBeing able to type: Priceless.",
-    "Error: You appear to not be able to type worth shit.",
-    "&CU&MG&YL&BY &WC&CO&yL&GO&YR&CS &MD&YI&MS&CC&MO&CU&nR&CA&MG&WE &MT&BY&CP&yO&CS&M.&n",
-
-    "Is your keyboard broken?",
-    "Let me ask my supervisor...",
-    "Gee, that's swell.",
-    "Que?",
-    "Qua?",
-    "Domo arigato, Mr. Roboto...",
-    "Uhh, yeah, sure.  Let's do that, then.",
-    "Type delete again to confirm this command.\r\n"
-        "WARNING: this command is irreversible.\r\n"
-        "Typing delete with an argument will undo delete status.",
-    "No means no, jacko.",
-    "The master will not be pleased.",
-    "What are you wearing?",
-    "Well, it was a typo, but it was a mighty fine one.",
-    "U R 1337 HAX0R!",
-    "I'm not impressed with your typing skills.",
-    "Uh, sure.  Okay.  Yep.  (What?)"
+    "Huh?!"
 };
 
 
