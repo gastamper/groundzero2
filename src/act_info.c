@@ -905,7 +905,8 @@ do_ttype (CHAR_DATA * ch, char *argument)
 }
 
 
-inline bool
+//inline bool
+bool
 p_tweak_bot (struct char_data *ch)
 {
     /* Tweak a bot every so often, just to fuck it up. */
