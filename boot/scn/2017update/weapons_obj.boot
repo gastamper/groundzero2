@@ -585,8 +585,8 @@ RANGE 4
 GEN 0
 EXTRACT 0  
 USE 0 
-gun m-16 carbine maerican~
-a M-16 carbine~
+gun m-16 carbine american~
+an M-16 carbine~
 An American made carbine lies here in the dust.~
 REPOP 0
 CHSH 7000 7000
