@@ -22,6 +22,6 @@ to pick it up and make it work.
 #### How to make it work
 1. Clone/download this repository
 2. Build and install libcares
-3. Make the necessary source changes according to the instructions in groundzeromud/src
+3. Make the necessary source changes according to the instructions in groundzeromud/src/README
 4. Build the server by going into groundzeromud/src and hitting __make__
 5. Hit __./ground0__ and pray
