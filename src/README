@@ -4,4 +4,20 @@ From previous maintainer:
 Some things missing from this version -- especially fridge work and items
 that were temp. deprecated (like the mech code).
 
+## HOW TO INSTALL ##
+First, edit localconfig.h and change logging settings to your preference.
+Next, make the necessary changes in comm.c to add yourself to the
+list of administrators (search for 'imp_table' and scroll down).
 
+Requirements:
+gcc, make, libcares, and a standard set of libraries (case Cnetos 6 install).
+
+You'll need to perform the following steps:
+1. Build and install libcares (https://c-ares.haxx.se) for DNS resolution.
+2. Build the server by typing 'make'
+3. Run the server by executing './ground0' (that's a zero not the letter O)
+
+## IT DOESN'T WORK ##
+1. Make sure your LD path is correct if getting shared library errors:
+1a. run 'LD_LIBRARY_PATH=:/usr/local/lib'
+1b. run 'export $LD_LIBRARY_PATH'
