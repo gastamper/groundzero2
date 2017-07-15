@@ -45,7 +45,7 @@ EXTRACT 0
 USE D
 radio equipment evac~
 an emergency evac radio~
-a radio is buried in the dust here~
+An emergency evac radio lies here.~
 REPOP 95 3-4
 CHSH 1000 1000
 
@@ -56,7 +56,7 @@ EXTRACT 0
 USE C
 radio airforce~
 an airforce radio~
-a radio is buried in the dust here.~
+An airforce radio lies here.~
 REPOP 95 3-4
 CHSH 1000 1000
 
@@ -67,7 +67,7 @@ EXTRACT 0
 USE 0
 condition monitor equipment wristband~
 a condition monitor and homing beacon~
-a small gold wristband is here~
+A condition monitoring wristband is here.~
 REPOP 60 1-1
 CHSH 5000 5000
 
@@ -81,7 +81,7 @@ DAM_CH 2000 0 0
 DAM_ST 0 0 0
 med pack medical medkit kit first heal~
 a &Rred&n cross first-aid kit~
-a &Wwhite&n box with a &Rred&n cross lies here.~
+A &Rfirst&n &Eaid&n &Rkit&n lies here.~
 REPOP 99 12-20
 CHSH 5000 5000
 
@@ -117,7 +117,7 @@ EXTRACT 0
 USE F
 seeker droid construction set~
 a construction set for a seeker droid~
-A construction set for a seeker droid lies here.~
+A seeker droid construction set lies here.~
 REPOP 75 2-2 
 CHSH 4000 4000
 
@@ -151,7 +151,7 @@ USE K
 MAX_USES 3
 lifeforce scanner~
 a lifeforce scanner~
-A complex piece of scanning equipment lies here.~
+A lifeforce scanner lies here.~
 REPOP 90 1-1 
 CHSH 250 250 
 
@@ -163,7 +163,7 @@ EXTRACT 0
 USE 0
 armor pair earmuffs~
 a pair of earmuffs~
-Someone dropped some earmuffs here.~
+A pair of earmuffs lie here.~
 REPOP 95 5-10
 CHSH 20 20
 
@@ -176,7 +176,7 @@ an early detection system~
 USE 0
 eds early detection system device antenna~
 an early detection system~
-A small round device with an antenna lies here.~
+An early detection system lies here.~
 REPOP 100 1-3
 CHSH 500 500
 
