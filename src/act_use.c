@@ -45,7 +45,7 @@ do_use (struct char_data *ch, char *argument)
 
     if ( (obj = get_obj_carry(ch, arg)) == NULL )
     {
-        send_to_char("You don't have that.\n\r", ch);
+        send_to_char("You don't have that.\r\n", ch);
         return;
     }
 
@@ -218,7 +218,7 @@ do_use (struct char_data *ch, char *argument)
 
             if ( max >= obj->spawnMax )
             {
-                send_to_char("The room's already cluttered with the stuff.\r\n", ch);
+                send_to_char("The room's already cluttered with stuff.\r\n", ch);
                 return;
             }
         }
@@ -289,7 +289,7 @@ construct_wall (struct char_data *ch, struct obj_data *obj, char *arg)
 
     if ( dir == NUM_OF_DIRS )
     {
-        send_to_char("That's not a direction.\r\n", ch);
+        send_to_char("That's not a valid direction.\r\n", ch);
         return 0;
     }
     else if ( dir == DIR_UP || dir == DIR_DOWN )
@@ -299,12 +299,12 @@ construct_wall (struct char_data *ch, struct obj_data *obj, char *arg)
     }
     else if ( IS_SET(ch->in_room->exit[dir], EX_ISWALL) )
     {
-        send_to_char("There's already a wall there, dope.\r\n", ch);
+        send_to_char("There's already a wall there.\r\n", ch);
         return 0;
     }
     else if ( !(toroom = get_to_room(ch->in_room, dir)) )
     {
-        send_to_char("There's no way to go that way.\r\n", ch);
+        send_to_char("You can't go that way.\r\n", ch);
         return 0;
     }
     else if ( IS_SET(toroom->exit[rev_dir[dir]], EX_ISWALL) )
@@ -348,7 +348,7 @@ evac_char (struct char_data *ch, struct obj_data *obj, char *argument)
          ch->in_room->interior_of->item_type == ITEM_TEAM_ENTRANCE) ||
         ch->in_room == safe_area)
     {
-        send_to_char("Radio signal is too weak here.\n\r", ch);
+        send_to_char("Radio signal is too weak here.\r\n", ch);
         return 0;
     }
 
@@ -370,7 +370,7 @@ evac_char (struct char_data *ch, struct obj_data *obj, char *argument)
         else
         {
             send_to_char
-                ("Transports cannot reach the saferoom or lower levels.\n\r",
+                ("Transports cannot reach the saferoom or lower levels.\r\n",
                  ch);
             return 0;
         }
@@ -380,7 +380,7 @@ evac_char (struct char_data *ch, struct obj_data *obj, char *argument)
         /* To prevent evac booming by low rep chars */
         if ( RANK(ch) < RANK_HUNTER || RANK(evacTo) > RANK(ch) )
         {
-            act("You talk into $p, requesting transport.\n\rUnfortunately, the " "officer on the other side informs you that you are of " "insufficient rank for your request to be honorred.", ch, obj, NULL, TO_CHAR);
+            act("You talk into $p, requesting transport.\n\rUnfortunately, the " "officer on the other side informs you that you are of " "insufficient rank for your request to be honored.", ch, obj, NULL, TO_CHAR);
 
             send_to_char
                 ("\r\nThe usual way to use an evac radio is with &cUSE EVAC <x> <y>&n\r\n",
@@ -445,7 +445,7 @@ backup_radio (struct char_data *ch, struct obj_data *obj, char *argument)
         dest = ch->in_room;
     else if ( (dest = find_location(ch, argument)) != NULL && !dest->level )
     {
-        act("You talk into $p, requesting the assistance of the elite paratroopers.\r\n" "A voice comes back, \"&rRoger, troopers dispatched.&n\"", ch, obj, NULL, TO_CHAR);
+        act("You talk into $p, requesting the assistance of paratroopers.\r\n" "A voice comes back, \"&rRoger, troopers dispatched.&n\"", ch, obj, NULL, TO_CHAR);
     }
     else
     {
@@ -471,7 +471,7 @@ backup_radio (struct char_data *ch, struct obj_data *obj, char *argument)
         if ( ch->in_room == dest )
         {
             add_follower(mob, ch);
-            act("$N parachutes down from the sky landing at your feet.",
+            act("$N parachutes down from the sky, landing at your feet.",
                 ch, NULL, mob, TO_CHAR);
         }
         else
@@ -479,7 +479,7 @@ backup_radio (struct char_data *ch, struct obj_data *obj, char *argument)
             mob->ld_behavior = 3;
         }
 
-        act("$n parachutes down from the sky landing at your feet.", mob,
+        act("$n parachutes down from the sky, landing at your feet.", mob,
             NULL, ch, TO_ROOM);
     }
 
@@ -496,8 +496,7 @@ heal_tank (struct char_data *ch, char *argument)
     if ( !tank )
     {
         send_to_char
-            ("You gotta be in a running tank in order to repair a tank!",
-             ch);
+            ("You must be in a running tank in order to repair it.", ch);
         return 0;
     }
 
@@ -506,7 +505,7 @@ heal_tank (struct char_data *ch, char *argument)
         tank->hit = tank->max_hit;
 
     send_to_char
-        ("You bust out some tools and start working on the tank.\n\r", ch);
+        ("You use your kit to repair the tank.\n\r", ch);
     return 1;                   /* worked out */
 }
 
@@ -515,17 +514,7 @@ int
 use_kit_person (struct char_data *ch, struct obj_data *obj,
                struct char_data *targ)
 {
-    if ( targ->hit < targ->max_hit )
-    {
-        act("$n uses $p on you.  Ahhh . . . &YMUCH&n better!", ch, obj,
-            targ, TO_VICT);
-    }
-    else
-    {
-        act("$n uses $p on you.  What a waste of good medicine.", ch, obj,
-            targ, TO_VICT);
-    }
-
+    act("$n uses $p on you.", ch, obj, targ, TO_VICT);
     act("You use $p on $M.", ch, obj, targ, TO_CHAR);
     act("$n uses $p on $N.", ch, obj, targ, TO_NOTVICT);
     heal_char(targ, obj->damage_char[0]);
@@ -544,10 +533,9 @@ use_kit (struct char_data *ch, struct obj_data *obj, char *argument)
     if ( !who[0] )
     {
         if ( ch->hit < ch->max_hit )
-            act("You use $p.  Ahhhh . . . &YMUCH&n better!", ch, obj, NULL,
-                TO_CHAR);
+            act("You use $p.", ch, obj, NULL, TO_CHAR);
         else
-            act("What a waste of good medicine.", ch, obj, NULL, TO_CHAR);
+            act("You waste $p.", ch, obj, NULL, TO_CHAR);
         act("$n uses $p.", ch, obj, NULL, TO_ROOM);
         heal_char(ch, obj->damage_char[0]);
         return (!IS_NPC(ch));
@@ -583,7 +571,7 @@ satellite_map (struct char_data *ch, struct obj_data *obj, char *argument)
         send_to_char("They aren't here.\r\n", ch);
         return (0);
     }
-    send_to_char("Cannot be used on another player, as of yet.\r\n",ch);
+    send_to_char("You can't use that on others.\r\n",ch);
     return (0);
 }
 
@@ -599,8 +587,7 @@ air_strike (struct char_data *ch, char *argument)
     if ( VNUM_NAPALM == -1 || VNUM_FIRE == -1 )
     {
         send_to_char
-            ("Napalm/fire are disabled -- complain to an immortal.\r\n",
-             ch);
+            ("Napalm and fire are currently disabled.\r\n", ch);
         return 0;
     }
 
@@ -621,7 +608,7 @@ air_strike (struct char_data *ch, char *argument)
     }
     if ( start_room->level )
     {
-        send_to_char("Lower levels cannot be reached by bombers.\n\r", ch);
+        send_to_char("Lower levels cannot be reached by air strikes.\n\r", ch);
         return 0;
     }
     if ( (start_x = start_room->x - radius) < 0 )
