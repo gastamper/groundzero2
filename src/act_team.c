@@ -129,7 +129,7 @@ do_forgive (struct char_data *ch, char *argument)
     if ( !get_trust(ch) &&
          (team_table[ch->team].independent || !team_table[ch->team].active) )
     {
-        send_to_char("You're not even on a real team.\r\n", ch);
+        send_to_char("You're not even on a team.\r\n", ch);
         return;
     }
     else if ( team_table[ch->team].teamleader == ch || get_trust(ch) )
@@ -142,12 +142,12 @@ do_forgive (struct char_data *ch, char *argument)
         {
             if ( (vict = get_char_world(ch, arg)) == NULL )
             {
-                send_to_char("Who's that?\r\n", ch);
+                send_to_char("Can't find that player.\r\n", ch);
                 return;
             }
             else if ( vict == ch )
             {
-                send_to_char("Yeah, right.\r\n", ch);
+                send_to_char("You can't forgive yourself.\r\n", ch);
                 return;
             }
             else if ( vict->teamkill < 1 )
@@ -158,7 +158,7 @@ do_forgive (struct char_data *ch, char *argument)
 
             if ( !ch->trust && vict->team != ch->team )
             {
-                send_to_char("Ehm?  They're not on your team.\r\n", ch);
+                send_to_char("They're not on your team.\r\n", ch);
                 return;
             }
 
@@ -175,7 +175,7 @@ do_forgive (struct char_data *ch, char *argument)
 
     if ( !vict )
     {
-        send_to_char("No teammate has killed you, lately.\r\n", ch);
+        send_to_char("No teammate has killed you this session.\r\n", ch);
         return;
     }
     else if ( vict->teamkill < 1 )
