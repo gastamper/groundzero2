@@ -74,7 +74,7 @@ do_profile (struct char_data *ch, char *argument)
         /* Not found in prototypes, either; error. */
         if ( ivn == top_obj_index )
         {
-            printf_to_char(ch, "%s: not found\r\n", argument);
+            printf_to_char(ch, "%s: not found.\r\n", argument);
             return;
         }
 
@@ -127,7 +127,7 @@ do_profile (struct char_data *ch, char *argument)
         if ( IS_SET(obj->general_flags, GEN_LEAVE_TRAIL) && (x = 1) )
             strcat(buf, "Leaves a trail behind it.\r\n");
         if ( IS_SET(obj->general_flags, GEN_DETECT_MINE) && (x = 1) )
-            strcat(buf, "When worn, detects the presence of and protects again mines.\r\n");
+            strcat(buf, "When worn, detects the presence of and protects against mines.\r\n");
         if ( IS_SET(obj->general_flags, GEN_ANTI_BLIND) && (x = 1) )
             strcat(buf, "Protects against blindness.\r\n");
         if ( IS_SET(obj->general_flags, GEN_DARKS_ROOM) && (x = 1) )
@@ -169,7 +169,7 @@ do_profile (struct char_data *ch, char *argument)
         if ( IS_SET(obj->extract_flags, EXTRACT_STUN_ON_EXTRACT) && (x = 1) )
             strcat(buf, "Causes stun when extracted.\r\n");
         if ( IS_SET(obj->extract_flags, EXTRACT_DARK_ON_EXTRACT) && (x = 1) )
-            strcat(buf, "Creates smoke screen when extracted.\r\n");
+            strcat(buf, "Creates a smoke screen when extracted.\r\n");
         if ( IS_SET(obj->extract_flags, EXTRACT_EXTINGUISH_ON_EXTRACT ) &&
             (x = 1))
             strcat(buf, "Douses fires when extracted.\r\n");
