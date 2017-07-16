@@ -537,20 +537,19 @@ do_explode (CHAR_DATA * ch, char *argument)
     {
         if ( RANK(ch) < RANK_BADASS )
         {
-            send_to_char("Only badasses can do this.\r\n", ch);
+            send_to_char("You aren't high enough to do this.\r\n", ch);
             return;
         }
     }
 
     if ( ch->in_room == safe_area )
     {
-        send_to_char("There will be no hostilities in the safe room.  "
-                     "Take it outside.\n\r", ch);
+        send_to_char("You cannot engage in combat in safe rooms.", ch);
         return;
     }
     else if ( ch->in_room == graveyard_area )
     {
-        send_to_char("No.\r\n", ch);
+        send_to_char("Not here.\r\n", ch);
         return;
     }
 
@@ -564,10 +563,7 @@ do_explode (CHAR_DATA * ch, char *argument)
     if ( ch->hit < ch->max_hit && ch->trust == 0 )
     {
         send_to_char
-            ("Coward!  Wanna get out the easy way huh?  Huh?!  Die "
-             "like a man!  Grit your\n\rteeth and laugh the pain off "
-             "instead of taking the quick exit from your\n\rpathetic "
-             "existance!  Wimp!\n\r", ch);
+            ("You must be at full health to use this command.\n\r", ch);
         return;
     }
 
@@ -606,14 +602,13 @@ do_boom (CHAR_DATA * ch, char *argument)
 
     if ( RANK(ch) < RANK_MERC )
     {
-        send_to_char("Only mercs can do this.\r\n", ch);
+        send_to_char("You are not high enough to do this.\r\n", ch);
         return;
     }
 
     if ( ch->in_room == safe_area )
     {
-        send_to_char("There will be no hostilities in the safe room.  "
-                     "Take it outside.\n\r", ch);
+        send_to_char("You cannot engage in combat in safe rooms.", ch);
         return;
     }
     else if ( ch->in_room == graveyard_area )
@@ -633,17 +628,13 @@ do_boom (CHAR_DATA * ch, char *argument)
         if ( buttontimer >= 0 )
         {
             send_to_char
-                ("Sorry, pal, button's been pressed.  Lose link if you really\r\n"
-                 "gotta go.  Command for that is ld.\r\n  If you just want "
-                 "The damage, the command is explode.\r\n", ch);
+                ("The button must be pressed to do this.\r\n", ch);
             return;
         }
         else if ( ch->hit < ch->max_hit )
         {
             send_to_char
-                ("You're not in too good of shape anyway, might as well just wait\r\n"
-                 "for someone to wax your silly ass.  (If you gotta' go, the\r\n"
-                 "command is ld.)\r\n", ch);
+                ("You must be at full health to use this command.\r\n", ch);
             return;
         }
     }
@@ -652,9 +643,7 @@ do_boom (CHAR_DATA * ch, char *argument)
     sprintf(buf, "%s has boomed out.", ch->names);
     logmesg(buf);
 
-    send_to_char("You activate your self-destruct device...\r\n"
-                 "See ya here next time you get the urge to kill.  Grin.\r\n",
-                 ch);
+    send_to_char("You activate your self-destruct device...\r\n",ch);
 
     if ( ch->desc )
         close_socket(ch->desc);
