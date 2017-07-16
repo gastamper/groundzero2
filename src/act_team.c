@@ -439,13 +439,13 @@ do_showvol (CHAR_DATA * ch, char *argument)
 
         if ( *arg && (team = lookup_team(arg)) == -1 )
         {
-            send_to_char("What team is that?\r\n", ch);
+            send_to_char("Can't find that team.\r\n", ch);
             return;
         }
     }
     else if ( team_table[team].teamleader != ch )
     {
-        send_to_char("You're not even leader.\r\n", ch);
+        send_to_char("You're not team leader.\r\n", ch);
         return;
     }
 
@@ -476,30 +476,28 @@ do_volunteer (CHAR_DATA * ch, char *argument)
 
     if ( IS_SET(ch->act, PLR_TRAITOR) )
     {
-        send_to_char("Not while you're a traitor, you don't.\r\n", ch);
+        send_to_char("You can't volunteer while you're a traitor.\r\n", ch);
         return;
     }
     else if ( ch->in_room == safe_area )
     {
-        send_to_char("Not while you're hiding in safe...\r\n", ch);
+        send_to_char("You can't volunteer while in a safe area.\r\n", ch);
         return;
     }
     else if ( IS_NPC(ch) )
     {
-        send_to_char("Not as a mob you don't.\r\n", ch);
+        send_to_char("NPCs can't volunteer.\r\n", ch);
         return;
     }
     else if ( team_table[ch->team].teamleader == ch )
     {
         send_to_char
-            ("You can't &Yvolunteer&n while you're the team leader.\r\n",
-             ch);
+            ("You can't volunteer while you're the team leader.\r\n", ch);
         return;
     }
     else if ( buttonpresser && buttonpresser != enforcer )
     {
-        send_to_char("Volunteering is off while the button is on.\r\n",
-                     ch);
+        send_to_char("Volunteering is off while the button is on.\r\n", ch);
         return;
     }
     else if (!team_table[ch->team].independent &&
@@ -516,12 +514,11 @@ do_volunteer (CHAR_DATA * ch, char *argument)
         if ( team_table[(int) ch->pcdata->volunteering].independent )
         {
             send_to_char
-                ("You're not volunteering your services to any team.\r\n",
-                 ch);
+                ("You're not volunteering for any team.\r\n", ch);
             return;
         }
         sprintf(arg,
-                "You're volunteering your services to %s&n.\r\nType &Yvol off&n to cancel.\r\n",
+                "You're volunteering for %s&n.\r\nType &Yvol off&n to cancel.\r\n",
                 team_table[(int) ch->pcdata->volunteering].who_name);
         send_to_char(arg, ch);
         return;
@@ -535,13 +532,12 @@ do_volunteer (CHAR_DATA * ch, char *argument)
 
     if ( (i = lookup_team(arg)) == -1 )
     {
-        send_to_char("Now try volunteering for a team that exists!\r\n",
-                     ch);
+        send_to_char("You can only volunteer for teams that exist.\r\n", ch);
         return;
     }
     else if ( i == ch->team )
     {
-        send_to_char("You're on that team, idiot.\r\n", ch);
+        send_to_char("You're on that team already.\r\n", ch);
         return;
     }
 
@@ -560,7 +556,7 @@ do_volunteer (CHAR_DATA * ch, char *argument)
             if ( lowestteam() != i )
             {
                 send_to_char
-                    ("It doesn't appear they need your services.\r\n", ch);
+                    ("You can only volunteer for the lowest team.\r\n", ch);
                 return;
             }
         }
@@ -568,8 +564,7 @@ do_volunteer (CHAR_DATA * ch, char *argument)
                  (team_table[ch->team].players == team_table[i].players &&
                   team_table[ch->team].score < team_table[i].score))
         {
-            send_to_char("Your current team needs you more, ya' wuss.\r\n",
-                         ch);
+            send_to_char("Your current team needs you more.\r\n", ch);
             return;
         }
     }
@@ -588,7 +583,7 @@ do_volunteer (CHAR_DATA * ch, char *argument)
     }
 
     ch->pcdata->volunteering = i;
-    sprintf(arg, "%s%s&n volunteers his services to %s&n",
+    sprintf(arg, "%s%s&n now volunteers for %s&n",
             team_table[ch->team].namecolor, ch->names,
             team_table[i].who_name);
     do_gecho(NULL, arg);
@@ -597,6 +592,7 @@ do_volunteer (CHAR_DATA * ch, char *argument)
 }
 
 
+// This function performs the induction after do_induct sanity checks input.
 void
 induct (CHAR_DATA * targ, int team)
 {
@@ -610,7 +606,7 @@ induct (CHAR_DATA * targ, int team)
     team_table[old_team].players--;
     targ->teamkill = 0;
 
-    sprintf(buf, "%s%s&n has switched to the %s&n team!",
+    sprintf(buf, "%s%s&n has switched to %s&n team!",
             team_table[targ->team].namecolor, targ->names,
             team_table[targ->team].who_name);
     do_gecho(NULL, buf);
@@ -639,7 +635,7 @@ do_induct (CHAR_DATA * ch, char *argument)
 
     if ( team_table[ch->team].teamleader != ch )
     {
-        send_to_char("You ain't the leader, bub.\r\n", ch);
+        send_to_char("Only team leaders can induct others.\r\n", ch);
         return;
     }
     else if ( buttonpresser && buttonpresser != enforcer )
@@ -662,22 +658,18 @@ do_induct (CHAR_DATA * ch, char *argument)
     }
     else if ( IS_NPC(targ) )
     {
-        send_to_char("Fuck off.\r\n", ch);
-        sprintf(arg, "%s attempted to crash the mud by inducting mobile.",
-                ch->names);
-        logmesg(arg, ch->names);
-        wiznet(arg, ch, NULL, WIZ_SECURE, 0, get_trust(ch));
+        send_to_char("You can't induct NPCs.\r\n", ch);
         return;
     }
     else if ( targ->in_room == safe_area )
     {
-        send_to_char("They can't be hiding in safe.\r\n", ch);
+        send_to_char("You can't induct people who are in safe areas.\r\n", ch);
         return;
     }
     else if ( targ->pcdata->volunteering != ch->team )
     {
         send_to_char
-            ("It'd help if they were volunteering for your team, first.\r\n",
+            ("You can only induct people who are volunteering for your team.\r\n",
              ch);
         return;
     }
