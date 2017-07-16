@@ -136,7 +136,7 @@ read_top (const char *fname, TOP_DATA * topv, size_t sz)
     }
 
     if (!fread((char *) topv, sizeof(TOP_DATA), sz, fh)) {
-        logmesg ("Error: Could not load top data!");
+        logmesg ("Error: Could not load top data from %s!", fname);
         fclose(fh);
         return;
     }
