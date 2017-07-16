@@ -237,7 +237,7 @@ char_from_room (CHAR_DATA * ch)
         }
 
         if ( prev == NULL )
-            logmesg("Erorr: char_from_room: ch not found.");
+            logmesg("Error: char_from_room: ch not found.");
     }
 
     ch->in_room = NULL;
