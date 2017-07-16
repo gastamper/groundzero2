@@ -1651,7 +1651,7 @@ item_type_name (OBJ_DATA * obj)
             return "scope";
     }
 
-    logmesg("Error:S Item_type_name: unknown type %d for %s.", 
+    logmesg("Error: Item_type_name: unknown type %d for %s.", 
 	obj->item_type, obj->name);
     return "(unknown)";
 }
