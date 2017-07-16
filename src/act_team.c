@@ -345,7 +345,7 @@ do_boot (CHAR_DATA * ch, char *argument)
     }
     else if ( IS_NPC(victim) )
     {
-        send_to_char("No.\r\n", ch);
+        send_to_char("You can't boot NPCs.\r\n", ch);
         return;
     }
     else if ( ch->desc == NULL )
@@ -355,7 +355,7 @@ do_boot (CHAR_DATA * ch, char *argument)
     }
     else if ( ch == victim )
     {
-        send_to_char("Yourself?!\r\n", ch);
+        send_to_char("You can't boot yourself.\r\n", ch);
         return;
     }
     else if ( !get_trust(ch) )
@@ -370,25 +370,23 @@ do_boot (CHAR_DATA * ch, char *argument)
         else if ( ch->team != victim->team )
         {
             send_to_char
-                ("How do you propose to boot someone not on your team?!\r\n",
-                 ch);
+                ("You can't boot people who aren't on your team.\r\n", ch);
             return;
         }
         else if ( buttonpresser )
         {
-            send_to_char("While the button's on?  Yeah, right.\r\n", ch);
+            send_to_char("You can't boot people while the button is pressed.\r\n", ch);
             return;
         }
         else if ( victim->in_room == safe_area )
         {
             send_to_char
-                ("You can't boot someone who's in the safe room.\r\n", ch);
+                ("You can't boot someone who's in a safe area.\r\n", ch);
             return;
         }
         else if ( g_safeVolMode && victim->pcdata->volunteering != -1 )
         {
-            send_to_char("Volunteering is safe right now, so... no.\r\n",
-                         ch);
+            send_to_char("You can't boot people while volunteering is safe.\r\n", ch);
             return;
         }
     }
