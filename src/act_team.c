@@ -54,7 +54,7 @@ do_teamwho (struct char_data *ch, char *argument)
 
             if ( team == -1 || team_table[team].independent )
             {
-                printf_to_char(ch, "%s is not a team.\r\n", arg);
+                printf_to_char(ch, "%s is not a valid team.\r\n", arg);
                 return;
             }
         }
@@ -67,7 +67,7 @@ do_teamwho (struct char_data *ch, char *argument)
      */
     if ( team_table[team].independent )
     {
-        send_to_char("You're not on a real team.\r\n", ch);
+        send_to_char("You're not on a team.\r\n", ch);
         return;
     }
 
