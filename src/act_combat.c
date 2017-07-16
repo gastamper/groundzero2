@@ -319,7 +319,7 @@ pull_obj (OBJ_DATA * obj, CHAR_DATA * ch, int silent, char *rest)
         {
             if ( !silent )
                 send_to_char
-                    ("The timer has a range of 6...60 seconds.\r\n", ch);
+                    ("The timer has a range of 6 to 60 seconds.\r\n", ch);
             return;
         }
 
@@ -354,8 +354,8 @@ pull_obj (OBJ_DATA * obj, CHAR_DATA * ch, int silent, char *rest)
     if ( IS_SET(obj->extract_flags, EXTRACT_BURN_ON_EXTRACT) )
     {
         if ( !silent )
-            act("You bust out your handy lighter and &ualight&n &uOthe rag&n on " "from $p.\n\rBetter get rid of that pal.  &YLooks to be " "&Rburning&n pretty fast there!&n", ch, obj, NULL, TO_CHAR);
-        act("$n busts out a lighter and &ualights&n &uOthe rag&n on $p.",
+            act("You &ualight&n &uOthe rag&n on " "from $p.\n\rBetter get rid of that pal.  &YLooks to be " "&Rburning&n pretty fast there!&n", ch, obj, NULL, TO_CHAR);
+        act("$n &ualights&n &uOthe rag&n on $p.",
             ch, obj, NULL, TO_ROOM);
     }
     else
@@ -376,13 +376,12 @@ do_pull (CHAR_DATA * ch, char *argument)
 
     if ( ch->in_room == safe_area )
     {
-        send_to_char("There will be no hostilities in the safe room.\r\n"
-                     "Take it outside.\r\n", ch);
+        send_to_char("You cannot engage in combat in safe rooms.\r\n", ch);
         return;
     }
     else if ( ch->in_room == graveyard_area )
     {
-        send_to_char("No killing zombies.\r\n", ch);
+        send_to_char("You cannot kill zombies.\r\n", ch);
         return;
     }
 
@@ -430,7 +429,6 @@ do_pull (CHAR_DATA * ch, char *argument)
         return;
     }
 
-    send_to_char("I'd run...\r\n", ch);
 }
 
 
@@ -444,7 +442,7 @@ do_unpull (CHAR_DATA * ch, char *argument)
 
     if ( !*arg )
     {
-        send_to_char("...unpull what?\r\n", ch);
+        send_to_char("Unpull what?\r\n", ch);
         return;
     }
     else if ( !(obj = get_obj_carry(ch, arg)) )
@@ -459,7 +457,7 @@ do_unpull (CHAR_DATA * ch, char *argument)
     }
     else if ( obj->timer <= 0 )
     {
-        send_to_char("That ain't live, pal.\r\n", ch);
+        act("$p&n isn't live.\r\n", ch, obj, NULL, TO_CHAR);
         return;
     }
     else if ( obj->timer <= 3 )
@@ -474,8 +472,8 @@ do_unpull (CHAR_DATA * ch, char *argument)
         {
             if ( IS_SET(obj->extract_flags, EXTRACT_BURN_ON_EXTRACT) )
             {
-                act("Ow!  You burn yourself on &uOthe rag&n and fumble $p to the ground.  Uh oh.", ch, obj, NULL, TO_CHAR);
-                act("$n yelps in pain as he burns himself on &uOthe rag&n of $p\r\n" "and drops the explosive...", ch, obj, NULL, TO_ROOM);
+                act("Ow!  You burn yourself on &uOthe rag&n and fumble $p to the ground.", ch, obj, NULL, TO_CHAR);
+                act("$n yelps in pain as he burns himself on &uOthe rag&n of $p\r\n" "and drops it.", ch, obj, NULL, TO_ROOM);
             }
             else if ( IS_SET(obj->general_flags, GEN_TIMER_ITEM) )
             {
@@ -485,7 +483,7 @@ do_unpull (CHAR_DATA * ch, char *argument)
             else
             {
                 act("You fumble with &uOthe pin&n, wedging it hard inside $p.\r\n" "You've seemed to have made a critical mistake...", ch, obj, NULL, TO_CHAR);
-                act("$n fumbles with &uOthe pin&n of $p.  Suddenly he gets a pained expression...", ch, obj, NULL, TO_ROOM);
+                act("$n fumbles with &uOthe pin&n of $p.", ch, obj, NULL, TO_ROOM);
             }
 
             bang_obj(obj, obj->extract_me);
@@ -493,30 +491,30 @@ do_unpull (CHAR_DATA * ch, char *argument)
         }
 
         send_to_char
-            ("Dammit!  That's a miss.  Best to either get rid of it or try it again.\r\n",
+            ("Best to either get rid of it or try it again.\r\n",
              ch);
         return;
     }
 
     if ( IS_SET(obj->extract_flags, EXTRACT_BURN_ON_EXTRACT) )
     {
-        act("You extinguish &uOthe rag&n on $p.  Whewww...", ch, obj, NULL,
+        act("You extinguish &uOthe rag&n on $p.", ch, obj, NULL,
             TO_CHAR);
-        act("$n extinguishes &uOthe rag&n on $p.  Good.", ch, obj, NULL,
+        act("$n extinguishes &uOthe rag&n on $p.", ch, obj, NULL,
             TO_ROOM);
     }
     else if ( IS_SET(obj->general_flags, GEN_TIMER_ITEM) )
     {
-        act("You de-activate &uOthe timer&n on $p.  Whewww...", ch, obj,
+        act("You de-activate &uOthe timer&n on $p.", ch, obj,
             NULL, TO_CHAR);
-        act("$n de-actives &uOthe timer&n on $p.  Good.", ch, obj, NULL,
+        act("$n de-actives &uOthe timer&n on $p.", ch, obj, NULL,
             TO_ROOM);
     }
     else
     {
-        act("You slip &uOthe pin&n back into $p.  Whewww...", ch, obj,
+        act("You slip &uOthe pin&n back into $p.", ch, obj,
             NULL, TO_CHAR);
-        act("$n slips &uOthe pin&n back into $p.  Good.", ch, obj, NULL,
+        act("$n slips &uOthe pin&n back into $p.", ch, obj, NULL,
             TO_ROOM);
     }
 
