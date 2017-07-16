@@ -256,7 +256,7 @@ LoadBans (FILE * fp)
     long date;
     int i;
 
-    logmesg("Banning troublesome sites . . .");
+    logmesg("Banning troublesome sites...");
 
     while ( (i = get_line(fp, line, 256)) != -1 && *line != '$' )
     {
