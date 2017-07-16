@@ -152,7 +152,7 @@ do_bury (CHAR_DATA * ch, char *argument)
     ch->in_room->mine = obj;
     claimObject(ch, obj);
 
-    /* Annnouncing it to teammates */
+    /* Annnouncing it to teammates if not independent */
     if ( !team_table[ch->team].independent )
     {
         if ( ch->in_room->interior_of )
@@ -189,13 +189,12 @@ do_kill (CHAR_DATA * ch, char *argument)
 
     if ( ch->in_room == safe_area )
     {
-        send_to_char("There will be no hostilities in the safe room.  "
-                     "Take it outside.\n\r", ch);
+        send_to_char("You cannot attack others in safe areas.\r\n", ch);
         return;
     }
     else if ( ch->in_room == graveyard_area )
     {
-        send_to_char("No killing zombies.\r\n", ch);
+        send_to_char("You cannot attack zombies.\r\n", ch);
         return;
     }
     else if ( ch->in_room->inside_mob )
@@ -212,24 +211,21 @@ do_kill (CHAR_DATA * ch, char *argument)
         send_to_char("You will now not attack anyone unless they attack "
                      "you.\n\r", ch);
         if ( IS_SET(ch->act, PLR_AGGRO_OTHER) )
-        {
-            send_to_char("Whats wrong? made some friends?.\n\r", ch);
             REMOVE_BIT(ch->act, PLR_AGGRO_OTHER);
-        }
         ch->fighting = NULL;
         return;
     }
 
     if ( !str_prefix(arg, "all") )
     {
-        send_to_char("Fuck 'em all..\n\r", ch);
+        send_to_char("You will now attack anything that isn't on your team.\r\n", ch);
         SET_BIT(ch->act, PLR_AGGRO_OTHER);
         return;
     }
 
     if ( (victim = get_char_world(ch, arg)) == NULL )
     {
-        send_to_char("Look again, dolt!\r\n", ch);
+        send_to_char("That doesn't exist.\r\n", ch);
         return;
     }
     else if ( victim == ch )
@@ -240,14 +236,14 @@ do_kill (CHAR_DATA * ch, char *argument)
     }
     else if ( ch->fighting == victim )
     {
-        send_to_char("Yeah, yeah... You're trying.\r\n", ch);
+        send_to_char("You're aleady attacking them.\r\n", ch);
         return;
     }
     else if ( !team_table[ch->team].independent && ch->team == victim->team )
     {
         if ( !g_forceAction )
         {
-            act("But $E's a teammate!  Use &WKILL $t!&n if you really want to, though.", ch, arg, victim, TO_CHAR);
+            act("But $E's a teammate!  Use &WKILL $t!&n if you really want to kill them.", ch, arg, victim, TO_CHAR);
             return;
         }
 
