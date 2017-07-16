@@ -330,7 +330,7 @@ f_alloc_perm (int sMem, char *filename, int line_num)
 
     if ( pMemPerm == NULL || iMemPerm + sMem > MAX_PERM_BLOCK )
     {
-        logmesg("allocating new block");
+        logmesg("allocating new permanent memory block");
         iMemPerm = 0;
         if ( (pMemPerm = calloc(1, MAX_PERM_BLOCK)) == NULL )
         {
