@@ -184,7 +184,6 @@ const struct cmd_type cmd_table[] = {
     {"roll", do_roll, POS_STANDING, 0, LOG_NORMAL, 1, 0, 0, 1},
     {"follow", do_follow, POS_STANDING, 0, LOG_NORMAL, 1, 0, 0, 1},
     {"commbadge", do_commbadge, POS_SLEEPING, 0, LOG_NORMAL, 1, 0, 1, 1},
-    {"bounty", do_bounty, POS_SLEEPING, 0, LOG_NORMAL, 1, 0, 0, 1},
     {"bury", do_bury, POS_STANDING, 0, LOG_NORMAL, 1, 0, 0, 1},
     {"rest", do_rest, POS_SLEEPING, 0, LOG_NORMAL, 1, 0, 0, 1},
     {"sit", do_sit, POS_SLEEPING, 0, LOG_NORMAL, 1, 0, 0, 1},

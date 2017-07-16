@@ -1191,13 +1191,6 @@ do_kills (CHAR_DATA * ch, char *argument)
 }
 
 void
-do_bounty (CHAR_DATA * ch, char *argument)
-{
-    send_to_char("Bounty?! Use your commbadge.\r\n", ch);
-    return;
-}
-
-void
 do_commbadge (CHAR_DATA * ch, char *argument)
 {
     char buf[MAX_STRING_LENGTH];
