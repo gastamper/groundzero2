@@ -2142,7 +2142,7 @@ do_peace (CHAR_DATA * ch, char *argument)
 }
 
 
-
+// Active ban code is in ban.c
 #if 0
 void
 do_ban (CHAR_DATA * ch, char *argument)
