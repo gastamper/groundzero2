@@ -23,7 +23,7 @@
 ]#define TEAM_ADMIN		       5
 START
 _guardian_ guardian~
-The $a GUARDIAN~
+the $a GUARDIAN~
 HP 200000-250000
 SPEED_DELAY 0
 BEHAV 1
@@ -79,7 +79,7 @@ LOC "god-store"~
 ITEMS 3 2 176 176 176 176 0
 
 _turret_ lx-810t laser turret~
-An LX-810T Laser Turret~
+an LX-810T Laser Turret~
 HP 3000-6000
 SPEED_DELAY 0
 BEHAV 4 
@@ -111,7 +111,7 @@ LOC random 2~
 ITEMS 10 37 78 127 127 105 126 123 103 123 126 124 0
 
 Elite Button Guard soldier~
-&nAn &gElite &RButton&n &gClan&n Soldier~
+&nan &gElite &RButton&n &gClan&n Soldier~
 HP 5000-10000 
 SPEED_DELAY 0
 BEHAVE 1
@@ -121,7 +121,7 @@ LOC rand 2~
 ITEMS 125 123 126 126 32 76 0
 
 Elite Button Guard soldier~
-&nAn &gElite &RButton&n &gClan&n Soldier~
+&nan &gElite &RButton&n &gClan&n Soldier~
 HP 5000-10000
 SPEED_DELAY 0  
 BEHAVE 1
@@ -131,7 +131,7 @@ LOC rand 2~
 ITEMS 125 123 126 126 32 76 0
 
 Elite Button Guard soldier~
-&nAn &gElite &RButton&n &gClan&n Soldier~
+&nan &gElite &RButton&n &gClan&n Soldier~
 HP 5000-10000
 SPEED_DELAY 0  
 BEHAVE 1
@@ -141,7 +141,7 @@ LOC rand 2~
 ITEMS 125 123 126 126 32 76 0
 
 Elite Button Guard soldier~
-&nAn &gElite &RButton&n &gClan&n Soldier~
+&nan &gElite &RButton&n &gClan&n Soldier~
 HP 5000-10000
 SPEED_DELAY 0  
 BEHAVE 1
@@ -162,7 +162,7 @@ LOC rand 2~
 ITEMS 53 76 133 134 135 28 0
 
 Elite Button Guard soldier~
-&nAn &gElite &RButton&n &gClan&n Soldier~
+&nan &gElite &RButton&n &gClan&n Soldier~
 HP 5000-10000
 SPEED_DELAY 0
 BEHAVE 1
@@ -172,7 +172,7 @@ LOC rand 2~
 ITEMS 125 123 126 126 32 76 0
 
 elite button clan scout~
-&nAn &gElite &RButton&n &gClan&n Scout~
+&nan &gElite &RButton&n &gClan&n Scout~
 HP 5000-7000
 SPEED_DELAY 0
 BEHAVE 1
@@ -182,7 +182,7 @@ LOC rand 2~
 ITEMS 123 125 126 126 14 55 55 0
 
 elite button clan scout~
-&nAn &gElite &RButton&n &gClan&n Scout~
+&nan &gElite &RButton&n &gClan&n Scout~
 HP 5000-7000
 SPEED_DELAY 0
 BEHAVE 1
@@ -232,7 +232,7 @@ LOC random 0~
 ITEMS 33 73 128 129 0
 
 elite button clan scout~
-&nAn &gElite &RButton&n &gClan&n Scout~
+&nan &gElite &RButton&n &gClan&n Scout~
 HP 5000-7000
 SPEED_DELAY 0  
 BEHAVE 1
@@ -242,7 +242,7 @@ LOC rand 0~
 ITEMS 123 125 126 126 14 55 55 0
 
 elite button clan scout~
-&nAn &gElite &RButton&n &gClan&n Scout~
+&nan &gElite &RButton&n &gClan&n Scout~
 HP 5000-7000
 SPEED_DELAY 0  
 BEHAVE 1
