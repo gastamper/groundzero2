@@ -147,7 +147,7 @@ note_remove (CHAR_DATA * ch, NOTE_DATA * pnote)
 
         if ( prev == NULL )
         {
-            logmesg("Note_remove: pnote not found.");
+            logmesg("Error: Note_remove: pnote not found.");
             return;
         }
 
@@ -207,7 +207,7 @@ note_delete (NOTE_DATA * pnote)
 
         if ( prev == NULL )
         {
-            logmesg("Note_delete: pnote not found.");
+            logmesg("Error: note_delete: pnote not found.");
             return;
         }
 
@@ -784,6 +784,7 @@ do_note (CHAR_DATA * ch, char *argument)
 
         if ( strlen(ch->pnote->text) >= MAX_STRING_LENGTH - MAX_INPUT_LENGTH )
         {
+// TODO: let player know how long a note can be.
             send_to_char("Note too long.\r\n", ch);
             return;
         }
@@ -799,6 +800,7 @@ do_note (CHAR_DATA * ch, char *argument)
         strcpy(buf, ch->pnote->text);
         if ( strlen(buf) + strlen(argument) >= MAX_STRING_LENGTH - MAX_INPUT_LENGTH )
         {
+// TODO: let player know how long a note can be.
             send_to_char("Note too long.\r\n", ch);
             return;
         }
@@ -816,7 +818,7 @@ do_note (CHAR_DATA * ch, char *argument)
         if (ch->pnote == NULL || !ch->pnote->text ||
             strlen(ch->pnote->text) < 2)
         {
-            send_to_char("Eh?  Write something first!\r\n", ch);
+            send_to_char("You have to write something first!\r\n", ch);
             return;
         }
 
@@ -956,6 +958,7 @@ do_note (CHAR_DATA * ch, char *argument)
 
         if ( vnum > 200 )
         {
+// TODO: seems arbitrary.
             send_to_char("There are too many notes right now.  Sorry.\r\n",
                          ch);
             return;
@@ -997,6 +1000,9 @@ do_note (CHAR_DATA * ch, char *argument)
             fclose(fp);
         }
 
+// TODO: seems sane to only notify people of new notes when not in the
+// play area, and notify them once they've spawned back in.  Or we could
+// notify them on login.
         for ( victim = char_list; victim != NULL; victim = victim->next )
         {
             if ( IS_SET(victim->comm, COMM_QUIET ) ||
@@ -1071,6 +1077,7 @@ do_delet (CHAR_DATA * ch, char *argument)
                  ch);
 }
 
+// TODO: needs check so that players can be forced to delete.
 void
 do_delete (CHAR_DATA * ch, char *argument)
 {
@@ -1091,8 +1098,8 @@ do_delete (CHAR_DATA * ch, char *argument)
         else
         {
             send_to_char
-                ("See ya here next time you get the urge to kill.  "
-                 "Grin.\r\n\r\n\r\n", ch);
+                ("See ya here next time you get the urge to kill."
+                 "\r\n\r\n", ch);
             send_to_char("&g                |\r\n", ch);
             send_to_char("&g               |.|\r\n", ch);
             send_to_char("&g               |.|\r\n", ch);
@@ -1240,7 +1247,7 @@ do_commbadge (CHAR_DATA * ch, char *argument)
             IS_SET(victim->comm, COMM_QUIET))
             continue;
         if ( ((argument[0] == '%') && ch && IS_IMMORTAL(ch)) || !ch )
-            act_new("&uAYOUR GENERAL &XCOMMBADGE&n: '&W$t&?&n'", victim,
+            act_new("&XCOMMBADGE&n: '&W$t&?&n'", victim,
                     argument + 1, NULL, TO_CHAR, POS_DEAD);
         else
             act_new("$n &XCOMMBADGE&n: '&W$t&?&n'", ch,
@@ -1262,12 +1269,12 @@ do_imptalk (CHAR_DATA * ch, char *argument)
     }
 
     sprintf(buf, "$n: %s", argument);
-    act_new("IMP] $n: $t", ch, argument, NULL, TO_CHAR, POS_DEAD);
+    act_new("[IMP] $n: $t", ch, argument, NULL, TO_CHAR, POS_DEAD);
     for ( d = descriptor_list; d != NULL; d = d->next )
     {
         if ( d->connected == CON_PLAYING && IS_IMP(d->character) )
         {
-            act_new("IMP] $n: $t", ch, argument, d->character, TO_VICT,
+            act_new("[IMP] $n: $t", ch, argument, d->character, TO_VICT,
                     POS_DEAD);
         }
     }
@@ -1278,7 +1285,7 @@ void
 do_immtalk (CHAR_DATA * ch, char *argument)
 {
     char buf[MAX_STRING_LENGTH];
-    CHAR_DATA *listenners;
+    CHAR_DATA *listeners;
 
     if ( argument[0] == '\0' )
     {
@@ -1303,15 +1310,15 @@ do_immtalk (CHAR_DATA * ch, char *argument)
     if ( ch )
         act_new("$n: $t", ch, argument, NULL, TO_CHAR, POS_DEAD);
 
-    for ( listenners = char_list; listenners; listenners = listenners->next )
+    for ( listeners = char_list; listeners; listeners = listeners->next )
     {
-        if ( IS_HERO(listenners) && !IS_SET(listenners->comm, COMM_NOWIZ) )
+        if ( IS_HERO(listeners) && !IS_SET(listeners->comm, COMM_NOWIZ) )
         {
             if ( ch )
-                act_new("$n: $t", ch, argument, listenners, TO_VICT,
+                act_new("$n: $t", ch, argument, listeners, TO_VICT,
                         POS_DEAD);
             else
-                act_new("&uAMR SELF-DESTRUCT&n: $t", listenners,
+                act_new("&uAMR SELF-DESTRUCT&n: $t", listeners,
                         &(argument[1]), NULL, TO_CHAR, POS_DEAD);
         }
     }
@@ -1329,7 +1336,7 @@ do_say (CHAR_DATA * ch, char *argument)
 
     if ( IS_SET(ch->comm, COMM_NOCHANNELS) )
     {
-        send_to_char("The gods have revoked your channel priviliges.\r\n",
+        send_to_char("The gods have revoked your communication priviliges.\r\n",
                      ch);
         return;
     }
@@ -1353,7 +1360,7 @@ do_tell (CHAR_DATA * ch, char *argument)
 
     if ( IS_SET(ch->comm, COMM_NOCHANNELS) )
     {
-        send_to_char("The gods have revoked your channel priviliges.\r\n",
+        send_to_char("The gods have revoked your communication priviliges.\r\n",
                      ch);
         return;
     }
@@ -1474,7 +1481,7 @@ do_emote (CHAR_DATA * ch, char *argument)
 
     if ( IS_SET(ch->comm, COMM_NOCHANNELS) )
     {
-        send_to_char("The gods have revoked your channel priviliges.\r\n", ch);
+        send_to_char("The gods have revoked your communication priviliges.\r\n", ch);
         return;
     }
 
@@ -1518,7 +1525,7 @@ do_typo (CHAR_DATA * ch, char *argument)
         return;
     }
 
-    send_to_char("...you just made one.\r\n", ch);
+    send_to_char("You just made one.\r\n", ch);
 }
 
 
@@ -1650,7 +1657,7 @@ add_follower (CHAR_DATA * ch, CHAR_DATA * leader)
 {
     if ( ch->leader != NULL )
     {
-        logmesg("Add_follower: non-null leader.");
+        logmesg("Error: add_follower: non-null leader.");
         return;
     }
 
@@ -1671,7 +1678,7 @@ stop_follower (CHAR_DATA * ch)
 {
     if ( ch->leader == NULL )
     {
-        logmesg("Stop_follower: null leader.");
+        logmesg("Error: stop_follower: null leader.");
         return;
     }
 
@@ -1815,7 +1822,7 @@ do_gocial (CHAR_DATA * ch, char *argument)
     }
     else if ( !IS_NPC(ch) && IS_SET(ch->comm, COMM_NOCHANNELS) )
     {
-        send_to_char("The gods have revoked your channel priviliges.\r\n",
+        send_to_char("The gods have revoked your communication priviliges.\r\n",
                      ch);
         return;
     }
@@ -1841,7 +1848,7 @@ do_teamtalk (CHAR_DATA * ch, char *argument)
 
     if ( IS_SET(ch->comm, COMM_NOCHANNELS) )
     {
-        send_to_char("The gods have revoked your channel priviliges.\r\n",
+        send_to_char("The gods have revoked your communication priviliges.\r\n",
                      ch);
         return;
     }
@@ -1868,10 +1875,7 @@ do_lines (struct char_data *ch, char *argument)
     int lines = 0;
 
     if ( IS_NPC(ch) || !ch->pcdata )
-    {
-        send_to_char("Go away.\r\n", ch);
         return;
-    }
 
     one_argument(argument, arg);
 
