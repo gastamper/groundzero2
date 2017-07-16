@@ -209,7 +209,7 @@ show_list_to_char (OBJ_DATA * list, CHAR_DATA * ch, bool fShort,
         if ( count > 10000 )
         {
             send_to_char("Infinite object list, report this bug.\r\n", ch);
-            logmesg("skipping infinite obj list (showed to %s).",
+            logmesg("Error: skipping infinite obj list (showed to %s).",
                        ch->names);
             return;
         }
@@ -297,7 +297,7 @@ show_char_to_char_0 (CHAR_DATA * victim, CHAR_DATA * ch)
     buf[0] = '\0';
 
     if ( IS_SET(victim->act, PLR_WIZINVIS) )
-        strcat(buf, "(&uwWizi&n) ");
+        strcat(buf, "(&uwWizinvis&n) ");
 
     strcat(buf, PERS(victim, ch));
     if ( !IS_NPC(victim) && !IS_SET(ch->comm, COMM_BRIEF) )
@@ -308,7 +308,7 @@ show_char_to_char_0 (CHAR_DATA * victim, CHAR_DATA * ch)
     switch (victim->position)
     {
         case POS_DEAD:
-            strcat(buf, " is DEAD!!");
+            strcat(buf, " is lying here, dead.");
             break;
         case POS_MORTAL:
             strcat(buf, " is mortally wounded.");
@@ -423,9 +423,6 @@ show_char_to_char_1 (CHAR_DATA * victim, CHAR_DATA * ch)
         }
     }
 
-    act("$E is ready to kill you like anyone else you would find here.\r\n"
-        "But other than that . . .", ch, NULL, victim, TO_CHAR);
-
     sprintf(buf, "%s%s", PERS(victim, ch), diagnose(victim));
     buf[0] = UPPER(buf[0]);
     send_to_char(buf, ch);
@@ -450,7 +447,7 @@ show_char_to_char_1 (CHAR_DATA * victim, CHAR_DATA * ch)
 
     if ( IS_IMMORTAL(ch) )
     {
-        send_to_char("\r\nYou peek at the inventory:\r\n", ch);
+        send_to_char("\r\nYou peek at their inventory:\r\n", ch);
         show_list_to_char(victim->carrying, ch, TRUE, TRUE);
     }
     return;
@@ -771,7 +768,7 @@ do_colorset (struct char_data *ch, char *argument)
 
     if ( IS_NPC(ch) )
     {
-        send_to_char("No mobiles allowed.\r\n", ch);
+        send_to_char("NPCs can't do this.\r\n", ch);
         return;
     }
     else if ( !*arg )
@@ -849,8 +846,8 @@ do_ttype (CHAR_DATA * ch, char *argument)
 
     if ( !ch->pcdata || !ch->desc )
     {
-        send_to_char("Ix-nay on the TTYPE command, foo'. "
-                     "You ain't a playa'.\r\n", ch);
+        send_to_char("You don't seem to be a player..\r\n", ch);
+	logmesg("Error: %s tried to do_ttype but isn't player.", ch->names);
         return;
     }
 
@@ -1186,7 +1183,7 @@ do_look (CHAR_DATA * ch, char *argument)
 
         if ( IS_SET(obj->general_flags, GEN_NO_AMMO_NEEDED) )
         {
-            sprintf(buf, "$p needs no ammunition\r\n");
+            sprintf(buf, "$p needs no ammunition.\r\n");
             act(buf, ch, obj, NULL, TO_CHAR);
             return;
         }
@@ -1350,7 +1347,7 @@ do_score (CHAR_DATA * ch, char *argument)
     switch (ch->position)
     {
         case POS_DEAD:
-            send_to_char("You are DEAD!!\r\n", ch);
+            send_to_char("You are DEAD!\r\n", ch);
             break;
         case POS_MORTAL:
             send_to_char("You are mortally wounded.\r\n", ch);
@@ -1526,7 +1523,7 @@ do_rank (CHAR_DATA * ch, char *argument)
     if ( RANK(ch) < RANK_HUNTER )
     {
         send_to_char
-            ("Go away, lamer.  Only hunters and badasses can do this.\r\n",
+            ("Only players of rank hunter or above can do this.\r\n",
              ch);
         return;
     }
@@ -1808,7 +1805,7 @@ do_count (CHAR_DATA * ch, char *argument)
                 count);
     else
         sprintf(buf,
-                "There are %d characters on, the most on this boot was %d.\r\n",
+                "There are %d characters on, and the most on this boot was %d.\r\n",
                 count, max_on);
 
     send_to_char(buf, ch);
@@ -1905,7 +1902,7 @@ do_where (struct char_data *ch, char *argument)
 
     if ( !ch->in_room )
     {
-        logmesg("%s in do_where in nowhere", ch->names);
+        logmesg("Error: %s in do_where in nowhere", ch->names);
         send_to_char("You appear to be in nowhere.  This is a bug.\r\n",
                      ch);
         return;
@@ -1976,7 +1973,7 @@ do_where (struct char_data *ch, char *argument)
     {
         if ( (ich = get_char_world(ch, arg)) == NULL )
         {
-            send_to_char("Who the fuck is that?!\r\n", ch);
+            send_to_char("Who is that?!\r\n", ch);
             return;
         }
 
@@ -2004,7 +2001,7 @@ set_title (CHAR_DATA * ch, char *title)
 
     if ( IS_NPC(ch) )
     {
-        logmesg("Set_title: NPC.");
+        logmesg("Error: NPC attempted to set_title.");
         return;
     }
 
@@ -2144,7 +2141,7 @@ do_password (CHAR_DATA * ch, char *argument)
     {
         if ( *p == '~' )
         {
-            send_to_char("New password not acceptable, try again.\r\n",
+            send_to_char("Passwords cannot include the tilde(~) character.\r\n",
                          ch);
             return;
         }
@@ -2202,7 +2199,7 @@ do_kill_message (CHAR_DATA * ch, char *argument)
     }
     else if ( IS_SET(ch->comm, COMM_NOCHANNELS) )
     {
-        send_to_char("The gods have revoked your channel priviliges.\r\n",
+        send_to_char("The gods have revoked your communication priviliges.\r\n",
                      ch);
         return;
     }
@@ -2230,7 +2227,7 @@ do_suicide_message (CHAR_DATA * ch, char *argument)
     }
     else if ( IS_SET(ch->comm, COMM_NOCHANNELS) )
     {
-        send_to_char("The gods have revoked your channel priviliges.\r\n",
+        send_to_char("The gods have revoked your communication priviliges.\r\n",
                      ch);
         return;
     }
