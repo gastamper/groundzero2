@@ -31,12 +31,12 @@ sh_int teleport_time = 0;
 
 
 const int dir_cmod[][3] = {
-    {0, 1, 0},
-    {1, 0, 0},
-    {0, -1, 0},
-    {-1, 0, 0},
-    {0, 0, 1},
-    {0, 0, -1}
+    {0, 1, 0},   // north
+    {1, 0, 0},   // east
+    {0, -1, 0},  // south
+    {-1, 0, 0},  // west
+    {0, 0, 1},   // up
+    {0, 0, -1}   // down
 };
 
 
@@ -166,7 +166,7 @@ bad_room (CHAR_DATA * ch)
         else if ( new_y > the_city->y_size - 1 )
             new_y = the_city->y_size - 1;
 
-        sprintf(buf, "BADPOP: %s was sent to %s", ch->names,
+        sprintf(buf, "BADPOP: %s was sent to %s.", ch->names,
                 IS_NPC(fch) ? fch->short_descript : fch->names);
         logmesg("%s", buf);
         wiznet(buf, NULL, NULL, WIZ_BADPOP, 0, get_trust(ch));
@@ -211,7 +211,7 @@ do_enter (CHAR_DATA * ch, char *argument)
         return;
     }
 
-    if ( OBJ_CAPACITY(obj ) &&
+    if ( OBJ_CAPACITY(obj) &&
         count_people(obj->interior) > OBJ_CAPACITY(obj))
     {
         send_to_char("There's not enough room in there for you.\r\n", ch);
@@ -379,7 +379,7 @@ move_char (CHAR_DATA * ch, int door, bool follow, int walls)
 
     if ( door < 0 || door > 5 )
     {
-        logmesg("Do_move: bad door %d.", door);
+        logmesg("Error: do_move: bad door %d.", door);
         return (FALSE);
     }
 
@@ -418,8 +418,7 @@ move_char (CHAR_DATA * ch, int door, bool follow, int walls)
         }
         else
         {
-            send_to_char("Can't go that way pal.  There's a wall.\n\r",
-                         ch);
+            send_to_char("You can't go that way.\r\n", ch);
             return (FALSE);
         }
     }
@@ -483,8 +482,8 @@ hit_mine (ROOM_DATA * room, CHAR_DATA * ch)
     if ( ch && find_worn_eq_char(ch, SEARCH_GEN_FLAG, GEN_DETECT_MINE) )
     {
         send_to_char
-            ("Your metal detector beeps wildly around a certain area of the ground\r\n"
-             "and you carefully avoid the mine.\r\n", ch);
+            ("Your metal detector alerts you to the presence of a mine.\r\n", 
+		ch);
         if (room->this_level == the_city && room->mine->owner &&
             room->mine->owner->team != ch->team)
             SetSquareFeature(ch->team, room->x, room->y, SQRF_MINE);
@@ -639,7 +638,7 @@ complete_movement (CHAR_DATA * ch, int fromDir)
 
             if ( !distance )
             {
-                strcpy(buf, "$N has arrived");
+                strcpy(buf, "$N has arrived.");
                 act(buf, fch, NULL, ch, TO_CHAR);
             }
             else
@@ -771,7 +770,7 @@ do_roll (struct char_data *ch, char *argument)
     }
     else if ( !(obj = get_obj_list(ch, arg, ch->in_room->contents)) )
     {
-        send_to_char("Nothing like that around here...\r\n", ch);
+        send_to_char("Nothing like that around here.\r\n", ch);
         return;
     }
     else if ( !IS_SET(obj->general_flags, GEN_CAN_PUSH) )
@@ -825,14 +824,14 @@ do_push (CHAR_DATA * ch, char *argument)
 
     if ( !*arg || !*arg2 )
     {
-        send_to_char("Push who?!  Or what?!  And where?!\r\n", ch);
+        send_to_char("Push who (or what) where?!\r\n", ch);
         return;
     }
     else if ( (victim = get_char_room(ch, arg)) == NULL )
     {
         if ( (obj = get_obj_list(ch, arg, ch->in_room->contents)) == NULL )
         {
-            send_to_char("I don't see that around.\r\n", ch);
+            send_to_char("That doesn't seem to be here.\r\n", ch);
             return;
         }
     }
@@ -848,7 +847,7 @@ do_push (CHAR_DATA * ch, char *argument)
     }
     else if ( obj && !IS_SET(obj->general_flags, GEN_CAN_PUSH) )
     {
-        send_to_char("It won't budge.\r\n", ch);
+        send_to_char("You can't move that.\r\n", ch);
         return;
     }
     else if ( victim )
@@ -864,7 +863,7 @@ do_push (CHAR_DATA * ch, char *argument)
         }
         else if ( victim == ch )
         {
-            send_to_char("Push yourself?  You big bully!\r\n", ch);
+            send_to_char("You can't push yourself.\r\n", ch);
             return;
         }
         else if ( victim->position < POS_STANDING )
@@ -1044,10 +1043,9 @@ do_rest (CHAR_DATA * ch, char *argument)
             break;
 
         case POS_FIGHTING:
-            send_to_char("You are already fighting!\n\r", ch);
+            send_to_char("You can't rest while fighting!\n\r", ch);
             break;
     }
-
 
     return;
 }
@@ -1059,7 +1057,7 @@ do_sit (CHAR_DATA * ch, char *argument)
     switch (ch->position)
     {
         case POS_SLEEPING:
-            send_to_char("You wake up.\n\r", ch);
+            send_to_char("You wake and sit up.\n\r", ch);
             act("$n wakes and sits up.\n\r", ch, NULL, NULL, TO_ROOM);
             ch->position = POS_SITTING;
             break;
@@ -1071,8 +1069,7 @@ do_sit (CHAR_DATA * ch, char *argument)
             send_to_char("You are already sitting down.\n\r", ch);
             break;
         case POS_FIGHTING:
-            send_to_char("Maybe you should finish this fight first?\n\r",
-                         ch);
+            send_to_char("You can't sit while fighting.\n\r", ch);
             break;
         case POS_STANDING:
             send_to_char("You sit down.\n\r", ch);
@@ -1093,7 +1090,6 @@ do_sleep (CHAR_DATA * ch, char *argument)
         case POS_SLEEPING:
             send_to_char("You are already sleeping.\n\r", ch);
             break;
-
         case POS_RESTING:
         case POS_SITTING:
         case POS_STANDING:
@@ -1101,9 +1097,8 @@ do_sleep (CHAR_DATA * ch, char *argument)
             act("$n goes to sleep.", ch, NULL, NULL, TO_ROOM);
             ch->position = POS_SLEEPING;
             break;
-
         case POS_FIGHTING:
-            send_to_char("You are already fighting!\n\r", ch);
+            send_to_char("You can't sleep while fighting!\n\r", ch);
             break;
     }
 
@@ -1139,7 +1134,7 @@ do_wake (CHAR_DATA * ch, char *argument)
     else if (victim->in_room == safe_area && victim->team != ch->team &&
              !ch->trust)
     {
-        send_to_char("No.\r\n", ch);
+        send_to_char("You can't do that.\r\n", ch);
         return;
     }
 
