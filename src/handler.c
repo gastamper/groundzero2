@@ -757,7 +757,7 @@ x_extract_obj (OBJ_DATA * obj, int perm_extract, const char *file, int line, con
         CHAR_DATA *the_dead, *dead_next;
         OBJ_DATA *extra_obj, *extra_next;
 
-//  Is this logmesg necessary?
+// TODO: Is this logmesg necessary?
         logmesg("x_extract_obj: Taking out the interior of %s.", obj->name);
         for (the_dead = obj->interior->people; the_dead;
              the_dead = dead_next)
