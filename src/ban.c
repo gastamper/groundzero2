@@ -267,7 +267,8 @@ LoadBans (FILE * fp)
         {
             logmesg("%s:%d:Invalid ban record ``%s''\n",
                        BAN_LIST, lineNo, line);
-            return;
+// Was previously return and would halt all ban list iteration on a single failure.
+            continue;
         }
 
         bd = MakeBan(NULL, date);
