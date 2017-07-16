@@ -215,7 +215,7 @@ char_from_room (CHAR_DATA * ch)
 {
     if ( ch->in_room == NULL )
     {
-        logmesg("Char_from_room: NULL.");
+        logmesg("Error: char_from_room: in_room == NULL for %s", ch->names);
         exit(-1);
     }
 
@@ -237,7 +237,7 @@ char_from_room (CHAR_DATA * ch)
         }
 
         if ( prev == NULL )
-            logmesg("Char_from_room: ch not found.");
+            logmesg("Erorr: char_from_room: ch not found.");
     }
 
     ch->in_room = NULL;
@@ -254,7 +254,7 @@ char_to_room (CHAR_DATA * ch, ROOM_DATA * pRoomIndex)
 {
     if ( pRoomIndex == NULL )
     {
-        logmesg("Char_to_room: NULL.");
+        logmesg("Error: char_to_room: pRoomIndex == NULL for %s.", ch->names);
         return;
     }
 
@@ -309,7 +309,7 @@ obj_from_char (OBJ_DATA * obj)
 
     if ( (ch = obj->carried_by) == NULL )
     {
-        logmesg("Obj_from_char: null ch.");
+        logmesg("Error: obj_from_char: NULL ch.");
         bug_object_state(obj);
         return;
     }
@@ -335,7 +335,7 @@ obj_from_char (OBJ_DATA * obj)
         }
 
         if ( prev == NULL )
-            logmesg("Obj_from_char: obj not in list.");
+            logmesg("Error: obj_from_char: obj not in list.");
     }
 
     obj->carried_by = NULL;
@@ -359,10 +359,10 @@ get_eq_char (CHAR_DATA * ch, int iWear)
         if ( obj->carried_by != ch )
         {
             if ( obj->carried_by )
-                logmesg("get_eq_char: Carried by %s; in list of %s",
+                logmesg("Error: get_eq_char: Carried by %s; in list of %s",
                            obj->carried_by->names, ch->names);
             else
-                logmesg("get_eq_char: Carried by null; in list of %s",
+                logmesg("Error: get_eq_char: Carried by null; in list of %s",
                            ch->names);
         }
         if ( obj->wear_loc == iWear )
@@ -455,7 +455,7 @@ equip_char (CHAR_DATA * ch, OBJ_DATA * obj, int iWear)
 {
     if ( get_eq_char(ch, iWear) != NULL )
     {
-        logmesg("Equip_char: already equipped (%d).", iWear);
+        logmesg("Equip_char: %s already equipped (%d).", ch->names, iWear);
         return;
     }
 
@@ -473,7 +473,7 @@ unequip_char (CHAR_DATA * ch, OBJ_DATA * obj)
 {
     if ( obj->wear_loc == WEAR_NONE )
     {
-        logmesg("Unequip_char: already unequipped.");
+        logmesg("Unequip_char: %s already unequipped %s.", ch->names, obj->name);
         return;
     }
 
@@ -528,7 +528,7 @@ obj_from_room (OBJ_DATA * obj)
 
     if ( (in_room = obj->in_room) == NULL )
     {
-        logmesg("obj_from_room: NULL room.");
+        logmesg("Error: obj_from_room: NULL room for %s.", obj->name);
         return;
     }
 
@@ -551,7 +551,7 @@ obj_from_room (OBJ_DATA * obj)
 
         if ( prev == NULL )
         {
-            logmesg("Obj_from_room: obj not found.");
+            logmesg("Error: obj_from_room: obj not found.");
             return;
         }
     }
@@ -658,7 +658,7 @@ obj_from_obj (OBJ_DATA * obj)
 
     if ( !obj->in_obj )
     {
-        logmesg("obj_from_obj: %s not in an object", obj->name);
+        logmesg("Error: obj_from_obj: %s not in an object", obj->name);
         bug_object_state(obj);
         return;
     }
@@ -676,7 +676,7 @@ obj_from_obj (OBJ_DATA * obj)
 
     if ( !tmp )
     {
-        logmesg("obj_from_obj: %s not in contents list of container %s",
+        logmesg("Error: obj_from_obj: %s not in contents list of container %s",
                    obj->name, obj->in_obj->name);
         bug_object_state(obj);
         return;
@@ -700,7 +700,7 @@ scatter_obj (OBJ_DATA * obj)
     if ( obj->in_room || obj->destination || obj->in_obj || obj->carried_by )
     {
         logmesg
-            ("%s could not be recycled because it still is somewhere.",
+            ("Error: %s could not be recycled because it still is somewhere.",
              obj->name);
         bug_object_state(obj);
         return;
@@ -736,7 +736,7 @@ x_extract_obj (OBJ_DATA * obj, int perm_extract, const char *file, int line, con
     if ( obj->valid != VALID_VALUE )
     {
         logmesg(log_buf,
-                   "Extract object: the object was not set to valid (%s).",
+                   "Error: x_extract_obj: the object was not set to valid (%s).",
                    obj->name);
         return;
     }
@@ -757,7 +757,8 @@ x_extract_obj (OBJ_DATA * obj, int perm_extract, const char *file, int line, con
         CHAR_DATA *the_dead, *dead_next;
         OBJ_DATA *extra_obj, *extra_next;
 
-        logmesg("Taking out the interior.");
+//  Is this logmesg necessary?
+        logmesg("x_extract_obj: Taking out the interior of %s.", obj->name);
         for (the_dead = obj->interior->people; the_dead;
              the_dead = dead_next)
         {
@@ -844,7 +845,7 @@ extract_char (CHAR_DATA * ch, bool fPull)
     {
         void coredump(void);
 
-        logmesg("Extract_char: NULL room.");
+        logmesg("Error: extract_char: NULL room for %s.", ch->names);
         coredump();
         return;
     }
@@ -1177,7 +1178,7 @@ get_obj_carry (CHAR_DATA * ch, char *argument)
     for ( obj = ch->carrying; obj != NULL; obj = obj->next_content )
     {
         if ( obj->carried_by != ch )
-            logmesg("get_obj_carry: carried_by not ch");
+            logmesg("Error: get_obj_carry: carried_by not ch.");
         if ( obj->wear_loc == WEAR_NONE && is_name_obj(arg, obj->name) )
         {
             if ( ++count == number )
@@ -1221,7 +1222,7 @@ get_obj_wear (CHAR_DATA * ch, char *argument)
     for ( obj = ch->carrying; obj != NULL; obj = obj->next_content )
     {
         if ( obj->carried_by != ch )
-            logmesg("get_obj_wear: carried_by not ch");
+            logmesg("Error: get_obj_wear: carried_by not ch");
         if ( obj->wear_loc != WEAR_NONE && is_name_obj(arg, obj->name) )
         {
             if ( ++count == number )
@@ -1650,7 +1651,8 @@ item_type_name (OBJ_DATA * obj)
             return "scope";
     }
 
-    logmesg("Item_type_name: unknown type %d.", obj->item_type);
+    logmesg("Error:S Item_type_name: unknown type %d for %s.", 
+	obj->item_type, obj->name);
     return "(unknown)";
 }
 
