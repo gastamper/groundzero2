@@ -81,7 +81,7 @@ DAM_CH 2000 0 0
 DAM_ST 0 0 0
 med pack medical medkit kit first heal~
 a &Rred&n cross first-aid kit~
-A &Rfirst&n &Eaid&n &Rkit&n lies here.~
+A &Rfirst&n &Waid&n &Rkit&n lies here.~
 REPOP 99 12-20
 CHSH 5000 5000
 
