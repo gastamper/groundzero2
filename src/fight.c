@@ -247,8 +247,8 @@ kill_message (struct char_data *killer, struct char_data *vict,
     if ( vict != killer && killer )
     {
         sprintf(buf,
-                "&cHOLY SHIT!&n %s&W(%s&W)&n %s&n %s&W(%s&W)&n. %s&n\r\n",
-                (IS_NPC(killer) ? killer->short_descript : killer->names),
+                "&n%s&W(%s&W)&n %s&n %s&W(%s&W)&n. %s&n\r\n",
+                capitalize((IS_NPC(killer) ? killer->short_descript : killer->names)),
                 team_table[killer->team].who_name,
                 kill_messages[number_range(0, NUM_KILL_MESSAGES - 1)],
                 (IS_NPC(vict) ? vict->short_descript : vict->names),
@@ -256,20 +256,20 @@ kill_message (struct char_data *killer, struct char_data *vict,
                 killer->kill_msg ? killer->kill_msg : "&gCARNAGE!");
 
         logmesg("%s(%s) killed %s(%s) with: %s.",
-                   killer->names, team_table[killer->team].name,
+                   capitalize(killer->names), team_table[killer->team].name,
                    vict->names, team_table[vict->team].name,
                    without_colors(with));
     }
     else
     {
         sprintf(buf,
-                "&cHAHAHA!&n  %s&W(%s&W) &Rdied &Wof natural causes.&n  %s&n\n\r",
-                IS_NPC(vict) ? vict->short_descript : vict->names,
+                "&n%s&W(%s&W) &Rdied &Wof natural causes.&n  %s&n\n\r",
+                capitalize(IS_NPC(vict) ? vict->short_descript : vict->names),
                 team_table[vict->team].who_name,
                 vict->suicide_msg ? vict->
                 suicide_msg : "&RWhat a dumbass!\r\n");
 
-        logmesg("%s(%s) committed suicide.", vict->names,
+        logmesg("%s(%s) committed suicide.", capitalize(vict->names),
                    team_table[vict->team].name);
     }
 
