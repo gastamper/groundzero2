@@ -212,7 +212,7 @@ do_enter (CHAR_DATA * ch, char *argument)
     }
 
     if ( OBJ_CAPACITY(obj) &&
-        count_people(obj->interior) > OBJ_CAPACITY(obj))
+        count_people(obj->interior) >= OBJ_CAPACITY(obj))
     {
         send_to_char("There's not enough room in there for you.\r\n", ch);
         return;
