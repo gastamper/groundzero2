@@ -1384,8 +1384,7 @@ do_tell (CHAR_DATA * ch, char *argument)
 
     if ( victim->desc == NULL && !IS_NPC(victim) )
     {
-        act("$N seems to have misplaced $S link...try again later.", ch,
-            NULL, victim, TO_CHAR);
+        act("$N seems to be linkdead.", ch, NULL, victim, TO_CHAR);
         return;
     }
 
