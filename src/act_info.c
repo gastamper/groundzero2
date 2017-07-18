@@ -2032,10 +2032,16 @@ do_title (CHAR_DATA * ch, char *argument)
         return;
 
     if ( argument[0] == '\0' )
-    {
+	{
         send_to_char("Change your title to what?\r\n", ch);
         return;
-    }
+	}
+
+    if (strlen(argument) > 29)
+	{
+	send_to_char("Title may be at most 29 characters.\r\n", ch);
+	return;
+	}
 
     smash_tilde(argument);
     set_title(ch, argument);
