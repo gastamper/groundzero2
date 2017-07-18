@@ -56,7 +56,7 @@ is_note_to (CHAR_DATA * ch, NOTE_DATA * pnote)
     if ( is_name_exact(ch->names, pnote->to_list) )
         return TRUE;
 
-    if ( ch->trust == 11 )
+    if ( IS_IMP(ch) )
         return TRUE;
 
     return FALSE;
