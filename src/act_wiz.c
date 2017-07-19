@@ -3277,7 +3277,8 @@ do_penalize (CHAR_DATA * ch, char *argument)
        was very useful and was the first measure of trust I gave to a mortal
        before later giving them an imm if they did well at dealing with
        spammers, etc. */
-    if ( !is_name(ch->names, "tireg euthenasia lalmec") )
+//    if ( !is_name(ch->names, "tireg euthenasia lalmec") )
+    if ( 1 )
     {
         send_to_char("Huh?!\n", ch);
         return;
@@ -3285,7 +3286,7 @@ do_penalize (CHAR_DATA * ch, char *argument)
 
     if ( !arg[0] )
     {
-        send_to_char("Syntax: penalize <character name>\n", ch);
+        send_to_char("USAGE: penalize <character name>\n", ch);
         return;
     }
 
@@ -3297,9 +3298,7 @@ do_penalize (CHAR_DATA * ch, char *argument)
 
     if ( vch == ch )
     {
-        send_to_char
-            ("Penalize yourself?!  Aren't you taking this a little "
-             "bit too seriously?\n", ch);
+        send_to_char("You can't penalize yourself.\r\n", ch);
         return;
     }
 
@@ -3322,6 +3321,7 @@ do_penalize (CHAR_DATA * ch, char *argument)
     sprintf(log_buf, "%s ENTERS PENAL mode for %s.\n", ch->names,
             vch->names);
     logmesg(log_buf);
+    wiznet(log_buf, NULL, NULL, WIZ_ON, 0, 1);
     save_char_obj(ch);
 
     if ( enforcer->desc )
@@ -3357,7 +3357,7 @@ do_penalize (CHAR_DATA * ch, char *argument)
     /* change communications to match */
     enforcer->comm = ch->comm;
     do_look(enforcer, "auto");
-    send_to_char("You are now in penal mode.  Done will return you to the "
+    send_to_char("You are now in penal mode.  'Done' will return you to the "
                  "game.\n", enforcer);
 }
 
