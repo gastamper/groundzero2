@@ -1,0 +1,30 @@
+How to notify wiznet
+
+Wiznet can be notified by one of two functions:
+wizlog (CHAR_DATA * ch, OBJ_DATA * obj, long flag, long flag_skip,
+       int min_level, const char *fmt, ...)
+wiznet (char *string, CHAR_DATA * ch, OBJ_DATA * obj, long flag,
+       long flag_skip, int min_level)
+
+wizlog will both write the output to the log as well as notifying wiznet
+(wiznet is called from within wizlog).  wizlog also has the advantage
+of allowing one to pass a sprintf-format string along wih objects at
+the end of the function instead of having to define a string, sprintf it,
+and then pass the string as a variable in to wiznet.  This is computationally
+more demanding but simpler to program.
+
+Note that wizlog is defined in utils.c whereas wiznet is defined in act_wiz.c
+Both are limited by MAX_STRING_LENGTH.
+
+The long flag is from the wiznet_table in interp.c and specifies the type
+of wiznet message (or rather, what wiznet "channel" listeners must have
+turned on to receive the message).  min_level defines the minimum trust
+level to receive the message.  ch and obj may be passed to wiznet as
+arguments in 'string' (ex. "$N", ch) in which case ch or obj->short_desc is
+inserted as appropriate.
+
+flag_skip may be used to notify even in the event that a listener does not
+have wiznet listening to a specific channel.  The code for this is:
+    [...] && (!flag_skip || !IS_SET(d->character->wiznet,flag_skip)) [...]
+For example, if you wish to notify those who do *not* have WIZ_SITES on.
+
