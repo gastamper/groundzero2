@@ -1894,7 +1894,7 @@ do_freeze (CHAR_DATA * ch, char *argument)
 
     if ( IS_NPC(victim) )
     {
-        send_to_char("Not on NPC's.\r\n", ch);
+        send_to_char("Not on NPCs.\r\n", ch);
         return;
     }
 
@@ -1909,12 +1909,16 @@ do_freeze (CHAR_DATA * ch, char *argument)
         REMOVE_BIT(victim->act, PLR_FREEZE);
         send_to_char("You can play again.\r\n", victim);
         send_to_char("FREEZE removed.\r\n", ch);
+	wizlog(0, 0, WIZ_ON, 0, get_trust(ch), "%s unfrozen by %s.",
+		victim->names, ch->names);
     }
     else
     {
         SET_BIT(victim->act, PLR_FREEZE);
         send_to_char("You can't do ANYthing!\r\n", victim);
         send_to_char("FREEZE set.\r\n", ch);
+	wizlog(0, 0, WIZ_ON, 0, get_trust(ch), "%s frozen by %s.",
+		victim->names, ch->names);
     }
 
     save_char_obj(victim);
