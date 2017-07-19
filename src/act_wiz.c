@@ -85,31 +85,36 @@ do_wiznet (CHAR_DATA * ch, char *argument)
 
     if ( argument[0] == '\0' )
     {
-        if ( IS_SET(ch->wiznet, WIZ_ON) )
-        {
-            send_to_char("Signing off of Wiznet.\r\n", ch);
-            REMOVE_BIT(ch->wiznet, WIZ_ON);
-        }
-        else
-        {
-            send_to_char("Welcome to Wiznet!\r\n", ch);
-            SET_BIT(ch->wiznet, WIZ_ON);
-        }
-        return;
+	send_to_char("Usage: wiznet <on|off|status|show|channel from list>\r\n", ch);
+	return;
     }
 
-    if ( !str_prefix(argument, "on") )
+    if ( !str_cmp(capitalize(argument), "ON") 
+		&& !IS_SET(ch->wiznet, WIZ_ON) )
     {
         send_to_char("Welcome to Wiznet!\r\n", ch);
         SET_BIT(ch->wiznet, WIZ_ON);
         return;
     }
+    else if ( !str_cmp(capitalize(argument), "ON") 
+		&& IS_SET(ch->wiznet, WIZ_ON) )
+	{
+	send_to_char("Wiznet already on.\r\n", ch);
+	return;
+	}
 
-    if ( !str_prefix(argument, "off") )
+    if ( !str_cmp(capitalize(argument), "OFF") 
+		&& IS_SET(ch->wiznet, WIZ_ON) )
     {
         send_to_char("Signing off of Wiznet.\r\n", ch);
         REMOVE_BIT(ch->wiznet, WIZ_ON);
         return;
+    }
+    else if ( !str_cmp(capitalize(argument), "OFF") && 
+		!IS_SET(ch->wiznet, WIZ_ON) )
+    {
+	send_to_char("Wiznet already off.\r\n", ch);
+	return;
     }
 
     /* show wiznet status */
