@@ -89,28 +89,28 @@ do_wiznet (CHAR_DATA * ch, char *argument)
 	return;
     }
 
-    if ( !str_cmp(capitalize(argument), "ON") 
+    if ( !str_cmp(argument, "on") 
 		&& !IS_SET(ch->wiznet, WIZ_ON) )
     {
         send_to_char("Welcome to Wiznet!\r\n", ch);
         SET_BIT(ch->wiznet, WIZ_ON);
         return;
     }
-    else if ( !str_cmp(capitalize(argument), "ON") 
+    else if ( !str_cmp(argument, "on") 
 		&& IS_SET(ch->wiznet, WIZ_ON) )
 	{
 	send_to_char("Wiznet already on.\r\n", ch);
 	return;
 	}
 
-    if ( !str_cmp(capitalize(argument), "OFF") 
+    if ( !str_cmp(argument, "off") 
 		&& IS_SET(ch->wiznet, WIZ_ON) )
     {
         send_to_char("Signing off of Wiznet.\r\n", ch);
         REMOVE_BIT(ch->wiznet, WIZ_ON);
         return;
     }
-    else if ( !str_cmp(capitalize(argument), "OFF") && 
+    else if ( !str_cmp(argument, "off") && 
 		!IS_SET(ch->wiznet, WIZ_ON) )
     {
 	send_to_char("Wiznet already off.\r\n", ch);
