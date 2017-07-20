@@ -2366,7 +2366,7 @@ do_newlock (CHAR_DATA * ch, char *arg)
     if ( !str_cmp(arg, "on") )
 	{
 	newlock = TRUE;
-        send_to_char("&YThe game has been locked to new characters.&n\r\n", ch);
+	send_to_char("&YThe game has been locked to new characters.&n\r\n", ch);
 	wizlog(0, 0, WIZ_ON, 0, get_trust(ch), "&YGame newlocked by %s.&n",
 		ch->names);
 	return;
