@@ -2374,9 +2374,9 @@ do_newlock (CHAR_DATA * ch, char *arg)
     else if ( !str_cmp(arg, "off") )
 	{
 	newlock = FALSE;
-        send_to_char("&YNewlock has been removed.&n\r\n", ch);
-        wizlog(0, 0, WIZ_ON, 0, get_trust(ch), "&YNewlock removed by %s.&n",
-        	ch->names);
+	send_to_char("&YNewlock has been removed.&n\r\n", ch);
+	wizlog(0, 0, WIZ_ON, 0, get_trust(ch), "&YNewlock removed by %s.&n",
+		ch->names);
 	return;
 	}
     sprintf(buf, "USAGE: newlock <on|off>\r\n\r\n"
