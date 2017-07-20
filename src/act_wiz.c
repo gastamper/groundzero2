@@ -2358,17 +2358,31 @@ do_wizlock (CHAR_DATA * ch, char *argument)
 /* RT anti-newbie code */
 
 void
-do_newlock (CHAR_DATA * ch, char *argument)
+do_newlock (CHAR_DATA * ch, char *arg)
 {
+    char buf[MAX_STRING_LENGTH];
     extern bool newlock;
 
-    newlock = !newlock;
-
-    if ( newlock )
-        send_to_char("New characters have been locked out.\r\n", ch);
-    else
-        send_to_char("Newlock removed.\r\n", ch);
-
+    if ( !str_cmp(arg, "on") )
+	{
+	newlock = TRUE;
+        send_to_char("&YThe game has been locked to new characters.&n\r\n", ch);
+	wizlog(0, 0, WIZ_ON, 0, get_trust(ch), "&YGame newlocked by %s.&n",
+		ch->names);
+	return;
+	}
+    else if ( !str_cmp(arg, "off") )
+	{
+	newlock = FALSE;
+        send_to_char("&YNewlock has been removed.&n\r\n", ch);
+        wizlog(0, 0, WIZ_ON, 0, get_trust(ch), "&YNewlock removed by %s.&n",
+        	ch->names);
+	return;
+	}
+    sprintf(buf, "USAGE: newlock <on|off>\r\n\r\n"
+		 "&YNewlock is currently: %s&n\r\n", 
+		(newlock) ? "on" : "off");
+    send_to_char(buf, ch);
     return;
 }
 
