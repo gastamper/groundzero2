@@ -161,7 +161,7 @@ logmesg (const char *fmt, ...)
 {
 #ifdef LOG_STDOUT
     time_t t = time(0);
-    char timestr[1000];
+    char timestr[1000], buf2[MAX_STRING_LENGTH];
     struct tm * lt = localtime(&t);
 #endif
 
@@ -176,10 +176,8 @@ logmesg (const char *fmt, ...)
 
 #ifdef LOG_STDOUT
     strftime(timestr, 1000, "%a %b %d %Y, %T", lt);
-    fprintf(stdout, timestr);
-    fprintf(stdout, ": ");
-    fprintf(stdout, buf);
-    fprintf(stdout, "\r\n");
+    sprintf(buf2, "%s: %s\r\n", timestr, buf);
+    fprintf(stdout, buf2);
 #endif
 }
 
