@@ -1719,16 +1719,14 @@ use TITLE to set your title to pretty much anything of yer choosing.
 
 -1 motd~
 &c _______ _______ _______ _____  
-&c|   |   |       |_     _|     \    &YMessage of the Day&X: &nCRules.
-&c|       |   -   | |   | |  --  |   &cBy &WSatori &con Sun Nov 26, 2001.
+&c|   |   |       |_     _|     \    &YMessage of the Day&X: &n.
+&c|       |   -   | |   | |  --  |   &cBy &WNobody &con&n &XJul 21 2017&n
 &c|__|_|__|_______| |___| |_____/ 
 
 &X-&n=&X-&n=&X-&n=&X-&n=&X-&n=&X-&n=&X-&n=&X-&n=&X-&n=&X-&n=&X-&n=&X-&n=&X-&n=&X-&n=&X-&n=&n-&n=&X-&n=&X-&n=&X-&n=&X-&n=&X-&n=&X-&n=&X-&n=&X-&n=&X-&n=&X-&n=&X-&n=&X-&n=&X-&n=&X-&n=&X-&n=&X-&n=&X-&n=&X-&n=&X-&n=&X-&n=&X-&n=&X-&n=&X-
 &n
-    &R&(IMPORTANT!!&)&n  If your character has apparently disappeared and you'd
-    like it back, tell Satori that he fucked up in archiving you, and you'll
-    be returned to your former self.  Sorry for the inconvenience (and the
-    blinking red text).
+
+    Read &YHELP HINTS&n and &YHELP NEWBIE&n for information on getting started.
 
     Read the rules!  Type &YRULES&n in the game to read them.  Ignorance is
     NOT an excuse.
