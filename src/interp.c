@@ -387,7 +387,7 @@ const struct cmd_type cmd_table[] = {
     {"immtalk", do_immtalk, POS_DEAD, 0, LOG_NORMAL, 1, 0, 0, 1},
     {"imotd", do_imotd, POS_DEAD, HE, LOG_NORMAL, 1, 0, 0, 1},
     {":", do_immtalk, POS_DEAD, 0, LOG_NORMAL, 1, 0, 0, 1},
-    {"ld", do_lose_link, POS_DEAD, 0, LOG_NORMAL, 1, 0, 0, 1},
+    {"ld", do_quit, POS_DEAD, 0, LOG_NORMAL, 1, 0, 0, 1},
     {"nonote", do_nonote, POS_DEAD, L4, LOG_NORMAL, 1, 0, 0, 1},
     {"penalize", do_penalize, POS_DEAD, IM, LOG_ALWAYS, 0, 0, 0, 1},
     {"done", do_done, POS_DEAD, 0, LOG_ALWAYS, 0, 0, 0, 1},

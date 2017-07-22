@@ -1522,8 +1522,9 @@ do_typo (CHAR_DATA * ch, char *argument)
 
 
 void
-do_lose_link (CHAR_DATA * ch, char *argument)
+do_quit (CHAR_DATA * ch, char *argument)
 {
+    send_to_char("Goodbye!\r\n", ch);
     if ( IS_IMMORTAL(ch) )
     {
         save_char_obj(ch);
@@ -1537,20 +1538,6 @@ do_lose_link (CHAR_DATA * ch, char *argument)
 
     if ( ch->desc )
         close_socket(ch->desc);
-}
-
-void
-do_quit (CHAR_DATA * ch, char *argument)
-{
-    if ( !IS_IMMORTAL(ch) )
-    {
-        send_to_char
-            ("No quitting here pal.  If you need to lose link, the command is 'ld'.",
-             ch);
-        return;
-    }
-
-    do_lose_link(ch, "");
 }
 
 void
