@@ -6,6 +6,28 @@ wizlog (CHAR_DATA * ch, OBJ_DATA * obj, long flag, long flag_skip,
 wiznet (char *string, CHAR_DATA * ch, OBJ_DATA * obj, long flag,
        long flag_skip, int min_level)
 
+
+example:
+wiznet("Sample message abpout nothing.\r\n",  to_char, an_obj, WIZ_ON, NULL, 1)
+                           ^                    ^        ^        ^      ^   ^
+             Message text--/                    |        |        |      |   |
+             Character object (see below)-------/        |        |      |   |
+	     This is an object (normally unused)---------/        |      |   |
+	     This is the flag which determines the level of wiznet/      |   |
+             This is almost never used but will display if this flag !ON /   |
+             This determines he *minimum* level of trust to see this message-/
+
+wiznet() performs act_new on these arguments; typically the following suffices:
+wiznet("Message: $N is a player\r\n", ch, NULL, NULL, WIZ_ON, NULL, 1);
+
+In this example, wiznet() will pull ch->names and insert the character's name
+into the message.  This occurs exactly once in the stock code and isn't
+typically useful since specifying a character in to_char also prevents them
+from seeing the message themselves due to the way wiznet() is coded.
+
+Wiznet performs act_new() (which performs send_to_char()) in order to display
+the message to listeners, and so can take the usual act* formatting.
+
 wizlog will both write the output to the log as well as notifying wiznet
 (wiznet is called from within wizlog).  wizlog also has the advantage
 of allowing one to pass a sprintf-format string along wih objects at
@@ -26,5 +48,5 @@ inserted as appropriate.
 flag_skip may be used to notify even in the event that a listener does not
 have wiznet listening to a specific channel.  The code for this is:
     [...] && (!flag_skip || !IS_SET(d->character->wiznet,flag_skip)) [...]
-For example, if you wish to notify those who do *not* have WIZ_SITES on.
-
+For example, if you wish to notify those who do *not* have WIZ_SITES on,
+for some reason.  This is almost never used in in stock code.
