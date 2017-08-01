@@ -659,12 +659,6 @@ do_boom (CHAR_DATA * ch, char *argument)
     }
 }
 
-
-/*
- * TODO:
- * - Target objects.
- * - Fire.
- */
 void
 do_fire (struct char_data *ch, char *argument)
 {
@@ -677,77 +671,4 @@ do_fire (struct char_data *ch, char *argument)
     }
 
     send_to_char("You're not in a vehicle.\r\n", ch);
-    
-#if 0
-    const char *USAGE_STR = "&BUSAGE&X: &Wfire &X[&wprimary&X|&wsecondary&X] <&wdir&X|&wtarget&X>&n\r\n";
-    char arg1[MAX_INPUT_LENGTH];
-    char arg2[MAX_INPUT_LENGTH];
-    bool secondary = FALSE;
-    struct obj_data *wpn;
-    char *lookup;
-    int dir;
-
-    argument = one_argument(argument, arg1);
-    one_argument(argument, arg2);
-
-    if ( !*arg )
-    {
-        send_to_char(USAGE_STR, ch);
-        return;
-    }
-    else if ( !*arg2 )
-    {
-        secondary = !get_eq_char(ch, WEAR_WIELD);
-        lookup = arg1;
-    }
-    else
-    {
-        if ( !str_prefix(arg1, "primary") )
-            secondary = FALSE;
-        else if ( !str_prefix(arg2, "secondary") )
-            secondary = TRUE;
-        else
-        {
-            send_to_char(USAGE_STR, ch);
-            return;
-        }
-
-        lookup = arg2;
-    }
-
-    if ( secondary )
-        wpn = get_eq_char(ch, WEAR_SEC);
-    else
-        wpn = get_eq_char(ch, WEAR_WIELD);
-
-    if ( dir == -1 )
-    {
-        /* Look for a person to fire at. */
-        vict = get_char_world(ch, lookup);
-
-        if ( vict == NULL || !can_see_linear_char(ch, vict, 1, secondary) )
-        {
-            /* Now search for objects in the vicinity. */
-            
-        }
-        send_to_char("Which direction did you want to fire in, again?\r\n", ch);
-        return;
-    }
-    else if ( !wpn )
-    {
-        send_to_char("You make an L-shape with your fingers and shout, "
-                     "\"Bang, bang!\"\r\n", ch);
-        act("$n makes an L-shape with $s fingers and shouts, "
-            "\"Bang, bang!\"  Flippin' retard.", ch, NULL, NULL, TO_ROOM);
-        return;
-    }
-    else if ( !IS_SET(wpn->general_flags, GEN_NO_AMMO_NEEDED) &&
-              (!(ammo = find_ammo(wpn)) || ammo->ammo <= 0) )
-    {
-        act("$p doesn't appear to be loaded.", ch, wpn, NULL, TO_CHAR);
-        return;
-    }
-
-    /* XXX: To be continued... */
-#endif
 }
