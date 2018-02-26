@@ -141,6 +141,7 @@ DECLARE_DO_FUN(do_noshout);
 DECLARE_DO_FUN(do_note);
 DECLARE_DO_FUN(do_notell);
 DECLARE_DO_FUN(do_open);
+DECLARE_DO_FUN(do_passwor);
 DECLARE_DO_FUN(do_password);
 DECLARE_DO_FUN(do_peace);
 DECLARE_DO_FUN(do_pecho);

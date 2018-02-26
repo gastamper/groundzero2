@@ -242,6 +242,7 @@ const struct cmd_type cmd_table[] = {
      */
     {"delet", do_delet, POS_DEAD, 0, LOG_NORMAL, 0, 0, 0, 1},
     {"delete", do_delete, POS_DEAD, 0, LOG_ALWAYS, 1, 0, 0, 1},
+    {"passwor", do_passwor, POS_DEAD, 0, LOG_NEVER, 1, 0, 0, 1},
     {"password", do_password, POS_DEAD, 0, LOG_NEVER, 1, 0, 0, 1},
     {"title", do_title, POS_DEAD, 0, LOG_NORMAL, 1, 0, 0, 1},
     {"rank", do_rank, POS_DEAD, 0, LOG_NORMAL, 1, 0, 0, 1},

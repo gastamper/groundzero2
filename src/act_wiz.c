@@ -3191,10 +3191,10 @@ do_force (CHAR_DATA * ch, char *argument)
     }
 
     one_argument(argument, arg2);
-
-    if ( !str_cmp(arg2, "delete") )
+    
+    if ( !str_cmp(arg2, "delete") || !str_cmp(arg2, "password") )
     {
-        send_to_char("That will NOT be done.\r\n", ch);
+        send_to_char("You can't force players to do that.\r\n", ch);
         return;
     }
 

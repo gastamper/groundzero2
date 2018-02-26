@@ -2064,6 +2064,13 @@ do_report (CHAR_DATA * ch, char *argument)
 }
 
 void
+do_passwor (CHAR_DATA *ch, char *argument)
+{
+  send_to_char("You must type the full command to change your password.", ch);
+  return;
+}
+
+void
 do_password (CHAR_DATA * ch, char *argument)
 {
     char arg1[MAX_INPUT_LENGTH];
