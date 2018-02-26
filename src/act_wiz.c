@@ -1720,19 +1720,21 @@ do_purge (CHAR_DATA * ch, char *argument)
 
         if ( ch == victim )
         {
-            send_to_char("Ho ho ho.\r\n", ch);
+            send_to_char("Purging yourself is a bad idea.\r\n", ch);
             return;
         }
 
         if ( get_trust(ch) <= get_trust(victim) )
         {
-            send_to_char("Maybe that wasn't a good idea...\r\n", ch);
+            send_to_char("You cannot purge higher level immortals.\r\n", ch);
             sprintf(buf, "%s tried to purge you!\r\n", ch->names);
             send_to_char(buf, victim);
             return;
         }
 
         act("$n disintegrates $N.", ch, 0, victim, TO_NOTVICT);
+	sprintf(buf, "You purged %s.\r\n", victim->names);
+	send_to_char(buf, ch);
 
         save_char_obj(victim);
         d = victim->desc;
@@ -1745,10 +1747,14 @@ do_purge (CHAR_DATA * ch, char *argument)
 
         return;
     }
-    else if (victim->in_room == store_area || victim == enforcer ||
-             victim->in_room == graveyard_area)
+    else if (victim->in_room == store_area || victim->in_room == graveyard_area)
     {
-        send_to_char("No.\r\n", ch);
+        send_to_char("Victim is in a protected area.\r\n", ch);
+        return;
+    }
+    else if (victim == enforcer)
+    {
+	send_to_char("You cannot purge enforcers.\r\n", ch);
         return;
     }
 
