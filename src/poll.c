@@ -286,7 +286,7 @@ do_poll (struct char_data *ch, char *argument)
         }
         else if ( RANK(ch) != RANK_JOSH && RANK(ch) < RANK_NOVICE )
         {
-            send_to_char("You need at least a novice.\r\n", ch);
+            send_to_char("You must be ranked at least a novice to vote.\r\n", ch);
             return;
         }
 
