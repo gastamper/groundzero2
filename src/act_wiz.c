@@ -230,7 +230,10 @@ do_outfit (CHAR_DATA * ch, char *argument)
     one_argument(argument, arg);
 
     if ( !*arg )
+    {
+	send_to_char("You must specify a player to provide items to.\r\n", ch);
         targ = ch;
+    }
     else
     {
         if ( !(targ = get_char_world(ch, arg)) )
