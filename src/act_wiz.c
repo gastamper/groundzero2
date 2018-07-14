@@ -326,7 +326,7 @@ do_nochannels (CHAR_DATA * ch, char *argument)
 
     if ( get_trust(victim) >= get_trust(ch) )
     {
-        send_to_char("You failed.\r\n", ch);
+        send_to_char("You cannot do that to higher level characters.\r\n", ch);
         return;
     }
 
@@ -410,6 +410,11 @@ do_bringon (CHAR_DATA * ch, char *argument)
 
     one_argument(argument, arg);
 
+    if (!*arg)
+    {
+        send_to_char("Specify a character to spawn.\r\n", ch);
+        return;
+    }
     if ( char_file_active(arg) )
     {
         send_to_char("That character is in the game at the moment.  Trans "
