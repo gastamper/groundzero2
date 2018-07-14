@@ -1402,7 +1402,7 @@ can_see (CHAR_DATA * ch, CHAR_DATA * victim)
           (ch->in_room->level || ch->ld_behavior == BEHAVIOR_GUARD)) )
         return TRUE;
 
-    if ( !IS_NPC(victim )
+    if ( !IS_NPC(victim)
         && IS_SET(victim->act, PLR_WIZINVIS)
         && get_trust(ch) < victim->invis_level)
         return FALSE;
