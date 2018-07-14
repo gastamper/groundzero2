@@ -516,29 +516,41 @@ do_undeny (CHAR_DATA * ch, char *argument)
         send_to_char("Undeny whom?\r\n", ch);
         return;
     }
-
-    if ( (victim = get_char_world(ch, arg)) == NULL )
+    if ( (victim = get_char_world(ch, arg)) != NULL )
     {
-        send_to_char("They aren't here.\r\n", ch);
+        if ( IS_NPC(victim) )
+        {
+            send_to_char("Not on NPC's.\r\n", ch);
+            return;
+        }
+    }
+
+    if ( char_file_active(arg) )
+    {
+        send_to_char("That character is not denied.\r\n", ch);
         return;
     }
 
-    if ( IS_NPC(victim) )
+    if ( (victim = load_char_obj(NULL, arg)) == NULL )
     {
-        send_to_char("Not on NPC's.\r\n", ch);
+        send_to_char("That character is not in the player files.\r\n", ch);
         return;
     }
 
+    victim->next = char_list;
+    char_list = victim;
+    char_to_room(victim, ch->in_room);
     if ( IS_SET(victim->act, PLR_DENY) )
     {
         REMOVE_BIT(victim->act, PLR_DENY);
-        send_to_char("You are no longer denied access.\r\n", victim);
-        send_to_char("OK.\r\n", ch);
         save_char_obj(victim);
+	victim->next_extract = extract_list;
+	extract_list = victim;
     }
     else
     {
-        send_to_char("That character is not denied.\r\n", ch);
+        send_to_char("Loaded character, but they're not denied.\r\n", ch);
+	logmesg("Error: loaded an undenied character in do_undeny.\r\n");
     }
 
     return;
