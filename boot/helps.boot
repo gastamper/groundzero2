@@ -30,22 +30,20 @@ Originally developed at:
 -1 GROUNDZERO GZII CODE GZ2 GROUND0 G0~
 
 The current administrative core:
+	  Whoever is adminning at the moment.
 
-          Satori     satori@gz,malawar.net        owner, programmer
-          Tireg      tireg@gz.malawar.net                   builder
-          Lalmec     lalmec@gz.malawar.net               programmer
-          Prajapati              -                     scenario god
-          Louman     louman@gz.malawar.net              help, admin
-          Morpheaus              -                         a person
-          Flagimm                -               balance/ideas/logs
+Below are the previous administrators, honorary and periperhal:
 
-GZ2 has a few honorary and peripheral administrators, too:
-
+          Satori     / owner, programmer
+          Tireg      / builder
+          Lalmec     / programmer
+          Prajapati  / scenario god
+          Louman     / help, admin
+          Morpheaus  / a person
+          Flagimm    / balance/ideas/logs
           Randar     / Creator of Ground Zero.
           Euthenasia / Original owner of Ground Zero 2.
 
-If you have any problem with Ground Zero 2, you can e-mail Satori at
-satori@groundzero.wox.org.  Please allow a few days for a reply.
 ~
 
 
@@ -1708,10 +1706,10 @@ use TITLE to set your title to pretty much anything of yer choosing.
 .
 &n           _______ _______ 
           |   _   |   _   |  &RGround Zero Ii &X-&R The Second Coming&n
-          |.  |___|___|   |  TELNET: &cgz.malawar.net 6666&n
-          |.  |   |/  ___/   WEB SITE: &chttp://gz.malawar.net/ &n
+          |.  |___|___|   |  TELNET: &groundzero2.org 4000&n
+          |.  |   |/  ___/   WEB SITE: &cNone!&n
           |:  1   |:  1  \   Administrative Staff:
-          |::.. . |::.. . |  Satori, Tireg, Lalmec, Prajapati
+          |::.. . |::.. . |  Nobody!
           `-------`-------'
 
 ~
