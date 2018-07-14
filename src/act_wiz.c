@@ -1363,8 +1363,9 @@ do_reboot (CHAR_DATA * ch, char *argument)
             close_socket(d);
         }
     }
-
-    ground0_down = STATUS_REBOOT;
+    // In case of shutdown command, should use STATUS_SHUTDOWN instead
+    if ( !str_cmp(arg, "-X") ) ground0_down = STATUS_SHUTDOWN;
+    else ground0_down = STATUS_REBOOT;
     save_polls();
 }
 
