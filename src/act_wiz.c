@@ -1844,7 +1844,10 @@ do_restore (CHAR_DATA * ch, char *argument)
              vch = vch->next_in_room)
         {
             vch->hit = vch->max_hit;
-            act("$n has restored you.", ch, NULL, vch, TO_VICT);
+	    if ( !can_see(vch, ch) )
+	      act("Someone has restored you.", ch, NULL, vch, TO_VICT);
+	    else 
+	      act("$n has restored you.", ch, NULL, vch, TO_VICT);
         }
 
         send_to_char("Room restored.\r\n", ch);
@@ -1864,8 +1867,13 @@ do_restore (CHAR_DATA * ch, char *argument)
                 continue;
 
             victim->hit = victim->max_hit;
-            if ( victim->in_room != NULL )
-                act("$n has restored you.", ch, NULL, victim, TO_VICT);
+            if ( victim->in_room != NULL ) 
+	    {
+		if ( !can_see(victim, ch) )
+		  act("Someone has restored you.", ch, NULL, victim, TO_VICT);
+                else 
+	          act("$n has restored you.", ch, NULL, victim, TO_VICT);
+	    }
         }
         send_to_char("All active players restored.\r\n", ch);
         return;
@@ -1877,8 +1885,12 @@ do_restore (CHAR_DATA * ch, char *argument)
         return;
     }
 
+    /* single target */
     victim->hit = victim->max_hit;
-    act("$n has restored you.", ch, NULL, victim, TO_VICT);
+    if ( !can_see(victim, ch) )
+      act("Someone has restored you.", ch, NULL, victim, TO_VICT);
+    else 
+      act("$n has restored you.", ch, NULL, victim, TO_VICT);
     send_to_char("Ok.\r\n", ch);
     return;
 }
