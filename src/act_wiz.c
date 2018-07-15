@@ -3878,7 +3878,7 @@ do_badpop (CHAR_DATA * ch, char *argument)
     one_argument(argument, arg);
     if ( arg[0] == '\0' )
     {
-        send_to_char("Curse whom?\r\n", ch);
+        send_to_char("Cause who to suffer from unlucky teleports?\r\n", ch);
         return;
     }
 
@@ -3890,7 +3890,7 @@ do_badpop (CHAR_DATA * ch, char *argument)
 
     if ( IS_NPC(victim) )
     {
-        send_to_char("Not on NPC's.\r\n", ch);
+        send_to_char("Not on NPCs.\r\n", ch);
         return;
     }
 
@@ -3920,38 +3920,38 @@ do_addlag (CHAR_DATA * ch, char *argument)
 
     if ( arg1[0] == '\0' )
     {
-        send_to_char("addlag to who?", ch);
+        send_to_char("Add artificial lag to who?\r\n", ch);
         return;
     }
     if ( (victim = get_char_world(ch, arg1)) == NULL )
     {
-        send_to_char("They're not here.", ch);
+        send_to_char("That character isn't online.\r\n", ch);
         return;
     }
 
     if ( victim->trust >= ch->trust )
     {
         send_to_char
-            ("Sorry, you can only addlag to someone that is below your trust.\r\n",
+            ("You can only addlag to someone that is below your trust.\r\n",
              ch);
         return;
     }
 
     if ( (x = atoi(argument)) <= 0 )
     {
-        send_to_char("That makes a LOT of sense.", ch);
+        send_to_char("Lag cannot be less than or equal to zero.\r\n", ch);
         return;
     }
 
     if ( x > 128 )
     {
-        send_to_char("There's a limit to cruel and unusual punishment",
+        send_to_char("Added lag cannot exceed 128.\r\n",
                      ch);
         return;
     }
 
     WAIT_STATE(victim, x);
-    send_to_char("Adding lag now...", ch);
+    send_to_char("Lag added to target.\r\n", ch);
     return;
 }
 
