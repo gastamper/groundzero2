@@ -1174,6 +1174,10 @@ flash_obj (OBJ_DATA * obj)
 
         if ( IS_NPC(chars_hit) && IS_SET(chars_hit->act, ACT_NO_BLIND) )
             continue;
+	
+	// Don't blind administrators if holylight is set
+	if ( IS_SET(chars_hit->act, PLR_HOLYLIGHT) )
+	    continue;
 
         if ( ((prot_obj = get_eq_char(chars_hit, WEAR_HEAD)) == NULL ) ||
             !IS_SET(prot_obj->general_flags, GEN_ANTI_BLIND))
