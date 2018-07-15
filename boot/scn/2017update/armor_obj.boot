@@ -391,7 +391,7 @@ GEN 0
 EXTRACT 0
 USE 0  
 armor paint camouflage facepaint cans button~
-&n &gElite &RButton&n &gClan&n facepaint~
+&n&gElite &RButton&n &gClan&n facepaint~
 some &Rred&n and &ggreen&n paint lies here.~
 REPOP 95 10-15
 CHSH 1000 1000
