@@ -1678,7 +1678,7 @@ act_bit_name (int act_flags)
     if ( act_flags & PLR_REPOP )
         strcat(buf, " basepop");
     if ( act_flags & PLR_BADPOP )
-        strcat(buf, " unlucky_pop");
+        strcat(buf, " badpop");
     if ( act_flags & PLR_RANKONLY )
         strcat(buf, " rankonly");
     if ( act_flags & PLR_NONOTE )
