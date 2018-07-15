@@ -1,7 +1,9 @@
 # groundzeromud
 
 Ground Zero was a MUD (multi-user dungeon) which was popular in the late 90s.
-The goals of this project are as follows:
+[![Screenshot 1](https://i.imgur.com/gA5Hkxt.png)](https://i.imgur.com/ZKWg4MQ.png)  
+
+#### The goals of this project:
 1. Fix obvious bugs.
 2. Enforce some standardization in the databases:
     * Keywords on objects should be obvious.
