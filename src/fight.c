@@ -536,11 +536,14 @@ shoot_messages (int shots, CHAR_DATA * ch, CHAR_DATA * victim,
         act(buf, victim, weapon, ch, TO_CHAR);
     }
 
-    if ( shots == 1 )
-        sprintf(buf, "$n &uastaggers&n as $e is &Rhit!&n");
-    else
-        sprintf(buf, "$n &uastaggers&n as $e is &Rhit&n %d times!", shots);
-    act(buf, victim, NULL, ch, TO_ROOM);
+    if ( !test_char_alive(victim) )
+    {
+        if ( shots == 1 )
+            sprintf(buf, "$n &uastaggers&n as $e is &Rhit!&n");
+        else
+            sprintf(buf, "$n &uastaggers&n as $e is &Rhit&n %d times!", shots);
+        act(buf, victim, NULL, ch, TO_ROOM);
+    }
 
     if ( victim->interior )
     {
