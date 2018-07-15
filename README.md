@@ -1,6 +1,6 @@
 # groundzeromud
 
-Ground Zero was a MUD (multi-user dungeon) which was popular in the late 90s.
+Ground Zero was a MUD (multi-user dungeon) which was popular in the late 90s.  
 [![Screenshot 1](https://i.imgur.com/gA5Hkxt.png)](https://i.imgur.com/ZKWg4MQ.png)  
 
 #### The goals of this project:
