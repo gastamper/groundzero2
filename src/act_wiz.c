@@ -232,6 +232,12 @@ do_outfit (CHAR_DATA * ch, char *argument)
     if ( !*arg )
     {
 	send_to_char("You must specify a player to provide items to.\r\n", ch);
+	return;
+    }
+    // The game actually calls do_outfit on any character that logs in, so
+    // it's easiest to juts pass a wonky argument than code around the exception.
+    else if ( !strcmp(arg, "equip_on_login") )
+    {
         targ = ch;
     }
     else
