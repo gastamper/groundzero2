@@ -194,10 +194,25 @@ capitalize (const char *str)
 {
     static char strcap[MAX_STRING_LENGTH];
     int i;
+    bool done = FALSE;
 
+    // Skip any color codes, only capitalize first character thereafter
     for ( i = 0; str[i] != '\0'; i++ )
-        strcap[i] = LOWER(str[i]);
+    {
+	if ( strcap[i] == '&' || strcap[i-1] == '&' )
+	{
+	    strcap[i] = str[i];
+	    continue;
+	}
+	if ( done != TRUE) 
+	{
+	    strcap[i] = UPPER(str[i]);
+	    done = TRUE;
+	}
+	else 
+	     strcap[i] = str[i];
+    }
+
     strcap[i] = '\0';
-    strcap[0] = UPPER(strcap[0]);
     return strcap;
 }
