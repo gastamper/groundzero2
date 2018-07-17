@@ -423,8 +423,7 @@ do_bringon (CHAR_DATA * ch, char *argument)
     }
     if ( char_file_active(arg) )
     {
-        send_to_char("That character is in the game at the moment.  Trans "
-                     "them maybe.\r\n", ch);
+        send_to_char("That character is in the game at the moment.\r\n", ch);
         return;
     }
 
