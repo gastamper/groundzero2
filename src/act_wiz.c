@@ -3531,13 +3531,13 @@ do_noleader (CHAR_DATA * ch, char *argument)
 
     if ( IS_NPC(victim) )
     {
-        send_to_char("Not on NPC's.\r\n", ch);
+        send_to_char("You can't do that to NPCs.\r\n", ch);
         return;
     }
 
     if ( get_trust(victim) >= get_trust(ch) )
     {
-        send_to_char("You failed.\r\n", ch);
+        send_to_char("You can't do that to a higher level character.\r\n", ch);
         return;
     }
 
@@ -3597,7 +3597,6 @@ do_grab (CHAR_DATA * ch, char *argument)
     char arg2[MAX_INPUT_LENGTH];
     char arg3[MAX_INPUT_LENGTH];
 
-    send_to_char(argument, ch);
     argument = one_argument(argument, arg1);
     argument = one_argument(argument, arg2);
     argument = one_argument(argument, arg3);
@@ -3622,7 +3621,7 @@ do_grab (CHAR_DATA * ch, char *argument)
 
     if ( victim->trust >= ch->trust )
     {
-        send_to_char("You Failed.\r\n", ch);
+        send_to_char("You can't do that to higher level characters.\r\n", ch);
         return;
     }
 
