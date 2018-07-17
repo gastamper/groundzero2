@@ -4209,8 +4209,7 @@ do_setscenario (CHAR_DATA * ch, char *argument)
             return;
         }
 
-        send_to_char("Scenario set to " DFLT_SCEN_DIR
-                     " for next boot.\r\n", ch);
+        send_to_char("Scenario set to " DFLT_SCEN_DIR " for next boot.\r\n", ch);
         return;
     }
 
@@ -4257,7 +4256,7 @@ do_listenin (CHAR_DATA * ch, char *argument)
 
     if ( IS_NPC(ch) )
     {
-        send_to_char("No.\r\n", ch);
+        send_to_char("You can't do that to NPCs.\r\n", ch);
         return;
     }
 
@@ -4317,12 +4316,12 @@ do_novote (CHAR_DATA * ch, char *argument)
     }
     else if ( (vict = get_char_world(ch, arg)) == NULL )
     {
-        send_to_char("He or she isn't here.\r\n", ch);
+        send_to_char("No such player online.\r\n", ch);
         return;
     }
     else if ( vict->trust >= ch->trust )
     {
-        send_to_char("You failed.\r\n", ch);
+        send_to_char("You can't do that to higher level characters.\r\n", ch);
         return;
     }
 
@@ -4358,15 +4357,15 @@ do_as (struct char_data *ch, char *argument)
     }
     else if ( (vict = get_char_world(ch, arg)) == NULL )
     {
-        send_to_char("Who's that?\r\n", ch);
+        send_to_char("No such player online\r\n", ch);
         return;
     }
     else if ( vict->trust >= ch->trust )
     {
-        send_to_char("No.\r\n", ch);
+        send_to_char("You can't do that to higher level characters.\r\n", ch);
         return;
     }
-    else if ( !str_prefix(argument, "delete") )
+    else if ( !str_prefix(argument, "delete") || !str_prefix(argument, password) )
     {
         send_to_char("No.\r\n", ch);
         return;
