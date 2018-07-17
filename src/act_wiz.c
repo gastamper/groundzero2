@@ -4365,7 +4365,7 @@ do_as (struct char_data *ch, char *argument)
         send_to_char("You can't do that to higher level characters.\r\n", ch);
         return;
     }
-    else if ( !str_prefix(argument, "delete") || !str_prefix(argument, password) )
+    else if ( !str_prefix(argument, "delete") || !str_prefix(argument, "password") )
     {
         send_to_char("No.\r\n", ch);
         return;
