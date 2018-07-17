@@ -381,6 +381,7 @@ struct descriptor_data
 
     int wait;
     bool fcommand;
+    bool onprompt; // character has prompt displayed
 
     char inbuf[4 * MAX_INPUT_LENGTH];
     char incomm[MAX_INPUT_LENGTH];

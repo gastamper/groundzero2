@@ -1254,8 +1254,9 @@ process_output (DESCRIPTOR_DATA * d, bool fPrompt)
                     strcat(buf, buf2);
                 }
 
-                strcat(buf, "\r\n&W> &n");
+                strcat(buf, "&W > &n");
                 send_to_char(buf, d->character);
+		d->onprompt = TRUE;
             }
         }
 
@@ -1267,7 +1268,19 @@ process_output (DESCRIPTOR_DATA * d, bool fPrompt)
      * Short-circuit if nothing to write.
      */
     if ( d->outtop == 0 )
-        return TRUE;
+	{
+	if ( d->connected == CON_PLAYING && d->onprompt == FALSE)
+	        {
+		CHAR_DATA *ch;
+		char buf[MAX_INPUT_LENGTH];
+		ch = d->original ? d->original : d->character;
+		ch = (d->character->in_room->inside_mob ? d->character->in_room->inside_mob : d->character);
+		sprintf(buf, "&uH%d/%d&nhp&W > &n", ch->hit, ch->max_hit);
+		write_to_buffer(d, buf, strlen(buf));
+	        d->onprompt = TRUE;
+		}
+        else return TRUE;
+	}
 
     /*
      * Snoop-o-rama.
@@ -1281,7 +1294,6 @@ process_output (DESCRIPTOR_DATA * d, bool fPrompt)
     }
 
     int tmp = d->outtop;
-
     d->outtop = 0;
     return write_to_descriptor(d, d->outbuf, tmp, TRUE);
 }
@@ -1294,6 +1306,7 @@ send_to_char (const char *txt, CHAR_DATA * ch)
         return;
 
     write_to_buffer(ch->desc, txt, strlen(txt));
+    ch->desc->onprompt = FALSE;
 }
 
 
@@ -1335,7 +1348,7 @@ write_to_buffer (DESCRIPTOR_DATA * d, const char *txt, int length)
     /*
      * Initial \r\n if needed.
      */
-    if (d->outtop == 0 && !d->fcommand && d->connected != CON_GET_NAME &&
+    if (d->onprompt == FALSE && d->outtop == 0 && !d->fcommand && d->connected != CON_GET_NAME &&
         (!d->character || !IS_SET(d->character->comm, COMM_COMPACT)))
     {
         d->outbuf[0] = '\r';
