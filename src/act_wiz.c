@@ -473,26 +473,26 @@ do_deny (CHAR_DATA * ch, char *argument)
 
     if ( (victim = get_char_world(ch, arg)) == NULL )
     {
-        send_to_char("They aren't here.\r\n", ch);
+        send_to_char("They aren't logged in.\r\n", ch);
         return;
     }
 
     if ( IS_NPC(victim) )
     {
-        send_to_char("Not on NPC's.\r\n", ch);
+        send_to_char("You can't do that to NPCs.\r\n", ch);
         return;
     }
 
     if ( get_trust(victim) >= get_trust(ch) )
     {
-        send_to_char("You failed.\r\n", ch);
+        send_to_char("You can't do that to higher level characters.\r\n", ch);
         return;
     }
 
     if ( !IS_SET(victim->act, PLR_DENY) )
     {
         SET_BIT(victim->act, PLR_DENY);
-        send_to_char("You are denied access!\r\n", victim);
+        send_to_char("You are denied access to the game!\r\n", victim);
         send_to_char("OK.\r\n", ch);
         save_char_obj(victim);
         if ( victim->desc )
@@ -503,6 +503,7 @@ do_deny (CHAR_DATA * ch, char *argument)
     }
     else
     {
+	// This should never happen - by being denied, they can't be online.
         send_to_char("That character is already denied.\r\n", ch);
     }
 
@@ -525,7 +526,7 @@ do_undeny (CHAR_DATA * ch, char *argument)
     {
         if ( IS_NPC(victim) )
         {
-            send_to_char("Not on NPC's.\r\n", ch);
+            send_to_char("You can't do that to NPCs.\r\n", ch);
             return;
         }
     }
