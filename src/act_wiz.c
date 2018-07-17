@@ -3330,7 +3330,6 @@ do_penalize (CHAR_DATA * ch, char *argument)
 //    {
 //        send_to_char("Huh?!\n", ch);
 //        return;
-    }
 
     if ( !arg[0] )
     {
@@ -3913,7 +3912,7 @@ do_addlag (CHAR_DATA * ch, char *argument)
         send_to_char("Add artificial lag to who?\r\n", ch);
         return;
     }
-    if ( (victim = get_char_world(ch, arg1)) == NULL )
+    if ( (victim = get_char_world(ch, arg1)) == NULL || IS_NPC(victim) )
     {
         send_to_char("That character isn't online.\r\n", ch);
         return;
@@ -3995,6 +3994,12 @@ do_ptell (CHAR_DATA * ch, char *argument)
     if ( (victim = get_char_world(ch, arg)) == NULL || IS_NPC(victim) )
     {
         send_to_char("That player isn't online.\r\n", ch);
+        return;
+    }
+
+    if ( victim == ch )
+    {
+        send_to_char("You can't do that.\r\n", ch);
         return;
     }
 
