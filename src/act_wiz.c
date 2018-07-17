@@ -1864,7 +1864,7 @@ do_restore (CHAR_DATA * ch, char *argument)
 
     }
 
-    if ( get_trust(ch) >= MAX_TRUST && !str_cmp(arg, "all") )
+    if ( !str_cmp(arg, "all") )
     {
         /* cure all */
 
