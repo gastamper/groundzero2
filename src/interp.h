@@ -65,7 +65,6 @@ DECLARE_DO_FUN(do_count);
 DECLARE_DO_FUN(do_combine);
 DECLARE_DO_FUN(do_commands);
 DECLARE_DO_FUN(do_commbadge);
-DECLARE_DO_FUN(do_create);
 DECLARE_DO_FUN(do_credits);
 DECLARE_DO_FUN(do_defec);
 DECLARE_DO_FUN(do_defect);

@@ -354,7 +354,7 @@ const struct cmd_type cmd_table[] = {
     {"wiznet", do_wiznet, POS_DEAD, IM, LOG_NORMAL, 1, 0, 0, 1},
     {"for", do_for, POS_DEAD, L2, LOG_ALWAYS, 1, 0, 0, 1},
     {"force", do_force, POS_DEAD, L3, LOG_ALWAYS, 1, 0, 0, 1},
-    {"create", do_create, POS_DEAD, L5, LOG_ALWAYS, 1, 0, 0, 1},
+    {"create", do_oload, POS_DEAD, L5, LOG_ALWAYS, 1, 0, 0, 1},
     {"newlock", do_newlock, POS_DEAD, L2, LOG_ALWAYS, 1, 0, 0, 1},
     {"nochannels", do_nochannels, POS_DEAD, L5, LOG_ALWAYS, 1, 0, 0, 1},
     {"noemote", do_noemote, POS_DEAD, L5, LOG_ALWAYS, 1, 0, 0, 1},

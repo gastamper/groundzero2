@@ -1625,24 +1625,6 @@ do_clone (CHAR_DATA * ch, char *argument)
 
 
 void
-do_create (CHAR_DATA * ch, char *argument)
-{
-    if ( argument[0] == '\0' )
-    {
-        send_to_char("Syntax: create <vnum>\r\n", ch);
-        return;
-    }
-    else
-    {
-        do_oload(ch, argument);
-        return;
-    }
-
-    do_create(ch, "");
-}
-
-
-void
 do_oload (CHAR_DATA * ch, char *argument)
 {
     char arg1[MAX_INPUT_LENGTH], arg2[MAX_INPUT_LENGTH];
