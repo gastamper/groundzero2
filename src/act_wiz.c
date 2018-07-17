@@ -3692,8 +3692,7 @@ do_for (CHAR_DATA * ch, char *argument)
 
     if ( !str_prefix("quit", argument) )
     {
-        send_to_char("Are you trying to crash the MUD or something?\r\n",
-                     ch);
+        send_to_char("Are you trying to crash the MUD or something?\r\n", ch);
         return;
     }
 
@@ -3876,20 +3875,25 @@ do_badpop (CHAR_DATA * ch, char *argument)
 
     if ( IS_NPC(victim) )
     {
-        send_to_char("Not on NPCs.\r\n", ch);
+        send_to_char("You can't do that to NPCs.\r\n", ch);
         return;
     }
+
+    if ( victim->trust >= ch->trust )
+    {
+        send_to_char("You cannot do that to higher level characters.\r\n", ch);
+        return;
+    }
+
 
     if ( !IS_SET(victim->act, PLR_BADPOP) )
     {
         SET_BIT(victim->act, PLR_BADPOP);
-        act("$N now has bad luck with teleports.\r\n", ch, NULL, victim,
-            TO_CHAR);
+        act("$N now has bad luck with teleports.\r\n", ch, NULL, victim, TO_CHAR);
         return;
     }
 
-    act("$N's curse of bad pops has been lifted.\r\n", ch, NULL, victim,
-        TO_CHAR);
+    act("$N's curse of bad pops has been lifted.\r\n", ch, NULL, victim, TO_CHAR);
     REMOVE_BIT(victim->act, PLR_BADPOP);
     return;
 }
