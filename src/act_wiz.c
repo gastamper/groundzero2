@@ -3921,9 +3921,7 @@ do_addlag (CHAR_DATA * ch, char *argument)
 
     if ( victim->trust >= ch->trust )
     {
-        send_to_char
-            ("You can only addlag to someone that is below your trust.\r\n",
-             ch);
+        send_to_char("You can't do that to higher level characters.\r\n", ch);
         return;
     }
 
@@ -3935,8 +3933,7 @@ do_addlag (CHAR_DATA * ch, char *argument)
 
     if ( x > 128 )
     {
-        send_to_char("Added lag cannot exceed 128.\r\n",
-                     ch);
+        send_to_char("Added lag cannot exceed 128.\r\n", ch);
         return;
     }
 
@@ -3995,11 +3992,12 @@ do_ptell (CHAR_DATA * ch, char *argument)
         return;
     }
 
-    if ( (victim = get_char_world(ch, arg)) == NULL )
+    if ( (victim = get_char_world(ch, arg)) == NULL || IS_NPC(victim) )
     {
-        send_to_char("Can't find em...\r\n", ch);
+        send_to_char("That player isn't online.\r\n", ch);
         return;
     }
+
     act_new("&R$n&n answers your prayer '&Y$t&n'", ch, argument, victim,
             TO_VICT, POS_DEAD);
     sprintf(buf, "&R%s&n ptells &r%s&n '&Y%s&n'\r\n", ch->names,
