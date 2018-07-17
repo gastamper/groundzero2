@@ -4254,12 +4254,6 @@ do_listenin (CHAR_DATA * ch, char *argument)
     char arg[MAX_INPUT_LENGTH];
     int i;
 
-    if ( IS_NPC(ch) )
-    {
-        send_to_char("You can't do that to NPCs.\r\n", ch);
-        return;
-    }
-
     argument = one_argument(argument, arg);
 
     if ( !*arg )
