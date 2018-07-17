@@ -34,7 +34,6 @@ DECLARE_DO_FUN (do_enfset);
 DECLARE_DO_FUN (do_force);
 DECLARE_DO_FUN (do_save);
 DECLARE_DO_FUN (do_look);
-DECLARE_DO_FUN (do_force);
 DECLARE_DO_FUN (do_oload);
 DECLARE_DO_FUN (do_ofind);
 DECLARE_DO_FUN (do_help);
@@ -1310,8 +1309,7 @@ do_ofind (CHAR_DATA * ch, char *argument)
 void
 do_shutdow (CHAR_DATA * ch, char *argument)
 {
-    send_to_char("If you really want to, type it all the way out.\r\n",
-                 ch);
+    send_to_char("If you really want to shutdown the game, type it all the way out.\r\n", ch);
     return;
 }
 
@@ -1437,7 +1435,7 @@ do_snoop (CHAR_DATA * ch, char *argument)
 
     if ( get_trust(victim) >= get_trust(ch) )
     {
-        send_to_char("You failed.\r\n", ch);
+        send_to_char("You can't do that to higher level characters.\r\n", ch);
         return;
     }
 
@@ -1459,7 +1457,9 @@ do_snoop (CHAR_DATA * ch, char *argument)
 }
 
 
-
+#if 0
+// do_switch technically works but needs lots of case checking and bugfixing
+// so commenting out until that happens
 void
 do_switch (CHAR_DATA * ch, char *argument)
 {
@@ -1511,6 +1511,7 @@ do_switch (CHAR_DATA * ch, char *argument)
     send_to_char("Ok.\r\n", victim);
     return;
 }
+#endif 
 
 /* trust levels for load and clone */
 
