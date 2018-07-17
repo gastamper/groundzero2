@@ -4035,28 +4035,26 @@ do_nonote (CHAR_DATA * ch, char *argument)
 
     if ( (victim = get_char_world(ch, arg)) == NULL )
     {
-        send_to_char("They aren't here.\r\n", ch);
+        send_to_char("No such player online.\r\n", ch);
         return;
     }
 
     if ( get_trust(victim) >= get_trust(ch) )
     {
-        send_to_char("You failed.\r\n", ch);
+        send_to_char("You can't do that to higher level characters.\r\n", ch);
         return;
     }
 
     if ( IS_SET(victim->act, PLR_NONOTE) )
     {
         REMOVE_BIT(victim->act, PLR_NONOTE);
-        send_to_char("The gods have restored your note priviliges.\r\n",
-                     victim);
+        send_to_char("The gods have restored your note priviliges.\r\n", victim);
         send_to_char("NONOTE removed.\r\n", ch);
     }
     else
     {
         SET_BIT(victim->act, PLR_NONOTE);
-        send_to_char("The gods have revoked your note priviliges.\r\n",
-                     victim);
+        send_to_char("The gods have revoked your note priviliges.\r\n",  victim);
         send_to_char("NONOTE set.\r\n", ch);
     }
 
@@ -4086,7 +4084,7 @@ do_ping (CHAR_DATA * ch, char *argument)
     }
     else if ( (victim = get_char_world(ch, arg)) == NULL )
     {
-        send_to_char("They aren't here.\r\n", ch);
+        send_to_char("No such player online.\r\n", ch);
         return;
     }
     else if ( !victim->desc )
@@ -4132,6 +4130,7 @@ do_savehelps (CHAR_DATA * ch, char *argument)
         fprintf(fp, "%d %s~\n%s~\n\n",
                 pHelp->level, pHelp->keyword, pHelp->text);
     }
+    send_to_char("Done.", ch);
 }
 
 
