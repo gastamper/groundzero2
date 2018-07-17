@@ -3334,13 +3334,13 @@ do_penalize (CHAR_DATA * ch, char *argument)
 
     if ( !arg[0] )
     {
-        send_to_char("USAGE: penalize <character name>\n", ch);
+        send_to_char("USAGE: penalize <character name>\r\n", ch);
         return;
     }
 
     if ( (vch = get_char_world(NULL, arg)) == NULL )
     {
-        send_to_char("They aren't here.\n", ch);
+        send_to_char("They aren't here.\r\n", ch);
         return;
     }
 
@@ -3352,8 +3352,7 @@ do_penalize (CHAR_DATA * ch, char *argument)
 
     if ( IS_NPC(vch) )
     {
-        send_to_char("If mobs are causing problems, penalizing them won't "
-                     "help.\n", ch);
+        send_to_char("If mobs are causing problems, penalizing them won't help.\r\n", ch);
         return;
     }
 
@@ -3361,12 +3360,12 @@ do_penalize (CHAR_DATA * ch, char *argument)
     if ( enforcer && (enforcer->desc) )
         if ( !arg[0] )
         {
-            send_to_char("The enforcer position is already being used.\n"
-                         "'penalize <name> f' to kick them out.\n", ch);
+            send_to_char("The enforcer position is already being used.\r\n"
+                         "'penalize <name> f' to kick them out.\r\n", ch);
             return;
         }
 
-    sprintf(log_buf, "%s ENTERS PENAL mode for %s.\n", ch->names,
+    sprintf(log_buf, "%s ENTERS PENAL mode for %s.", ch->names,
             vch->names);
     logmesg(log_buf);
     wiznet(log_buf, NULL, NULL, WIZ_ON, 0, 1);
@@ -3376,10 +3375,10 @@ do_penalize (CHAR_DATA * ch, char *argument)
     {
         CHAR_DATA *tmp;
 
-        sprintf(log_buf, "Old enforcer %s is ousted for %s.\n",
+        sprintf(log_buf, "Old enforcer %s is ousted for %s.",
                 enforcer->names, ch->names);
         logmesg(log_buf);
-        act("$n takes over the enforcer position.\n", ch, NULL, enforcer,
+        act("$n takes over the enforcer position.\r\n", ch, NULL, enforcer,
             TO_VICT);
         tmp = enforcer->desc->original;
         tmp->desc = enforcer->desc;
@@ -3405,8 +3404,7 @@ do_penalize (CHAR_DATA * ch, char *argument)
     /* change communications to match */
     enforcer->comm = ch->comm;
     do_look(enforcer, "auto");
-    send_to_char("You are now in penal mode.  'Done' will return you to the "
-                 "game.\n", enforcer);
+    send_to_char("You are now in penal mode.  'Done' will return you to the game.\r\n", enforcer);
 }
 
 void
@@ -3416,11 +3414,11 @@ do_done (CHAR_DATA * ch, char *argument)
 
     if ( ch != enforcer )
     {
-        send_to_char("Done???  You aren't doing anything . . .\n", ch);
+        send_to_char("Huh?!\r\n", ch);
         return;
     }
 
-    sprintf(log_buf, "%s LEAVES PENAL mode.\n", ch->desc->original->names);
+    sprintf(log_buf, "%s LEAVES PENAL mode.", ch->desc->original->names);
     logmesg(log_buf);
     tmp = enforcer->desc->original;
     tmp->desc = enforcer->desc;
@@ -3430,7 +3428,7 @@ do_done (CHAR_DATA * ch, char *argument)
     if ( tmp->trust == 1 )
         tmp->trust = 0;
     do_look(tmp, "auto");
-    send_to_char("You return to the game.\n", tmp);
+    send_to_char("You return to the game.\r\n", tmp);
 }
 
 /*
