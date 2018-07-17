@@ -1773,6 +1773,7 @@ do_trust (CHAR_DATA * ch, char *argument)
 {
     char arg1[MAX_INPUT_LENGTH];
     char arg2[MAX_INPUT_LENGTH];
+    char buf[100];
     CHAR_DATA *victim;
     int level;
 
@@ -1793,7 +1794,8 @@ do_trust (CHAR_DATA * ch, char *argument)
 
     if ( (level = atoi(arg2)) < 0 || level > MAX_TRUST )
     {
-        send_to_char("Level must be 0 (reset) or 1 to 10.\r\n", ch);
+	sprintf(buf, "Level must be 0 (reset) or between 1 and %d.\r\n", MAX_TRUST);
+        send_to_char(buf, ch);
         return;
     }
 
@@ -1804,7 +1806,7 @@ do_trust (CHAR_DATA * ch, char *argument)
     }
     if ( ch->trust <= victim->trust && ch != victim )
     {
-        send_to_char("You can only lower yourself's trust.\r\n", ch);
+        send_to_char("You can only lower your own trust.\r\n", ch);
         return;
     }
 
@@ -1826,6 +1828,9 @@ do_trust (CHAR_DATA * ch, char *argument)
     }
 
     victim->trust = level;
+    sprintf(buf, "%s has set trust of %s to %d.", ch->names, victim->names, level);
+    logmesg(buf);
+    wiznet(buf, NULL, NULL, WIZ_ON, 0, 1);
     return;
 }
 
