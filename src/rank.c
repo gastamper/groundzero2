@@ -51,7 +51,7 @@ static int ratReq[RANK_MAX] = {
 
 const char *ranks[RANK_MAX] = {
     "&cJOSH",
-    "",
+    "&YNEWBIE",
     "&BNOVICE",
     "&XMERC",
     "&GHUNTER",

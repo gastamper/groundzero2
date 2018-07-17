@@ -53,6 +53,8 @@ char *const where_name[] = {
     "<held>              "
 };
 
+/* for who ranks */
+extern const char *ranks[RANK_MAX];
 
 /* for do_count */
 int max_on = 0;
@@ -1544,17 +1546,6 @@ do_rank (CHAR_DATA * ch, char *argument)
     }
 }
 
-
-const char *who_ranks[RANK_MAX] = {
-    "&cJOSH",
-    "",
-    "&BNOVICE",
-    "&XMERC",
-    "&GHUNTER",
-    "&RBADASS"
-};
-
-
 char *
 wholine (CHAR_DATA * who, bool justRank, bool fullTitle)
 {
@@ -1573,8 +1564,8 @@ wholine (CHAR_DATA * who, bool justRank, bool fullTitle)
         j = sprintf(who_buf, "                %s%*c %s%*c  ",
                     team_table[who->team].who_name,
                     (8 - str_len(team_table[who->team].who_name)), ' ',
-                    who_ranks[RANK(who)],
-                    (7 - str_len(who_ranks[RANK(who)])), ' ');
+                    ranks[RANK(who)],
+                    (7 - str_len(ranks[RANK(who)])), ' ');
     }
     else
     {
@@ -1582,8 +1573,8 @@ wholine (CHAR_DATA * who, bool justRank, bool fullTitle)
                     who->kills, who->deaths,
                     team_table[who->team].who_name,
                     (8 - str_len(team_table[who->team].who_name)), ' ',
-                    who_ranks[RANK(who)],
-                    (7 - str_len(who_ranks[RANK(who)])), ' ');
+                    ranks[RANK(who)],
+                    (7 - str_len(ranks[RANK(who)])), ' ');
     }
 
     if ( who->idle > 16 )
