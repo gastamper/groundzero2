@@ -4033,7 +4033,7 @@ do_nonote (CHAR_DATA * ch, char *argument)
         return;
     }
 
-    if ( (victim = get_char_world(ch, arg)) == NULL )
+    if ( (victim = get_char_world(ch, arg)) == NULL || IS_NPC(victim) )
     {
         send_to_char("No such player online.\r\n", ch);
         return;
