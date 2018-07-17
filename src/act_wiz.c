@@ -4314,7 +4314,7 @@ do_novote (CHAR_DATA * ch, char *argument)
         send_to_char("Novote who?\r\n", ch);
         return;
     }
-    else if ( (vict = get_char_world(ch, arg)) == NULL )
+    else if ( (vict = get_char_world(ch, arg)) == NULL || IS_NPC(vict) )
     {
         send_to_char("No such player online.\r\n", ch);
         return;
