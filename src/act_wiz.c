@@ -591,9 +591,7 @@ do_disconnect (CHAR_DATA * ch, char *argument)
 
     if ( victim->trust > ch->trust )
     {
-        send_to_char
-            ("Sorry, you can only disconnect someone that is below your trust.\r\n",
-             ch);
+        send_to_char("You cannot do that to higher level characters.\r\n\r\n", ch);
         return;
     }
 
@@ -601,17 +599,14 @@ do_disconnect (CHAR_DATA * ch, char *argument)
     {
         if ( d == victim->desc )
         {
-            send_to_char
-                ("Someone picks up your phone, disconnecting you from your\r\n"
-                 "&RAOL&n session and screams &RFUCK YOU!&n\r\r\n\n"
-                 "You've been kicked off the MUD! *GASP*\r\n", victim);
-            close_socket(d);
+            // Probably no worth notifying someone they've been disconnected as such.
+	    close_socket(d);
             send_to_char("Ok.\r\n", ch);
             return;
         }
     }
 
-    logmesg("Do_disconnect: desc not found.");
+    logmesg("Do_disconnect: descriptor not found.");
     send_to_char("Descriptor not found!\r\n", ch);
     return;
 }
