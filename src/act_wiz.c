@@ -2582,7 +2582,7 @@ do_mset (CHAR_DATA * ch, char *argument)
         }
         if ( IS_NPC(victim) )
         {
-            send_to_char("You can't set kills on mobs, duh.\r\n", ch);
+            send_to_char("You can't set kills on mobs.\r\n", ch);
             return;
         }
         victim->kills = value;
@@ -2598,7 +2598,7 @@ do_mset (CHAR_DATA * ch, char *argument)
         }
         if ( IS_NPC(victim) )
         {
-            send_to_char("You can't set deaths on mobs, duh.\r\n", ch);
+            send_to_char("You can't set deaths on mobs.\r\n", ch);
             return;
         }
         victim->deaths = value;
@@ -2771,7 +2771,7 @@ do_string (CHAR_DATA * ch, char *argument)
         {
             if ( !IS_NPC(victim) )
             {
-                send_to_char("Not on PC's.\r\n", ch);
+                send_to_char("You can't do that to players.\r\n", ch);
                 return;
             }
 
@@ -2791,7 +2791,7 @@ do_string (CHAR_DATA * ch, char *argument)
         {
             if ( IS_NPC(victim) )
             {
-                send_to_char("Not on NPC's.\r\n", ch);
+                send_to_char("You can't do that to NPCs.\r\n", ch);
                 return;
             }
 
@@ -2803,7 +2803,7 @@ do_string (CHAR_DATA * ch, char *argument)
         {
             if ( !IS_NPC(victim) )
             {
-                send_to_char("Not on PC's.\r\n", ch);
+                send_to_char("You can't do that to players.\r\n", ch);
                 return;
             }
             return;
@@ -2973,7 +2973,7 @@ do_tset (CHAR_DATA * ch, char *argument)
 
     if ( (team = lookup_team(arg1)) == -1 )
     {
-        send_to_char("That team does not exsist.\r\n", ch);
+        send_to_char("That team does not exist.\r\n", ch);
         return;
     }
 
@@ -3002,7 +3002,7 @@ do_tset (CHAR_DATA * ch, char *argument)
         else if ( vict->team != team )
         {
             send_to_char
-                ("Can't set player to leader of team he's not on.\r\n",
+                ("Can't set a player to leader of team they're not on.\r\n",
                  ch);
             return;
         }
@@ -3326,10 +3326,10 @@ do_penalize (CHAR_DATA * ch, char *argument)
        before later giving them an imm if they did well at dealing with
        spammers, etc. */
 //    if ( !is_name(ch->names, "tireg euthenasia lalmec") )
-    if ( 1 )
-    {
-        send_to_char("Huh?!\n", ch);
-        return;
+//    if ( 1 )
+//    {
+//        send_to_char("Huh?!\n", ch);
+//        return;
     }
 
     if ( !arg[0] )
