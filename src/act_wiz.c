@@ -1927,13 +1927,13 @@ do_freeze (CHAR_DATA * ch, char *argument)
 
     if ( IS_NPC(victim) )
     {
-        send_to_char("Not on NPCs.\r\n", ch);
+        send_to_char("You can't do that to NPCs.\r\n", ch);
         return;
     }
 
     if ( get_trust(victim) >= get_trust(ch) )
     {
-        send_to_char("You failed.\r\n", ch);
+        send_to_char("You cannot do that to higher level characters.\r\n", ch);
         return;
     }
 
@@ -1998,7 +1998,7 @@ do_log (CHAR_DATA * ch, char *argument)
 
     if ( IS_NPC(victim) )
     {
-        send_to_char("Not on NPC's.\r\n", ch);
+        send_to_char("You can't do that to NPCs.\r\n", ch);
         return;
     }
 
@@ -2044,7 +2044,7 @@ do_noemote (CHAR_DATA * ch, char *argument)
 
     if ( get_trust(victim) >= get_trust(ch) )
     {
-        send_to_char("You failed.\r\n", ch);
+        send_to_char("You can't do that to higher level characters.\r\n", ch);
         return;
     }
 
@@ -2088,13 +2088,13 @@ do_noshout (CHAR_DATA * ch, char *argument)
 
     if ( IS_NPC(victim) )
     {
-        send_to_char("Not on NPC's.\r\n", ch);
+        send_to_char("You can't do that to NPCs.\r\n", ch);
         return;
     }
 
     if ( get_trust(victim) >= get_trust(ch) )
     {
-        send_to_char("You failed.\r\n", ch);
+        send_to_char("You can't do that to higher level characters.\r\n", ch);
         return;
     }
 
@@ -2138,7 +2138,7 @@ do_notell (CHAR_DATA * ch, char *argument)
 
     if ( get_trust(victim) >= get_trust(ch) )
     {
-        send_to_char("You failed.\r\n", ch);
+        send_to_char("You can't do that to higher level characters.\r\n", ch);
         return;
     }
 
