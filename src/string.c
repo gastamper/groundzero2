@@ -210,7 +210,7 @@ capitalize (const char *str)
 	    done = TRUE;
 	}
 	else 
-	     strcap[i] = str[i];
+            strcap[i] = str[i];
     }
 
     strcap[i] = '\0';
