@@ -4489,7 +4489,7 @@ do_zombies (struct char_data *ch, char *argument)
     }
 
     if ( !count )
-        strcat(buf, "  &YNothing!&n  Hrm...\r\n");
+        strcat(buf, "  &YNothing!&n\r\n");
     else
         sprintf(buf + k, "\r\n%d objects.\r\n", count);
 
@@ -4512,17 +4512,17 @@ do_statfreeze (struct char_data *ch, char *argument)
     }
     else if ( (vict = get_char_world(ch, arg)) == NULL )
     {
-        send_to_char("Ehm?  Who?\r\n", ch);
+        send_to_char("No such player online\r\n", ch);
         return;
     }
     else if ( IS_NPC(vict) )
     {
-        send_to_char("NPC's don't have stats, really.\r\n", ch);
+        send_to_char("You can't do that to NPCs.\r\n", ch);
         return;
     }
     else if ( vict->trust >= ch->trust )
     {
-        send_to_char("No.\r\n", ch);
+        send_to_char("You can't do that to higher level characters.\r\n", ch);
         return;
     }
     else if ( IS_SET(vict->act, PLR_FREEZE_STATS) )
