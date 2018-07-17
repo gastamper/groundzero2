@@ -824,7 +824,7 @@ close_socket (DESCRIPTOR_DATA * dclose)
             if ( (ch->in_room->level < 0) && !IS_IMMORTAL(ch ) &&
                 !ch->in_room->interior_of)
             {
-                logmesg("Transporting the character.");
+                logmesg("Removing the character %s from environment.", ch->names);
                 do_teleport(ch, "");
             }
         }
