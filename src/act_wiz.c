@@ -4044,6 +4044,12 @@ do_nonote (CHAR_DATA * ch, char *argument)
         return;
     }
 
+    if ( victim == ch )
+    {
+        send_to_char("You can't do that.\r\n", ch);
+        return;
+    }
+
     if ( get_trust(victim) >= get_trust(ch) )
     {
         send_to_char("You can't do that to higher level characters.\r\n", ch);
@@ -4092,6 +4098,13 @@ do_ping (CHAR_DATA * ch, char *argument)
         send_to_char("No such player online.\r\n", ch);
         return;
     }
+
+    if ( victim == ch )
+    {
+        send_to_char("You can't do that.\r\n", ch);
+        return;
+    }
+
     else if ( !victim->desc )
     {
         send_to_char("It must have a connection.\r\n", ch);
@@ -4318,6 +4331,13 @@ do_novote (CHAR_DATA * ch, char *argument)
         send_to_char("No such player online.\r\n", ch);
         return;
     }
+
+    if ( vict == ch )
+    {
+        send_to_char("You can't do that.\r\n", ch);
+        return;
+    }
+
     else if ( vict->trust >= ch->trust )
     {
         send_to_char("You can't do that to higher level characters.\r\n", ch);
@@ -4359,11 +4379,19 @@ do_as (struct char_data *ch, char *argument)
         send_to_char("No such player online\r\n", ch);
         return;
     }
+
+    else if ( vict == ch )
+    {
+        send_to_char("You can't do that.\r\n", ch);
+        return;
+    }
+
     else if ( vict->trust >= ch->trust )
     {
         send_to_char("You can't do that to higher level characters.\r\n", ch);
         return;
     }
+    
     else if ( !str_prefix(argument, "delete") || !str_prefix(argument, "password") )
     {
         send_to_char("No.\r\n", ch);
@@ -4514,6 +4542,11 @@ do_statfreeze (struct char_data *ch, char *argument)
         send_to_char("No such player online\r\n", ch);
         return;
     }
+    else if ( vict == ch )
+    {
+        send_to_char("You can't do that to yourself.\r\n", ch);
+        return;
+    }
     else if ( IS_NPC(vict) )
     {
         send_to_char("You can't do that to NPCs.\r\n", ch);
@@ -4549,9 +4582,7 @@ do_slay (CHAR_DATA * ch, char *argument)
     {
         if ( vict->trust > ch->trust )
         {
-            send_to_char
-                ("Yea right pal.  Slay someone less than your trust level.\r\n",
-                 ch);
+            send_to_char("Yea right pal.  Slay someone less than your trust level.\r\n", ch);
             return;
         }
 
@@ -4696,7 +4727,7 @@ do_rename (CHAR_DATA * ch, char *argument)
     }
     else if ( get_trust(ch) <= get_trust(vict) )
     {
-        send_to_char("You failed.\r\n", ch);
+        send_to_char("You can't do that to higher level characters.\r\n", ch);
         return;
     }
 
@@ -4754,7 +4785,7 @@ do_topology (CHAR_DATA * ch, char *argument)
 
     ptr = buf;
     ptr +=
-        sprintf(buf, "Topology of Level %d\r\n\r\n ", lvl->level_number);
+        sprintf(buf, "Topology of level %d\r\n\r\n ", lvl->level_number);
 
     /* Draw very top of topological map. */
     for ( x = 0; x < lvl->x_size; x++ )
@@ -4875,12 +4906,17 @@ do_dub (struct char_data *ch, char *argument)
     }
     else if ( !(vict = get_char_world(ch, arg)) )
     {
-        send_to_char("Who's that?\r\n", ch);
+        send_to_char("No such player online\r\n", ch);
         return;
+    }
+    else if ( vict == ch )
+    {
+	send_to_char("You can't do that.\r\n", ch);
+	return;
     }
     else if ( vict->trust >= ch->trust )
     {
-        send_to_char("No.\r\n", ch);
+        send_to_char("You can't do that to higher level characters.\r\n", ch);
         printf_to_char(vict, "%s tried to dub you.\r\n", ch->names);
         return;
     }
@@ -4903,12 +4939,12 @@ do_whack (struct char_data *ch, char *argument)
 
     if ( !*arg )
     {
-        send_to_char("&WUsage&X: &cWHACK &X<&nvictim&X>\r\n", ch);
+        send_to_char("&WUsage&X: '&cWHACK &X<&nvictim&X>' to delete someone.\r\n", ch);
         return;
     }
     else if ( !(vict = get_char_world(ch, arg)) )
     {
-        send_to_char("Who's that?\r\n", ch);
+        send_to_char("No such player online.\r\n", ch);
         return;
     }
     else if ( vict == ch )
@@ -4923,7 +4959,7 @@ do_whack (struct char_data *ch, char *argument)
     }
     else if ( vict->trust >= ch->trust )
     {
-        send_to_char("No.\r\n", ch);
+        send_to_char("You can't do that to higher level characters.\r\n", ch);
         printf_to_char(vict, "%s tried to whack you.\r\n", ch->names);
         return;
     }
