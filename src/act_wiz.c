@@ -590,7 +590,7 @@ do_disconnect (CHAR_DATA * ch, char *argument)
 
     if ( victim->trust > ch->trust )
     {
-        send_to_char("You cannot do that to higher level characters.\r\n\r\n", ch);
+        send_to_char("You cannot do that to higher level characters.\r\n", ch);
         return;
     }
 
@@ -2413,7 +2413,7 @@ do_newlock (CHAR_DATA * ch, char *arg)
 		ch->names);
 	return;
 	}
-    sprintf(buf, "USAGE: newlock <on|off>\r\n\r\n"
+    sprintf(buf, "USAGE: newlock <on|off>\r\n"
 		 "&YNewlock is currently: %s&n\r\n", 
 		(newlock) ? "on" : "off");
     send_to_char(buf, ch);
@@ -4605,7 +4605,7 @@ do_slay (CHAR_DATA * ch, char *argument)
         char_death(vict, "slayed");
     }
     else
-        send_to_char("They aren't here.\n\r", ch);
+        send_to_char("They aren't here.\r\n", ch);
 }
 
 
