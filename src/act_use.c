@@ -348,7 +348,7 @@ evac_char (struct char_data *ch, struct obj_data *obj, char *argument)
          ch->in_room->interior_of->item_type == ITEM_TEAM_ENTRANCE) ||
         ch->in_room == safe_area)
     {
-        send_to_char("Radio signal is too weak here.\r\n", ch);
+        send_to_char("The radio signal is too weak here.\r\n", ch);
         return 0;
     }
 
@@ -413,15 +413,15 @@ evac_char (struct char_data *ch, struct obj_data *obj, char *argument)
         }
         else
         {
-            send_to_char
-                ("The transports couldn't lock on to that person.\n\r",
-                 ch);
+            send_to_char("The transports couldn't lock on to that person.\n\r", ch);
             return 0;
         }
     }
-
-    send_to_char("You must specify where you want to go in the form x y "
-                 "level, or if you're a hunter, the person.\n\r", ch);
+    if ( RANK(ch) >= RANK_HUNTER )
+        send_to_char("You must specify where you want to go in the form x y "
+                 "level, or specify the person you'd like transport to.\n\r", ch);
+    else
+        send_to_char("You must specify where you want to go in the form x y level.\r\n", ch);
     return 0;
 }
 
