@@ -34,9 +34,13 @@ show_top_list (CHAR_DATA * ch, TOP_DATA * topv, size_t sz)
 
     for ( i = 0; i < sz; i++ )
     {
-        sprintf(buf, "%2d. [&Y%d&n] &R%s&n\r\n", i + 1, topv[i].val,
+        if ( topv[i].val != 0 )
+        {
+            sprintf(buf, "%2d. [&Y%d&n] &R%s&n\r\n", i + 1, topv[i].val,
                 topv[i].name);
-        send_to_char(buf, ch);
+            send_to_char(buf, ch);
+        }
+        else break;
     }
 }
 
