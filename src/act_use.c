@@ -195,7 +195,7 @@ do_use (struct char_data *ch, char *argument)
             extract_obj(obj, obj->extract_me);
         else
         {
-            sprintf(arg, "\r\n\r\nYou have %d uses left on $p.",
+            sprintf(arg, "\r\r\n\nYou have %d uses left on $p.",
                     obj->ammo);
             act(arg, ch, obj, NULL, TO_CHAR);
         }
@@ -358,9 +358,9 @@ evac_char (struct char_data *ch, struct obj_data *obj, char *argument)
     {
         if ( !dest->level )
         {
-            act("You talk into $p, requesting transport.\n\rAlmost "
+            act("You talk into $p, requesting transport.\r\nAlmost "
                 "instantly, a bright light surrounds you and you are at "
-                "your destination.\n\r", ch, obj, NULL, TO_CHAR);
+                "your destination.\r\n", ch, obj, NULL, TO_CHAR);
             if ( ch->position < POS_STANDING )
                 do_stand(ch, "");
             do_goto(ch, argument);
@@ -380,7 +380,7 @@ evac_char (struct char_data *ch, struct obj_data *obj, char *argument)
         /* To prevent evac booming by low rep chars */
         if ( RANK(ch) < RANK_HUNTER || RANK(evacTo) > RANK(ch) )
         {
-            act("You talk into $p, requesting transport.\n\rUnfortunately, the " "officer on the other side informs you that you are of " "insufficient rank for your request to be honored.", ch, obj, NULL, TO_CHAR);
+            act("You talk into $p, requesting transport.\r\nUnfortunately, the " "officer on the other side informs you that you are of " "insufficient rank for your request to be honored.", ch, obj, NULL, TO_CHAR);
 
             send_to_char
                 ("\r\nThe usual way to use an evac radio is with &cUSE EVAC <x> <y>&n\r\n",
@@ -393,10 +393,10 @@ evac_char (struct char_data *ch, struct obj_data *obj, char *argument)
         {
             int x, y;
 
-            act("You talk into $p, requesting transport.\n\rAlmost "
+            act("You talk into $p, requesting transport.\r\nAlmost "
                 "instantly, a bright light surrounds you.  It flickers "
-                "intently.\n\rYou hear a soft humming sound.  And then "
-                "you are at your destination.\n\rOr, at least, near it.",
+                "intently.\r\nYou hear a soft humming sound.  And then "
+                "you are at your destination.\r\nOr, at least, near it.",
                 ch, obj, NULL, TO_CHAR);
 
             x = evacTo->in_room->x - number_range(-4, 4);
@@ -413,13 +413,13 @@ evac_char (struct char_data *ch, struct obj_data *obj, char *argument)
         }
         else
         {
-            send_to_char("The transports couldn't lock on to that person.\n\r", ch);
+            send_to_char("The transports couldn't lock on to that person.\r\n", ch);
             return 0;
         }
     }
     if ( RANK(ch) >= RANK_HUNTER )
         send_to_char("You must specify where you want to go in the form x y "
-                 "level, or specify the person you'd like transport to.\n\r", ch);
+                 "level, or specify the person you'd like transport to.\r\n", ch);
     else
         send_to_char("You must specify where you want to go in the form x y level.\r\n", ch);
     return 0;
@@ -437,7 +437,7 @@ backup_radio (struct char_data *ch, struct obj_data *obj, char *argument)
          (ch->in_room->interior_of->item_type == ITEM_TEAM_ENTRANCE)) ||
         (ch->in_room == safe_area))
     {
-        send_to_char("Radio signal is too weak here.\n\r", ch);
+        send_to_char("The radio signal is too weak here.\r\n", ch);
         return 0;
     }
 
@@ -505,7 +505,7 @@ heal_tank (struct char_data *ch, char *argument)
         tank->hit = tank->max_hit;
 
     send_to_char
-        ("You use your kit to repair the tank.\n\r", ch);
+        ("You use your kit to repair the tank.\r\n", ch);
     return 1;                   /* worked out */
 }
 
@@ -586,8 +586,7 @@ air_strike (struct char_data *ch, char *argument)
 
     if ( VNUM_NAPALM == -1 || VNUM_FIRE == -1 )
     {
-        send_to_char
-            ("Napalm and fire are currently disabled.\r\n", ch);
+        send_to_char("Napalm and fire are currently disabled.\r\n", ch);
         return 0;
     }
 
@@ -595,7 +594,7 @@ air_strike (struct char_data *ch, char *argument)
          (ch->in_room->interior_of->item_type == ITEM_TEAM_ENTRANCE)) ||
         (ch->in_room == safe_area))
     {
-        send_to_char("Radio signal is too weak here.\n\r", ch);
+        send_to_char("The radio signal is too weak here.\r\n", ch);
         return 0;
     }
     start_room = find_location(ch, argument);
@@ -603,12 +602,12 @@ air_strike (struct char_data *ch, char *argument)
     {
         send_to_char
             ("You must specify which coordinates you want bombed in "
-             "the form x y level.\n\r", ch);
+             "the form x y level.\r\n", ch);
         return 0;
     }
     if ( start_room->level )
     {
-        send_to_char("Lower levels cannot be reached by air strikes.\n\r", ch);
+        send_to_char("Lower levels cannot be reached by air strikes.\r\n", ch);
         return 0;
     }
     if ( (start_x = start_room->x - radius) < 0 )
