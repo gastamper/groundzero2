@@ -159,12 +159,12 @@ do_toss (struct char_data *ch, char *argument)
     {
         if ( (n_dir == DIR_UP) || (n_dir == DIR_DOWN) )
         {
-            send_to_char("You cannot throw an item up or down.\n\r", ch);
+            send_to_char("You cannot throw an item up or down.\r\n", ch);
             return;
         }
         if ( num_squares >= 2 )
         {
-            send_to_char("You &uathrow&n it as hard as you can!\n\r", ch);
+            send_to_char("You &uathrow&n it as hard as you can!\r\n", ch);
             num_squares = 2;
         }
     }
@@ -301,7 +301,7 @@ helper_load (struct char_data *ch, OBJ_DATA * wpn, char *arg, int sec)
 
     if ( IS_SET(wpn->general_flags, GEN_NO_AMMO_NEEDED) )
     {
-        sprintf(buf, "Your %s weapon does not require ammunition\n\r",
+        sprintf(buf, "Your %s weapon does not require ammunition\r\n",
                 (sec ? "secondary" : "primary"));
         send_to_char(buf, ch);
         return;
@@ -312,7 +312,7 @@ helper_load (struct char_data *ch, OBJ_DATA * wpn, char *arg, int sec)
         if ( ammo->ammo > 0 )
         {
             sprintf(buf, "There %s still %d round%s in your %s "
-                    "weapon.\n\r", (ammo->ammo == 1 ? "is" : "are"),
+                    "weapon.\r\n", (ammo->ammo == 1 ? "is" : "are"),
                     ammo->ammo, (ammo->ammo == 1 ? "" : "s"),
                     (sec ? "secondary" : "primary"));
             send_to_char(buf, ch);
@@ -329,7 +329,7 @@ helper_load (struct char_data *ch, OBJ_DATA * wpn, char *arg, int sec)
     {
         if ( !(ammo = find_eq_char(ch, SEARCH_AMMO_TYPE, wpn->ammo_type)) )
         {
-            sprintf(buf, "You don't have ammo for your %s weapon.\n\r",
+            sprintf(buf, "You don't have ammo for your %s weapon.\r\n",
                     (sec ? "secondary" : "primary"));
             send_to_char(buf, ch);
             return;
@@ -339,7 +339,7 @@ helper_load (struct char_data *ch, OBJ_DATA * wpn, char *arg, int sec)
     {
         if ( (ammo = get_obj_carry(ch, arg)) == NULL )
         {
-            send_to_char("You don't have that item.\n\r", ch);
+            send_to_char("You don't have that item.\r\n", ch);
             return;
         }
         else if (ammo->item_type != ITEM_AMMO ||
@@ -360,9 +360,9 @@ helper_load (struct char_data *ch, OBJ_DATA * wpn, char *arg, int sec)
 
     obj_from_char(ammo);
     obj_to_obj(ammo, wpn);
-    act("You &uaload&n $P into $p.\n\r&YCHCK-CHCK . . . CLUNK&n\n\r"
+    act("You &uaload&n $P into $p.\r\n&YCHCK-CHCK . . . CLUNK&n\r\n"
         "&RGrrrrrrrrr. . .&n", ch, wpn, ammo, TO_CHAR);
-    act("$n &ualoads&n $P into $p.\n\r&YCHCK-CHCK . . . CLUNK&n", ch, wpn,
+    act("$n &ualoads&n $P into $p.\r\n&YCHCK-CHCK . . . CLUNK&n", ch, wpn,
         ammo, TO_ROOM);
 }
 
@@ -378,7 +378,7 @@ do_load (struct char_data *ch, char *argument)
 
     if ( !the_weapon && !sec_weapon )
     {
-        send_to_char("You aren't wielding anything to load.\n\r", ch);
+        send_to_char("You aren't wielding anything to load.\r\n", ch);
         return;
     }
 
@@ -393,7 +393,7 @@ get_obj (struct char_data *ch, OBJ_DATA * obj, OBJ_DATA * container)
 {
     if ( !CAN_WEAR(obj, ITEM_TAKE) )
     {
-        send_to_char("You can't take that.\n\r", ch);
+        send_to_char("You can't take that.\r\n", ch);
         return;
     }
 
@@ -424,7 +424,7 @@ do_get (struct char_data *ch, char *argument)
     /* Get type. */
     if ( arg[0] == '\0' )
     {
-        send_to_char("Get what?\n\r", ch);
+        send_to_char("Get what?\r\n", ch);
         return;
     }
 
@@ -460,7 +460,7 @@ do_get (struct char_data *ch, char *argument)
         if ( !found )
         {
             if ( arg[3] == '\0' )
-                send_to_char("I see nothing here.\n\r", ch);
+                send_to_char("I see nothing here.\r\n", ch);
             else
                 act("I see no '$T' here.", ch, NULL, &arg[4], TO_CHAR);
         }
@@ -491,7 +491,7 @@ do_drop (struct char_data *ch, char *argument)
 
     if ( arg[0] == '\0' )
     {
-        send_to_char("Drop what?\n\r", ch);
+        send_to_char("Drop what?\r\n", ch);
         return;
     }
 
@@ -500,7 +500,7 @@ do_drop (struct char_data *ch, char *argument)
         /* 'drop obj' */
         if ( (obj = get_obj_carry(ch, arg)) == NULL )
         {
-            send_to_char("You do not have that item.\n\r", ch);
+            send_to_char("You do not have that item.\r\n", ch);
             return;
         }
 
@@ -550,31 +550,31 @@ do_give (struct char_data *ch, char *argument)
 
     if ( arg1[0] == '\0' || arg2[0] == '\0' )
     {
-        send_to_char("Give what to whom?\n\r", ch);
+        send_to_char("Give what to whom?\r\n", ch);
         return;
     }
 
     if ( (obj = get_obj_carry(ch, arg1)) == NULL )
     {
-        send_to_char("You do not have that item.\n\r", ch);
+        send_to_char("You do not have that item.\r\n", ch);
         return;
     }
 
     if ( obj->wear_loc != WEAR_NONE )
     {
-        send_to_char("You must remove it first.\n\r", ch);
+        send_to_char("You must remove it first.\r\n", ch);
         return;
     }
 
     if ( obj->timer > 0 )
     {
-        send_to_char("It's live, toss it or drop it.\n\r", ch);
+        send_to_char("It's live, toss it or drop it.\r\n", ch);
         return;
     }
 
     if ( (victim = get_char_room(ch, arg2)) == NULL )
     {
-        send_to_char("They aren't here.\n\r", ch);
+        send_to_char("They aren't here.\r\n", ch);
         return;
     }
 
@@ -588,7 +588,7 @@ do_give (struct char_data *ch, char *argument)
 
     if ( count_carried(victim) >= MAX_NUMBER_CARRY - 1 )
     {
-        send_to_char("They can't carry that many things.\n\r", ch);
+        send_to_char("They can't carry that many things.\r\n", ch);
         return;
     }
 
@@ -623,7 +623,7 @@ remove_obj (struct char_data *ch, int iWear, bool fReplace, int wearing)
 
     if ( !wearing && count_carried(ch) >= MAX_NUMBER_CARRY - 1 )
     {
-        send_to_char("You can't carry that many items.\n\r", ch);
+        send_to_char("You can't carry that many items.\r\n", ch);
         return FALSE;
     }
 
@@ -1082,7 +1082,7 @@ donate (struct char_data *ch, OBJ_DATA * obj)
 
     if ( !obj->in_room )
     {
-        send_to_char("This is a bug, please report.\n\r", ch);
+        send_to_char("This is a bug, please report.\r\n", ch);
         logmesg("donate: not in a room");
         bug_object_state(obj);
         return;
@@ -1121,13 +1121,13 @@ do_donate (struct char_data *ch, char *argument)
 
     if ( arg[0] == '\0' )
     {
-        send_to_char("What do you want to donate?\n\r", ch);
+        send_to_char("What do you want to donate?\r\n", ch);
         return;
     }
 
     if ( ch->in_room == safe_area )
     {
-        send_to_char("You cannot donate anything from the safe area.\n\r",
+        send_to_char("You cannot donate anything from the safe area.\r\n",
                      ch);
         return;
     }
@@ -1137,7 +1137,7 @@ do_donate (struct char_data *ch, char *argument)
         obj = get_obj_list(ch, arg, ch->in_room->contents);
         if ( obj == NULL )
         {
-            send_to_char("You don't see that.\n\r", ch);
+            send_to_char("You don't see that.\r\n", ch);
             return;
         }
         donate(ch, obj);
@@ -1157,7 +1157,7 @@ do_donate (struct char_data *ch, char *argument)
             }
         }
         if ( !found )
-            send_to_char("I don't see that here.\n\r", ch);
+            send_to_char("I don't see that here.\r\n", ch);
     }
 }
 
@@ -1173,7 +1173,7 @@ do_remove (struct char_data *ch, char *argument)
 
     if ( arg[0] == '\0' )
     {
-        send_to_char("Remove what?\n\r", ch);
+        send_to_char("Remove what?\r\n", ch);
         return;
     }
 
@@ -1181,7 +1181,7 @@ do_remove (struct char_data *ch, char *argument)
     {
         if ( (obj = get_obj_wear(ch, arg)) == NULL )
         {
-            send_to_char("You do not have that item.\n\r", ch);
+            send_to_char("You do not have that item.\r\n", ch);
             return;
         }
         remove_obj(ch, obj->wear_loc, TRUE, 0);
@@ -1425,14 +1425,14 @@ do_depress (CHAR_DATA * ch, char *argument)
         if ( buttonpresser == ch )
         {
             send_to_char
-                ("You just started it, why on earth would you wanna stop it?\n\r",
+                ("You just started it, why on earth would you wanna stop it?\r\n",
                  ch);
             return;
         }
         if (buttonpresser->team == ch->team &&
             !team_table[ch->team].independent && ch != enforcer)
         {
-            sprintf(buf, "%s%s&n already depressed for your team.\n\r",
+            sprintf(buf, "%s%s&n already depressed for your team.\r\n",
                     team_table[ch->team].namecolor, buttonpresser->names);
             send_to_char(buf, ch);
             return;
@@ -1474,7 +1474,7 @@ do_depress (CHAR_DATA * ch, char *argument)
         }
 
         buttonpresser = ch;
-        sprintf(buf, "Oh no! %s has depressed the button!\n\r", ch->names);
+        sprintf(buf, "Oh no! %s has depressed the button!\r\n", ch->names);
         for ( d = descriptor_list; d; d = d->next )
         {
             if ( d->connected == CON_PLAYING )

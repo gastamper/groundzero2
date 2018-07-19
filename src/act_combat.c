@@ -119,7 +119,7 @@ do_bury (CHAR_DATA * ch, char *argument)
 
     if ( ch->in_room->mine )
     {
-        send_to_char("Oops.  Someone beat you to it!\n\r", ch);
+        send_to_char("Oops.  Someone beat you to it!\r\n", ch);
         extract_obj(obj, obj->extract_me);
         obj = ch->in_room->mine;
 
@@ -200,7 +200,7 @@ do_kill (CHAR_DATA * ch, char *argument)
     else if ( ch->in_room->inside_mob )
     {
         send_to_char
-            ("There is not enough space in here to be violent.\n\r", ch);
+            ("There is not enough space in here to be violent.\r\n", ch);
         return;
     }
 
@@ -209,7 +209,7 @@ do_kill (CHAR_DATA * ch, char *argument)
     if ( !arg[0] )
     {
         send_to_char("You will now not attack anyone unless they attack "
-                     "you.\n\r", ch);
+                     "you.\r\n", ch);
         if ( IS_SET(ch->act, PLR_AGGRO_OTHER) )
             REMOVE_BIT(ch->act, PLR_AGGRO_OTHER);
         ch->fighting = NULL;
@@ -274,7 +274,7 @@ do_kill (CHAR_DATA * ch, char *argument)
 
     if ( IS_SET(ch->act, PLR_AGGRO_OTHER) )
     {
-        send_to_char("Kill all removed.\n\r", ch);
+        send_to_char("Kill all removed.\r\n", ch);
         REMOVE_BIT(ch->act, PLR_AGGRO_OTHER);
     }
 }
@@ -289,7 +289,7 @@ pull_obj (OBJ_DATA * obj, CHAR_DATA * ch, int silent, char *rest)
     if ( !obj->extract_flags )
     {
         if ( !silent )
-            send_to_char("There is no pin on that.\n\r", ch);
+            send_to_char("There is no pin on that.\r\n", ch);
         return;
     }
 
@@ -298,13 +298,13 @@ pull_obj (OBJ_DATA * obj, CHAR_DATA * ch, int silent, char *rest)
         if ( IS_SET(obj->extract_flags, EXTRACT_BURN_ON_EXTRACT) )
         {
             if ( !silent )
-                send_to_char("It has already been lit.\n\r", ch);
+                send_to_char("It has already been lit.\r\n", ch);
             return;
         }
         else
         {
             if ( !silent )
-                send_to_char("It has already been pulled.\n\r", ch);
+                send_to_char("It has already been pulled.\r\n", ch);
             return;
         }
     }
@@ -354,14 +354,14 @@ pull_obj (OBJ_DATA * obj, CHAR_DATA * ch, int silent, char *rest)
     if ( IS_SET(obj->extract_flags, EXTRACT_BURN_ON_EXTRACT) )
     {
         if ( !silent )
-            act("You &ualight&n &uOthe rag&n on " "from $p.\n\rBetter get rid of that pal.  &YLooks to be " "&Rburning&n pretty fast there!&n", ch, obj, NULL, TO_CHAR);
+            act("You &ualight&n &uOthe rag&n on " "from $p.\r\nBetter get rid of that pal.  &YLooks to be " "&Rburning&n pretty fast there!&n", ch, obj, NULL, TO_CHAR);
         act("$n &ualights&n &uOthe rag&n on $p.",
             ch, obj, NULL, TO_ROOM);
     }
     else
     {
         if ( !silent )
-            act("You &uapull&n &uOthe pin&n from $p.\n\rBetter get rid of that " "pal.  &YYou've only got a few seconds!&n", ch, obj, NULL, TO_CHAR);
+            act("You &uapull&n &uOthe pin&n from $p.\r\nBetter get rid of that " "pal.  &YYou've only got a few seconds!&n", ch, obj, NULL, TO_CHAR);
         act("$n &uapulls&n &uOthe pin&n from $p.", ch, obj, NULL, TO_ROOM);
     }
 }
@@ -388,7 +388,7 @@ do_pull (CHAR_DATA * ch, char *argument)
     if ( ch->in_room->inside_mob )
     {
         send_to_char
-            ("There is not enough space in here to be violent.\n\r", ch);
+            ("There is not enough space in here to be violent.\r\n", ch);
         return;
     }
 
@@ -556,21 +556,21 @@ do_explode (CHAR_DATA * ch, char *argument)
     if ( ch->in_room->inside_mob )
     {
         send_to_char
-            ("There is not enough space in here to be violent.\n\r", ch);
+            ("There is not enough space in here to be violent.\r\n", ch);
         return;
     }
 
     if ( ch->hit < ch->max_hit && ch->trust == 0 )
     {
         send_to_char
-            ("You must be at full health to use this command.\n\r", ch);
+            ("You must be at full health to use this command.\r\n", ch);
         return;
     }
 
     act("$n activates a small device that causes every item in his inventory " "to &REXPLODE&n!", ch, NULL, NULL, TO_ROOM);
     send_to_char
         ("You activate your self destruct device, setting off every "
-         "explosive item in your inventory!\n\r", ch);
+         "explosive item in your inventory!\r\n", ch);
 
     for ( obj = ch->carrying; obj; obj = next_obj )
     {
@@ -620,7 +620,7 @@ do_boom (CHAR_DATA * ch, char *argument)
     if ( ch->in_room->inside_mob )
     {
         send_to_char
-            ("There is not enough space in here to be violent.\n\r", ch);
+            ("There is not enough space in here to be violent.\r\n", ch);
         return;
     }
     else if ( !IS_IMMORTAL(ch) )
