@@ -30,8 +30,6 @@ show_top_list (CHAR_DATA * ch, TOP_DATA * topv, size_t sz)
     char buf[MAX_STRING_LENGTH];
     int i;
 
-    send_to_char("&YTOP&n &RGround&BZERO&n &YPLAYERS&n\n\r", ch);
-
     for ( i = 0; i < sz; i++ )
     {
         if ( topv[i].val != 0 )
