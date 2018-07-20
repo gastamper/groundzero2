@@ -2172,17 +2172,17 @@ do_top (CHAR_DATA * ch, char *argument)
 
     if ( !str_prefix(arg, "kills") )
     {
-        send_to_char("KILLS\r\n", ch);
+        send_to_char("&YTOP&n &RGround&BZERO&n &YKILLS&n\n\r", ch);
         show_top_list(ch, top_players_kills, NUM_TOP_KILLS);
     }
     else if ( !str_prefix(arg, "deaths") )
     {
-        send_to_char("DEATHS\r\n", ch);
+        send_to_char("&YTOP&n &RGround&BZERO&n &YDEATHS&n\n\r", ch);
         show_top_list(ch, top_players_deaths, NUM_TOP_DEATHS);
     }
     else if ( !str_prefix(arg, "hours") )
     {
-        send_to_char("HOURS\r\n", ch);
+        send_to_char("&YTOP&n &RGround&BZERO&n &YHOURS&n\n\r", ch);
         show_top_list(ch, top_players_hours, NUM_TOP_HOURS);
     }
     else
