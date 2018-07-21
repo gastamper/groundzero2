@@ -957,8 +957,6 @@ struct pc_data
     bool confirm_delete;
     int listen_data;
 
-    byte noPages;
-
     time_t time_traitored;
     char volunteering;
 
