@@ -24,9 +24,9 @@ a level XX frag grenade~
 DAM_CH 6500 5000 3500
 DAM_STR 1000 500 10
 USE 0
-explosive frag grenade level XX rock green big~
+explosive frag grenade level XX~
 a level &{&WXX &Gfrag grenade&}~
-There is a big &{&ggreen&} rock here ticking.~
+A &Ylevel XX&n frag &{&ggrenade&} lies here.~
 REPOP 90 2-4
 CSCH 500 500
 
@@ -40,8 +40,8 @@ DAM_CH 2500 2000 1000
 DAM_SH 2500 2000 1000
 USE 0
 mine explosive claymore~
-a Claymore mine~
-A Claymore mine lies here ready to be buried.~
+a claymore mine~
+A claymore mine lies here ready to be buried.~
 REPOP 95 2-4
 CHSH 500 500
 
@@ -70,8 +70,8 @@ DAM_CH 4000 2900 2500
 DAM_STR 1500 1000 500
 USE 0
 explosive c4 plastic~
-a small plastic container of c4 with a detonator~
-A small plastic container of c4 lies here attached to a detonator.~
+a small plastic container of c4~
+A small plastic container of c4 lies here.~
 REPOP 100 10-12
 CHSH 500 500
 
@@ -102,7 +102,7 @@ DAM_CH 1500 1000 500
 DAM_ST 50 25 0
 BURN 75
 USE 0
-molotov cocktail explosive~
+molotov cocktail explosive gas can rag~
 a molotov cocktail~
 A gas can attached to a rag lies here.~
 REPOP 95 8-10
@@ -117,9 +117,9 @@ an AP mine~
 DAM_CH 3500 3000 2000
 DAM_ST 1500 1000 500
 USE 0
-anti AP personel mine explosive~
+anti AP personnel mine explosive~
 an AP explosive mine~
-An anti personel mine lies here.~
+An anti personnel mine lies here.~
 REPOP 75 1-3
 CHSH 500 500
 
@@ -130,7 +130,7 @@ GEN B
 EXTRACT B
 a &wf&Rl&wa&Rr&we&n mine~
 USE 0
-mine explosive flare~
+mine explosive flare tripwire~
 a &{&Wf&Rl&Wa&Rr&We&} mine~
 an automated &{&Wf&Rl&Wa&Rr&We&} gun with a tripwire is here.~
 REPOP 95 3-5
@@ -148,9 +148,9 @@ a &Xsmoke&n bomb~
 DAM_CH 2000 1500 500
 DAM_ST 150 100 0
 USE 0
-smoke bomb explosive~
+smoke bomb explosivec~
 a &{&Xs&wm&Xo&wk&Xe&} bomb~
-A &{&Xblack&} plastic sphere lies here.~
+A &{&Xblack&} smoke bomb lies here.~
 REPOP 95 3-6
 CHSH 500 500
 
@@ -167,7 +167,7 @@ CHOKE 50
 USE 0
 bomb chemical explosive~
 a &gc&yh&ge&ym&gi&yc&ga&yl&n bomb~
-A strange looking bomb lies here.~
+A &gc&yh&ge&ym&gi&yc&ga&yl&n bomb lies here.~
 REPOP 95 2-6   
 CHSH 500 500
 
@@ -195,9 +195,9 @@ an &{&Ge&Cl&Xe&Gc&Ct&Xr&Go&Cm&Xa&Gg&Cn&Xe&Gt&Ci&Xc &Gp&Cu&Xl&Gs&Ce&}~
 DAM_CH 501 501 501
 DAM_STR 10000 10000 10000
 USE 0
-explosive emp grenade pineapple electronic electromagnetic pulse~
+explosive emp grenade electronic electromagnetic pulse~
 an &{&GE&CM&XP&} grenade~
-A funny looking &{&Ge&Cl&Xe&Gc&Ct&Xr&Go&Cn&Xi&Gc&} pineapple lies here, humming to itself.~
+An &{&GE&CM&XP&} grenade lies here.~
 REPOP 95 5-10
 CHSH 500 500
 
@@ -211,9 +211,9 @@ DAM_CH 2000 1000 1500
 DAM_SH 700 350 0
 BURN 65
 USE 0
-explosive all-purpose ap mine~
-an All-Purpose Mine~
-WHOA!! There's an all purpose mine here, ready to be buried!~
+explosive all-purpose mine~
+an all-purpose mine~
+An all-purpose mine lies here, ready to be buried.~
 REPOP 95 1-1
 CHSH 500 500
 
@@ -305,8 +305,8 @@ a lung cancer smoke bomb~
 CHOKE 50
 USE 0
 bomb lung cancer smoke explosive~
-a lung cancer &Xsmoke&n bomb~
-A small &Xblack&n canister lies here.~
+a &Xlung cancer smoke&n bomb~
+A &Xlung cancer smoke&n bomb lies here.~
 REPOP 100 2-6
 CHSH 500 500
 
@@ -326,7 +326,7 @@ CHOKE 35
 USE 0
 tear gas bomb explosive~
 a tear gas bomb~
-A small tear gas bomb has been dropped here.~
+A small tear gas bomb lies here.~
 REPOP 97 2-4
 CHSH 500 500
 
@@ -339,7 +339,7 @@ a co2 bomb~
 USE 0
 co2 bomb explosive c02~
 a Co2 bomb~   
-Somebody left you a Co2 bomb!~
+A Co2 bomb lies here.~
 REPOP 95 6-8
 CHSH 500 500
 
