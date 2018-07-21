@@ -105,15 +105,6 @@ DECLARE_DO_FUN (do_charge);
 DECLARE_DO_FUN (do_jump);
 #endif
 
-
-#if 0
-void do_testscreen (struct char_data *ch, char *argument)
-{
-    void RedrawScreen(struct char_data *);
-    RedrawScreen(ch);
-}
-#endif
-
 /*
  * Log-all switch.
  */
