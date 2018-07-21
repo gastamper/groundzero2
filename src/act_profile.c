@@ -66,24 +66,23 @@ do_profile (struct char_data *ch, char *argument)
         count = number_argument(argument, arg);
         int ivn;
 
+        /* Iterate through object list */
         for ( ivn = 1; ivn < top_obj_index; ivn++ )
             if ( (oid = get_obj_index(ivn)) != NULL )
                 if ( is_name_obj(arg, oid->name) && --count < 1 )
                     break;
 
-        /* Not found in prototypes, either; error. */
+        /* Not found in prototypes either; error. */
         if ( ivn == top_obj_index )
         {
             printf_to_char(ch, "%s: not found.\r\n", argument);
             return;
         }
 
-        /* Otherwise, load a version to profile.  Destroy it later. */
+        /* Otherwise load a version to profile.  Destroy it later. */
         if ( (obj = create_object(oid, 0)) == NULL )
         {
-            send_to_char
-                ("Could not load object from prototype to profile.\r\n",
-                 ch);
+            send_to_char("Could not load object from prototype to profile.\r\n", ch);
             return;
         }
     }
@@ -123,11 +122,11 @@ do_profile (struct char_data *ch, char *argument)
         if ( IS_SET(obj->general_flags, GEN_CONDITION_MONITOR) && (x = 1) )
             strcat(buf, "Transports wearer to safe room when near death.\r\n");
         if ( IS_SET(obj->general_flags, GEN_BURNS_ROOM) && (x = 1) )
-            strcat(buf, "Burns people in the same room as it.\r\n");
+            strcat(buf, "Burns people in the same room.\r\n");
         if ( IS_SET(obj->general_flags, GEN_LEAVE_TRAIL) && (x = 1) )
             strcat(buf, "Leaves a trail behind it.\r\n");
         if ( IS_SET(obj->general_flags, GEN_DETECT_MINE) && (x = 1) )
-            strcat(buf, "When worn, detects the presence of and protects against mines.\r\n");
+            strcat(buf, "When worn, detects and protects against mines.\r\n");
         if ( IS_SET(obj->general_flags, GEN_ANTI_BLIND) && (x = 1) )
             strcat(buf, "Protects against blindness.\r\n");
         if ( IS_SET(obj->general_flags, GEN_DARKS_ROOM) && (x = 1) )
@@ -139,7 +138,7 @@ do_profile (struct char_data *ch, char *argument)
         if ( IS_SET(obj->general_flags, GEN_ANTI_DAZE) && (x = 1) )
             strcat(buf, "Protects the wearer against stun.\r\n");
         if ( IS_SET(obj->general_flags, GEN_CHOKES_ROOM) && (x = 1) )
-            strcat(buf, "Suffocates people in the same room as it.\r\n");
+            strcat(buf, "Suffocates people in the same room.\r\n");
         if ( IS_SET(obj->general_flags, GEN_IGNORE_ARMOR) && (x = 1) )
             strcat(buf, "Damage is not affected by armor absorption.\r\n");
         if ( IS_SET(obj->general_flags, GEN_CAN_PUSH) && (x = 1) )
@@ -152,17 +151,13 @@ do_profile (struct char_data *ch, char *argument)
             strcat(buf, "Has a programmable timer.\r\n");
         if ( IS_SET(obj->general_flags, GEN_COMBUSTABLE) && (x = 1) )
             strcat(buf, "Can be damaged by fire.\r\n");
-        if ( IS_SET(obj->general_flags, GEN_CAN_BURY) )
+        if ( IS_SET(obj->general_flags, GEN_CAN_BURY) && (x = 1) )
             strcat(buf, "Can be buried (is a mine).\r\n");
 
-        strcat(buf, "\r\n");
-
         /* Extraction abilities. */
-        if ( IS_SET(obj->extract_flags, EXTRACT_EXPLODE_ON_EXTRACT ) &&
-            (x = 1))
+        if ( IS_SET(obj->extract_flags, EXTRACT_EXPLODE_ON_EXTRACT ) && (x = 1))
             strcat(buf, "Explodes when extracted.\r\n");
-        if ( IS_SET(obj->extract_flags, EXTRACT_BLIND_ON_EXTRACT ) &&
-            (x = 1))
+        if ( IS_SET(obj->extract_flags, EXTRACT_BLIND_ON_EXTRACT ) && (x = 1))
             strcat(buf, "Causes blindness when extracted.\r\n");
         if ( IS_SET(obj->extract_flags, EXTRACT_BURN_ON_EXTRACT) && (x = 1) )
             strcat(buf, "Ignites fires when extracted.\r\n");
@@ -170,20 +165,15 @@ do_profile (struct char_data *ch, char *argument)
             strcat(buf, "Causes stun when extracted.\r\n");
         if ( IS_SET(obj->extract_flags, EXTRACT_DARK_ON_EXTRACT) && (x = 1) )
             strcat(buf, "Creates a smoke screen when extracted.\r\n");
-        if ( IS_SET(obj->extract_flags, EXTRACT_EXTINGUISH_ON_EXTRACT ) &&
-            (x = 1))
-            strcat(buf, "Douses fires when extracted.\r\n");
+        if ( IS_SET(obj->extract_flags, EXTRACT_EXTINGUISH_ON_EXTRACT ) && (x = 1))
+            strcat(buf, "Extinguishes fires when extracted.\r\n");
         if ( IS_SET(obj->extract_flags, EXTRACT_ANNOUNCE) && (x = 1) )
-            strcat(buf,
-                   "Announces victim when stepped on (mine only).\r\n");
-        if ( IS_SET(obj->extract_flags, EXTRACT_CHOKE_ON_EXTRACT ) &&
-            (x = 1))
+            strcat(buf, "Announces victim when stepped on (mine only).\r\n");
+        if ( IS_SET(obj->extract_flags, EXTRACT_CHOKE_ON_EXTRACT ) && (x = 1))
             strcat(buf, "Releases poisonous gas when extracted.\r\n");
-        if ( IS_SET(obj->extract_flags, EXTRACT_TELERAN_ON_EXTRACT ) &&
-            (x = 1))
+        if ( IS_SET(obj->extract_flags, EXTRACT_TELERAN_ON_EXTRACT ) && (x = 1))
             strcat(buf, "Randomly teleports victims when extracted.\r\n");
-        if ( IS_SET(obj->extract_flags, EXTRACT_TELELOC_ON_EXTRACT ) &&
-            (x = 1))
+        if ( IS_SET(obj->extract_flags, EXTRACT_TELELOC_ON_EXTRACT ) && (x = 1))
             strcat(buf, "Teleports owner to victim when extracted.\r\n");
 
         /* Only print if we found something. */
@@ -364,8 +354,7 @@ profile_miscellaneous (struct char_data *ch, struct obj_data *obj)
     }
     else if ( IS_SET(obj->usage_flags, USE_HEALTH_MONITOR) && (x = 1) )
     {
-        k += sprintf(buf + k,
-                     "Remotely monitor a character's health.\r\n");
+        k += sprintf(buf + k, "Remotely monitor a character's health.\r\n");
         k += field_string("Use", buf + k);
         k += sprintf(buf + k, "&Wuse %s &X<&ntarget&X>\r\n", first);
         k += field_string("Charges", buf + k);
@@ -440,7 +429,7 @@ profile_weapon (struct char_data *ch, struct obj_data *wpn)
     if ( IS_SET(wpn->wear_flags, ITEM_TWO_HANDS) )
         k += sprintf(buf + k, "two-handed\r\n");
     else if ( IS_SET(wpn->wear_flags, ITEM_SEC_HAND) )
-        k += sprintf(buf + k, "either (dualable)\r\n");
+        k += sprintf(buf + k, "either (offhandable)\r\n");
     else
         k += sprintf(buf + k, "either\r\n");
 
