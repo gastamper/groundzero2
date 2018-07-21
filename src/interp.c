@@ -73,7 +73,6 @@ DECLARE_DO_FUN (do_stop);
 DECLARE_DO_FUN (do_detach);
 DECLARE_DO_FUN (do_attach);
 DECLARE_DO_FUN (do_history);
-DECLARE_DO_FUN (do_page);
 DECLARE_DO_FUN (do_beeps);
 DECLARE_DO_FUN (do_makechar);
 DECLARE_DO_FUN (do_ttype);
@@ -265,7 +264,6 @@ const struct cmd_type cmd_table[] = {
     {"say", do_say, POS_RESTING, 0, LOG_NORMAL, 1, 0, 1, 1},
     {"'", do_say, POS_RESTING, 0, LOG_NORMAL, 1, 0, 1, 1},
     {"gocial", do_gocial, POS_RESTING, 0, LOG_NORMAL, 1, 0, 1, 1},
-    {"page", do_page, POS_DEAD, 0, LOG_NORMAL, 1, 0, 1, 1},
     {"@", do_social, POS_DEAD, 0, LOG_NORMAL, 1, 0, 1, 1},
     {"gemote", do_gemote, POS_DEAD, 0, LOG_NORMAL, 1, 0, 1, 1},
 

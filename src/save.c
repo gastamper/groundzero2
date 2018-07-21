@@ -154,16 +154,6 @@ fwrite_char (CHAR_DATA * ch, FILE * fp)
         fprintf(fp, "\n");
     }
 
-    if ( GET_PAGER_MEMORY(ch) && GET_NO_PAGES(ch) > 0 )
-    {
-        fprintf(fp, "NoPages %d\n", GET_NO_PAGES(ch));
-
-        for ( i = 0; i < GET_NO_PAGES(ch); i++ )
-            fprintf(fp, "Page %s %ld %s~\n",
-                    GET_PAGE(ch, i).from, GET_PAGE(ch, i).time,
-                    GET_PAGE(ch, i).message);
-    }
-
     fprintf(fp, "End\n\n");
 }
 
@@ -259,9 +249,6 @@ set_default_pcdata (CHAR_DATA * ch)
     ch->pcdata->it.cd = NULL;
     ch->pcdata->him = NULL;
     ch->pcdata->her = NULL;
-
-    GET_NO_PAGES(ch) = 0;
-    GET_PAGER_MEMORY(ch) = NULL;
 
     /* Game Stats */
     ch->pcdata->gs_kills = 0;
@@ -396,7 +383,6 @@ void
 fread_char (CHAR_DATA * ch, FILE * fp)
 {
     char buf[MAX_STRING_LENGTH];
-    int pageIdx = 0;
     char *word;
     bool fMatch;
 
@@ -477,36 +463,9 @@ fread_char (CHAR_DATA * ch, FILE * fp)
                 KEY("Name", ch->names, fread_string(fp));
                 KEY("nhp_solo", ch->pcdata->solo_hit, fread_number(fp));
                 KEY("Note", ch->last_note, fread_number(fp));
-
-                if ( !str_cmp(word, "NoPages") )
-                {
-                    GET_NO_PAGES(ch) = fread_number(fp);
-                    GET_PAGER_MEMORY(ch) =
-                        calloc(GET_NO_PAGES(ch), sizeof(struct page_data));
-                    fMatch = TRUE;
-                    break;
-                }
-
                 break;
 
             case 'P':
-                if ( !str_cmp(word, "Page") )
-                {
-                    if ( GET_NO_PAGES(ch) <= 0 || !GET_PAGER_MEMORY(ch) )
-                    {
-                        logmesg("Got a pager message before NoPages.");
-                        break;
-                    }
-                    GET_PAGE(ch, pageIdx).from = str_dup(fread_word(fp));
-                    GET_PAGE(ch, pageIdx).time = fread_number(fp);
-                    GET_PAGE(ch, pageIdx).message = fread_string(fp);
-
-                    pageIdx++;
-
-                    fMatch = TRUE;
-                    break;
-                }
-
                 if ( !str_cmp(word, "Palette") )
                 {
                     int i;

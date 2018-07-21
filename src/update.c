@@ -211,9 +211,6 @@ char_update (void)
             }
         }
 
-        if ( ch->pcdata && ch->pcdata->pageDelay )
-            ch->pcdata->pageDelay--;
-
         if ( ch->position == POS_STUNNED )
             update_pos(ch);
 

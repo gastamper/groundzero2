@@ -773,7 +773,7 @@ struct note_data
 #define COMM_NOWIZ              (B)
 #define COMM_NOIMP              (C)
 #define COMM_NOBEEP             (D)
-#define COMM_NOPAGE             (E)
+// #define COMM_NOPAGE             (E)Unused
 #define COMM_NOBOUNTY           (F)
 #define COMM_NOKILLS            (G)
 #define COMM_NOSKULLS           (H)
@@ -941,11 +941,6 @@ struct npc_data
 };
 
 #define MAX_PALETTE_ENTS      16
-#define MAX_PAGER_MEMORY      10
-
-#define GET_PAGER_MEMORY(_x)  ((_x)->pcdata->pages)
-#define GET_PAGE(_x, _i)      ((_x)->pcdata->pages[(_i)])
-#define GET_NO_PAGES(_x)      ((_x)->pcdata->noPages)
 
 /*
  * Data which only PC's have.
@@ -963,8 +958,6 @@ struct pc_data
     int listen_data;
 
     byte noPages;
-    struct page_data *pages;
-    byte pageDelay;
 
     time_t time_traitored;
     char volunteering;
@@ -1229,14 +1222,6 @@ struct poll_data
     int numOptions;
     struct poll_opt_data *options;
     struct poll_data *next;
-};
-
-
-struct page_data
-{
-    char *from;
-    time_t time;
-    char *message;
 };
 
 

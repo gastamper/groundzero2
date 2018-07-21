@@ -2190,11 +2190,6 @@ nanny (DESCRIPTOR_DATA * d, char *argument)
                 do_note(ch, "list -z -dun");
             }
 
-            if ( GET_NO_PAGES(ch) > 0 )
-                printf_to_char(ch,
-                               "You have %d page%s waiting.  Type &WPAGE&n to see them.\r\n",
-                               GET_NO_PAGES(ch),
-                               (GET_NO_PAGES(ch) == 1 ? "" : "s"));
             do_poll(ch, "check");
             do_outfit(ch, "equip_on_login");
             recalc_num_on();
