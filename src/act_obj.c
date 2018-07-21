@@ -403,8 +403,8 @@ get_obj (struct char_data *ch, OBJ_DATA * obj, OBJ_DATA * container)
         return;
     }
 
-    act("You &uaget&n $p.", ch, obj, NULL, TO_CHAR);
-    act("$n &uagets&n $p.", ch, obj, NULL, TO_ROOM);
+    act("You get $p.", ch, obj, NULL, TO_CHAR);
+    act("$n gets $p.", ch, obj, NULL, TO_ROOM);
 
     obj_from_room(obj);
     obj_to_char(obj, ch);
@@ -471,8 +471,8 @@ do_get (struct char_data *ch, char *argument)
 void
 drop_obj (struct char_data *ch, struct obj_data *obj)
 {
-    act("$n &uadrops&n $p.", ch, obj, NULL, TO_ROOM);
-    act("You &uadrop&n $p.", ch, obj, NULL, TO_CHAR);
+    act("$n drops $p.", ch, obj, NULL, TO_ROOM);
+    act("You drop $p.", ch, obj, NULL, TO_CHAR);
 
     obj_from_char(obj);
     obj_to_room(obj, ch->in_room);

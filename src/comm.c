@@ -2656,11 +2656,11 @@ act_parse (const char *fmt, CHAR_DATA * to,
                     break;
                 case 'p':
                     if ( obj1 && obj1->valid == VALID_VALUE )
-                        sprintf(i, "&uO%s&n", obj1->short_descr);
+                        sprintf(i, "%s&n", obj1->short_descr);
                     break;
                 case 'P':
                     if ( obj2 && obj2->valid == VALID_VALUE )
-                        sprintf(i, "&uO%s&n", obj2->short_descr);
+                        sprintf(i, "%s&n", obj2->short_descr);
                     break;
                 case '$':
                     strcpy(i, "$$");
