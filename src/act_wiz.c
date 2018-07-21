@@ -1841,7 +1841,6 @@ do_restore (CHAR_DATA * ch, char *argument)
 {
     char arg[MAX_INPUT_LENGTH];
     CHAR_DATA *victim;
-    CHAR_DATA *vch;
     DESCRIPTOR_DATA *d;
 
     one_argument(argument, arg);
@@ -1849,14 +1848,14 @@ do_restore (CHAR_DATA * ch, char *argument)
     {
         /* cure room */
 
-        for (vch = ch->in_room->people; vch != NULL;
-             vch = vch->next_in_room)
+        for (victim = ch->in_room->people; victim != NULL;
+             victim = victim->next_in_room)
         {
-            vch->hit = vch->max_hit;
-	    if ( !can_see(vch, ch) )
-	      act("Someone has restored you.", ch, NULL, vch, TO_VICT);
+            victim->hit = victim->max_hit;
+	    if ( !can_see(victim, ch) )
+	      act("Someone has restored you.", ch, NULL, victim, TO_VICT);
 	    else 
-	      act("$n has restored you.", ch, NULL, vch, TO_VICT);
+	      act("$n has restored you.", ch, NULL, victim, TO_VICT);
         }
 
         send_to_char("Room restored.\r\n", ch);
