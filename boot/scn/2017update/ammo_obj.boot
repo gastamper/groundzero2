@@ -100,7 +100,7 @@ DAM_ST 0 0 0
 GEN 0
 EXTRACT 0
 USE 0
-ammo 9mm hollow clip rounds~
+ammo 9mm hollow clip rounds tipped~
 a clip of &chollow&n tipped 9mm rounds~
 A clip of &chollow&n tipped 9mm bullets lies here.~
 REPOP 95 10-15
@@ -130,7 +130,7 @@ DAM_ST 0 0 0
 GEN 0
 EXTRACT 0
 USE 0
-ammo assault rifle clip uranium~
+ammo assault rifle clip uranium rounds~
 a clip of &{&BU&cr&Ba&cn&Bi&cu&Bm&} dipped assault rifle rounds~
 A clip of &{&BU&cr&Ba&cn&Bi&cu&Bm&} dipped assault rifle rounds lies here.~
 REPOP 90 2-3
@@ -301,7 +301,7 @@ DAM_ST 0 0 0
 GEN 0
 EXTRACT 0
 USE 0
-ammo 5.56 ball ammo banana clip~
+ammo 5.56 ammo banana clip~
 a 30 round banana clip~
 A 30 round banana clip lies here.~
 REPOP 90 2-5
