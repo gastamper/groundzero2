@@ -136,7 +136,21 @@ const char *error_table[MAX_ERRORS] = {
 
 /*
  * Command table.
- */
+ * * Structure for a command in the command lookup table:  
+ *  struct cmd_type
+ *  {
+ *    char *const name;
+ *    DO_FUN *do_fun;
+ *    sh_int position;
+ *    sh_int level;
+ *    sh_int log;
+ *    bool show;
+ *    bool canForce;
+ *    bool dub;
+ *    bool resetLagFlag;
+ *  };
+ *  */ 
+
 const struct cmd_type cmd_table[] = {
     /*
      * Common movement commands.
@@ -177,7 +191,6 @@ const struct cmd_type cmd_table[] = {
     {"bury", do_bury, POS_STANDING, 0, LOG_NORMAL, 1, 0, 0, 1},
     {"rest", do_rest, POS_SLEEPING, 0, LOG_NORMAL, 1, 0, 0, 1},
     {"sit", do_sit, POS_SLEEPING, 0, LOG_NORMAL, 1, 0, 0, 1},
-    {"sockets", do_sockets, POS_DEAD, 0, LOG_NORMAL, 1, 0, 0, 1},
     {"stand", do_stand, POS_SLEEPING, 0, LOG_NORMAL, 1, 0, 0, 1},
     {"wield", do_wield, POS_RESTING, 0, LOG_NORMAL, 1, 0, 0, 1},
     {"secondary", do_secondary, POS_RESTING, 0, LOG_NORMAL, 1, 0, 0, 1},
@@ -337,6 +350,7 @@ const struct cmd_type cmd_table[] = {
     {"reboot", do_reboot, POS_DEAD, L6, LOG_ALWAYS, 1, 0, 0, 1},
     {"sedit", do_sedit, POS_DEAD, L7, LOG_ALWAYS, 1, 0, 0, 1},
     {"set", do_set, POS_DEAD, L2, LOG_ALWAYS, 1, 0, 0, 1},
+    {"sockets", do_sockets, POS_DEAD, L6, LOG_NORMAL, 1, 0, 0, 1},
     {"shutdow", do_shutdow, POS_DEAD, L6, LOG_NORMAL, 0, 0, 0, 1},
     {"shutdown", do_shutdown, POS_DEAD, L6, LOG_ALWAYS, 1, 0, 0, 1},
     {"wizlock", do_wizlock, POS_DEAD, L2, LOG_ALWAYS, 1, 0, 0, 1},
