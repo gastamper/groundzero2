@@ -3138,16 +3138,11 @@ do_sockets (CHAR_DATA * ch, char *argument)
             continue;
 
         count++;
-	if ( who )
-	        sprintf(buf + strlen(buf),
-                "&B%-4d &W%-15s &c%-8s &n%-5ld &r%s&n\r\n", d->descriptor,
-                (!who->names ? "[unnamed]" : who->names),
-                connected_states[d->connected], HOURS_PLAYED(who), d->host);
-	else
-		sprintf(buf + strlen(buf),
-                "&B%-4d &W%-15s &c%-8s &n%-5ld &r%s&n\r\n", d->descriptor,
-                "[unnamed]",
-                connected_states[d->connected], (long)0, d->host);
+        sprintf(buf + strlen(buf),
+        "&B%-4d &W%-15s &c%-8s &n%-5ld &r%s&n\r\n", d->descriptor,
+        (!who ? "[unnamed]" : who->names), 
+	connected_states[d->connected], 
+	(!who ? (long)0 : HOURS_PLAYED(who)), d->host);
 
     }
 
