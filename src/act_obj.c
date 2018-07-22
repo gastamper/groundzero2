@@ -37,9 +37,6 @@ bool remove_obj(struct char_data *ch, int iWear, bool fReplace,
                 int wearing);
 bool wear_obj(struct char_data *, struct obj_data *, int, bool, bool,
               bool);
-int evac_char(struct char_data *ch, OBJ_DATA * obj, char *argument);
-int air_strike(struct char_data *ch, char *argument);
-int heal_tank(struct char_data *ch, char *argument);
 void fire_extinguisher(struct room_data *room, int recurs_depth);
 OBJ_DATA *find_eq_char(struct char_data *, int, unsigned int);
 void bug_object_state(OBJ_DATA *);
