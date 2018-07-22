@@ -601,13 +601,12 @@ air_strike (struct char_data *ch, char *argument)
     if ( !start_room )
     {
         send_to_char
-            ("You must specify which coordinates you want bombed in "
-             "the form x y level.\r\n", ch);
+            ("You must specify which coordinates you want bombed.\r\n", ch);
         return 0;
     }
     if ( start_room->level )
     {
-        send_to_char("Lower levels cannot be reached by air strikes.\r\n", ch);
+        send_to_char("Air strikes can only read the main level.\r\n", ch);
         return 0;
     }
     if ( (start_x = start_room->x - radius) < 0 )
