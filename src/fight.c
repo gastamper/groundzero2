@@ -1010,7 +1010,7 @@ burn_obj (OBJ_DATA * obj)
             if ( IS_NPC(vict) && IS_SET(vict->act, ACT_NO_BURN) )
                 continue;
 
-            act("$n is &Rburned!", vict, NULL, NULL, TO_ROOM);
+            act("$n is &Rburned&n!", vict, NULL, NULL, TO_ROOM);
             act("Blisters erupt on your skin as $p burns you!", vict, obj,
                 NULL, TO_CHAR);
 
@@ -1030,9 +1030,9 @@ burn_obj (OBJ_DATA * obj)
 
             if ( toroom->people )
             {
-                act("$p is &Rburned!", toroom->people, v_obj, NULL,
+                act("$p is &Rburned&n!", toroom->people, v_obj, NULL,
                     TO_CHAR);
-                act("$p is &Rburned!", toroom->people, v_obj, NULL,
+                act("$p is &Rburned&n!", toroom->people, v_obj, NULL,
                     TO_ROOM);
             }
 
@@ -1059,8 +1059,8 @@ burn_obj (OBJ_DATA * obj)
             if ( IS_NPC(vict) && IS_SET(vict->act, ACT_NO_BURN) )
                 continue;
 
-            act("$n is &Rburned!", vict, NULL, NULL, TO_ROOM);
-            act("You are &Rburned!", vict, obj, NULL, TO_CHAR);
+            act("$n is &Rburned&n!", vict, NULL, NULL, TO_ROOM);
+            act("You are &Rburned&n!", vict, obj, NULL, TO_CHAR);
             damage_char(vict, obj->owner, obj->damage_char[1], FALSE,
                         "a fire");
         }
