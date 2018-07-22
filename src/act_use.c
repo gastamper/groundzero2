@@ -369,9 +369,7 @@ evac_char (struct char_data *ch, struct obj_data *obj, char *argument)
         }
         else
         {
-            send_to_char
-                ("Transports cannot reach the saferoom or lower levels.\r\n",
-                 ch);
+            send_to_char("Transports can only reach the main level.\r\n", ch);
             return 0;
         }
     }
