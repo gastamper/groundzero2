@@ -3120,7 +3120,6 @@ void
 do_sockets (CHAR_DATA * ch, char *argument)
 {
     char buf[2 * MAX_STRING_LENGTH];
-    char site[MAX_INPUT_LENGTH];
     char arg[MAX_INPUT_LENGTH];
     DESCRIPTOR_DATA *d;
     CHAR_DATA *who;
@@ -3135,61 +3134,21 @@ do_sockets (CHAR_DATA * ch, char *argument)
     {
         who = (d->original ? d->original : d->character);
 
-        if ( !who )
-            continue;
-        if ( !can_see(ch, who) )
-            continue;
-        if ( *arg && !is_name(arg, who->names) )
-            continue;
-        if ( !ch->trust && d->connected != CON_PLAYING )
+        if ( who && *arg && !is_name(arg, who->names) )
             continue;
 
         count++;
-        memset(site, 0, MAX_INPUT_LENGTH);
-
-        if ( !ch->trust && !who->trust )
-        {
-            register char *rptr = d->host;
-            register char *wptr = site;
-            char *eptr = d->host + 37;
-
-            while ( rptr < eptr )
-            {
-                if ( isdigit(*rptr) )
-                {
-                    *(wptr++) = '&';
-                    *(wptr++) = 'X';
-
-                    while ( rptr < eptr && isdigit(*rptr) )
-                    {
-                        *(wptr++) = 'X';
-                        rptr++;
-                    }
-
-                    *(wptr++) = '&';
-                    *(wptr++) = 'r';
-                }
-
-                if ( !(*(wptr++) = *(rptr++)) )
-                {
-                    if ( isdigit(*(wptr - 1)) )
-                        *(--wptr) = '\0';
-                    break;
-                }
-            }
-        }
-        else
-        {
-            if ( ch->trust )
-                strncpy(site, d->host, 36);
-            else
-                strncpy(site, "-", 36);
-        }
-
-        sprintf(buf + strlen(buf),
+	if ( who )
+	        sprintf(buf + strlen(buf),
                 "&B%-4d &W%-15s &c%-8s &n%-5ld &r%s&n\r\n", d->descriptor,
                 (!who->names ? "[unnamed]" : who->names),
-                connected_states[d->connected], HOURS_PLAYED(who), site);
+                connected_states[d->connected], HOURS_PLAYED(who), d->host);
+	else
+		sprintf(buf + strlen(buf),
+                "&B%-4d &W%-15s &c%-8s &n%-5ld &r%s&n\r\n", d->descriptor,
+                "[unnamed]",
+                connected_states[d->connected], (long)0, d->host);
+
     }
 
     if ( count == 0 && *arg )
