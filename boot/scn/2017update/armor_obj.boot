@@ -211,7 +211,7 @@ GEN 0
 EXTRACT 0
 USE 0
 armor gloves black fingerless~
-&Xblack fingerless gloves&n~
+&XA pair of black fingerless gloves&n~
 A pair of &Xblack&n fingerless gloves are lying here.~
 REPOP 95 7-15
 CHSH 600 600
