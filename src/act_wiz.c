@@ -3128,7 +3128,7 @@ do_sockets (CHAR_DATA * ch, char *argument)
     one_argument(argument, arg);
 
     strcpy(buf,
-           "&CSOCK&X-&CNAME&X------------&CSTATE&X----&CHOURS&X-&CSITE&X----&n\r\n");
+           "&CSOCK&X-&CNAME&X------------&CSTATE&X----&CONLINE&X-&CSITE&X----&n\r\n");
 
     for ( d = descriptor_list; d != NULL; d = d->next )
     {
@@ -3142,7 +3142,7 @@ do_sockets (CHAR_DATA * ch, char *argument)
         "&B%-4d &W%-15s &c%-8s &n%-5ld &r%s&n\r\n", d->descriptor,
         (!who ? "[unnamed]" : who->names), 
 	connected_states[d->connected], 
-	(!who ? (long)0 : HOURS_PLAYED(who)), d->host);
+	(!who ? (long)0 : MINUTES_PLAYED(who)), d->host);
 
     }
 

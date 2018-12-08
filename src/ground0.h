@@ -1164,7 +1164,8 @@ struct obj_data
 
 #define GET_AGE(ch)     ((int) (17 + ((ch)->played \
                     + current_time - (ch)->logon )/72000))
-#define HOURS_PLAYED(ch)  ((((ch)->played + current_time - (ch)->logon) / 3600))
+// #define HOURS_PLAYED(ch)  ((((ch)->played + current_time - (ch)->logon) / 3600))
+#define MINUTES_PLAYED(ch)  (((current_time - (ch)->logon) / 60))
 
 #define IS_AWAKE(ch)        (ch->position > POS_SLEEPING)
 
