@@ -40,6 +40,7 @@
 #include    "mccp.h"
 #include    "telnet.h"
 #include    "ban.h"
+#include    "imp_table.h"
 
 #include    <sys/wait.h>
 #include    <sys/stat.h>
@@ -1479,17 +1480,7 @@ get_god (char *a_name)
     return NULL;
 }
 
-/* This was "hard coded for security reasons" by previous maintainers at some point. */
-
-/* Format is {"Login name", Trust Level, "Character name", "login name's password", ""}
- * For example: {"Greg", 10, "Snoopy", "password", ""} to login as Greg and play
- * the character named Snoopy.  Note that "password" applies to Greg and not Snoopy, which
- * must have its own separate password. Trust levels are shown in src/ground0.h */
-
-const struct god_type imp_table[] = {
-    {"Test", 10, "Test", "test", ""}
-};
-
+/* The imp_table definition has been moved to its own file, imp_table.c. */
 
 static void
 finish_newbie (struct char_data *ch)

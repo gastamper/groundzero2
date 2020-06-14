@@ -2161,7 +2161,6 @@ load_notes (void)
     }
 
     strcpy(strArea, NOTE_FILE);
-    fp = fp;
     logmesg("Load_notes: bad key word.");
     exit(STATUS_ERROR);
     return;

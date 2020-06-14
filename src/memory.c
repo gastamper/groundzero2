@@ -298,7 +298,9 @@ f_free_mem (void *pMem, int sMem, char *filename, int line_num)
                 (get_mem_reference(pMem, &temp_alloc_list))->line_num,
                 filename, line_num);
         logmesg(log_buf);
-        *((char *) NULL) = 5;
+        
+        // Crash the thread. Previously used ``*((char *) NULL) = 5;``
+        __builtin_trap();
         exit(STATUS_ERROR);
     }
 

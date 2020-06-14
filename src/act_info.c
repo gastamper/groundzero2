@@ -22,6 +22,7 @@
 #include    "ansi.h"
 #include    "db.h"
 #include    "telnet.h"
+#include    "imp_table.h"
 
 /* command procedures needed */
 DECLARE_DO_FUN (do_exits);
