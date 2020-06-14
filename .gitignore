@@ -7,3 +7,5 @@ player/PS*
 *.top
 TODO
 src/todo/act_combat.c
+src/imp_table.c
+
