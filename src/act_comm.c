@@ -19,6 +19,7 @@
 
 #include "ground0.h"
 #include "telnet.h"
+#include "imp_table.h"
 
 extern char *guild_list[];
 

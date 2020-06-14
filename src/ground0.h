@@ -66,6 +66,14 @@
 #define DECLARE_DO_FUN( fun )       DO_FUN    fun
 #endif
 
+// Fix for OSX's NTELOPTS only being ~36, while MCCP requires a flag with value 86
+// Magic number '87' (TELOPT_COMPRESS2 + 1) used here since we can't include telnet.h cleanly.
+#define TELOPT_COMPRESS2_PLUS_1 87
+#if NTELOPTS < TELOPT_COMPRESS2_PLUS_1
+  #undef NTELOPTS
+  #define NTELOPTS TELOPT_COMPRESS2_PLUS_1
+#endif
+
 /* system calls */
 int unlink();
 int system();

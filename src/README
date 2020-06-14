@@ -6,8 +6,8 @@ that were temp. deprecated (like the mech code).
 
 ## HOW TO INSTALL ##
 First, edit localconfig.h and change logging settings to your preference.
-Next, make the necessary changes in comm.c to add yourself to the
-list of administrators (search for 'imp_table' and scroll down).
+Next, make the necessary changes in imp_table.c to add yourself to the
+list of administrators. Make sure you don't commit these changes back to Git!
 
 Requirements:
 gcc, make, libcares, and a standard set of libraries (case Cnetos 6 install).
