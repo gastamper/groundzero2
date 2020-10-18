@@ -1,5 +1,5 @@
-Ground Zero was a MUD (multi-user dungeon) which was popular in the late 90s.  
-[![Screenshot 1](https://i.imgur.com/gA5Hkxt.png)](https://i.imgur.com/ZKWg4MQ.png)  
+Ground Zero was a MUD (multi-user dungeon) which was popular in the late 90s.
+[![Screenshot 1](https://i.imgur.com/gA5Hkxt.png)](https://i.imgur.com/ZKWg4MQ.png)
 
 #### The goals of this project:
 1. Fix obvious bugs.
@@ -25,3 +25,13 @@ to pick it up and make it work.
 3. Make the necessary source changes according to the instructions in groundzeromud/src/README
 4. Build the server by going into groundzeromud/src and hitting __make__
 5. Hit __./ground0__ and pray
+
+
+# Installation on Ubuntu server:
+
+1. `sudo apt-get install build-essential ksh libz-dev libc-ares-dev`
+2. `git clone https://github.com/gastamper/groundzero2.git`
+3. `cd groundzero2/`
+4. Make the necessary source changes according to the instructions in groundzeromud/src/README
+5. `make`
+6. `./ground0`
